@@ -696,9 +696,8 @@ algorithm. The length penalization is defined as
   \label{eq:length-penalization}
 \end{align}
 	
-We do not use similarity terms in this section, thus we postpone the
-definition of such terms until the description of how DCE can be used
-in an image segmentation framework.
+We do not use similarity terms in this section, thus we postpone the definition of such terms until later in this
+article, with the description of how DCE can be used in an image segmentation framework.
 
 
 
@@ -719,13 +718,10 @@ in an image segmentation framework.
 \end{table}
 
 
-In figure \ref{fig:m1-square-flow} we see some results for the DCE
-algorithm with $m=1$. We observe a global movement towards roundness,
-but with several artifacts. We minimize the effects of a jaggy
-boundary by setting $\alpha > 0$. Nonetheless, a higher estimation
-ball radius creates unstable shapes. In fact, the estimator is very
-sensitive in regions of low squared curvature, and it is precisely in
-those regions that spurious pixels are created. 
+In figure \ref{fig:m1-square-flow} we see some results for the DCE algorithm with $m=1$. We observe a global evolution
+towards rounder shapes, but with several artifacts. We minimize the effects of a jaggy boundary by setting $\alpha >
+0$. Nonetheless, a higher estimation ball radius creates unstable shapes. In fact, the estimator is very sensitive in
+regions of low squared curvature, and it is precisely in those regions that spurious pixels are created.
 
 
 \begin{figure}[!h]
@@ -751,12 +747,10 @@ those regions that spurious pixels are created.
 
 
 \subsection{A more stable model.}
-In the previous section we noticed that the algorithm produces shapes
-with many artifacts due to the small uncertainties of the estimator
-along regions of low squared curvature. We argue that, evaluating the
-estimation ball along farther ring sets we avoid those sensitive areas
-by focusing the optimization process only on regions with highest
-squared curvature value. 
+In the previous section we noticed that the algorithm produces shapes with many artifacts due to the small uncertainties
+of the estimator along regions of low squared curvature. We argue that, evaluating the estimation ball along outer
+ring sets we avoid those sensitive areas by focusing the optimization process only on regions with highest squared
+curvature value.
 
 %%\jaco{Motivation in digital geometry of why it makes sense to compute things farther.}
 
@@ -783,10 +777,13 @@ squared curvature value.
 \caption{By positioning the estimation ball on farther rings, we minimize artifacts creation. \label{fig:mx-square-flow}}
 \end{figure}
 
-\daniel{In our experiments, the best results are obtained by executing DCE
-algorithm with $m$ equal to $r$, where $r$ is the estimation ball
-radius (see figure \ref{fig:mx-square-flow} ). We observe that Elastica may increase after some iterations if chosen radius is too large, as in the case of the triangle in figure \ref{fig:mx-flow-gs-radius-effect} in which the flow converges to a single point. We conjecture that an appropriated value for the radius should be given by the shape reach.
-	The produced flow has no difficulties in handling changes on topology, and it presents different speeds for regions with low and high curvature values, as illustrated in figure \ref{fig:mx-speed-variation-hole-filling}.}
+\daniel{In our experiments, the best results are obtained by executing DCE algorithm with $m$ equal to $r$, where $r$ is
+  the estimation ball radius (see figure \ref{fig:mx-square-flow} ). We observe that Elastica may increase after some
+  iterations if chosen radius is too large, as in the case of the triangle in figure \ref{fig:mx-flow-gs-radius-effect}
+  in which the flow converges to a single point. We conjecture that an appropriated value for the radius should be given
+  by the shape reach.  The produced flow has no difficulties in handling changes on topology, and it presents different
+  speeds for regions with low and high curvature values, as illustrated in figure
+  \ref{fig:mx-speed-variation-hole-filling}.}
 
 \begin{figure}[hp!]
 \center				
