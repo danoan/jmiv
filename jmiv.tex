@@ -79,127 +79,188 @@
 \setcounter{footnote}{0}
 \section{Introduction} %% \todo{(To be extended)}}
 
-Geometric quantities are particularly useful as regularizers in low-level image analysis, especially when little prior
-information is known about the shape of interest. Length penalization is a \HT{well-behaved,} general purpose
-regularizer and \HT{many} models \HT{in the literature} make use of it, from active contours \cite{casseles97geodesic}
-to level-set formulations \cite{malladi1995image,malladi1995shape}. Discrete graph-based variational models have been
-particularly succesfull to incorporate length penalization as a penalizer, while keeping the ability to extract \HT{a}
-global optimum \cite{boykov01graphcut,appleton05geodesic}.
+Geometric quantities are particularly useful as regularizers in
+low-level image analysis, especially when little prior information is
+known about the shape of interest. Length penalization is a
+well-behaved, general purpose regularizer and many models in the
+literature make use of it, from active contours
+\cite{casseles97geodesic} to level-set formulations
+\cite{malladi1995image,malladi1995shape}. Discrete graph-based
+variational models have been particularly succesful to incorporate
+length penalization as a penalizer, while keeping the ability to
+extract a global optimum \cite{boykov01graphcut,appleton05geodesic}.
 
-However length regularization shows limitations when segmenting small or thin and elongated objects, as it tends to
-shrink solutions or \HT{yields} disconnected solutions. Such drawbacks can be problematic in image segmentation, image
-restoration or image inpainting. It is thus rather natural to consider curvature (especially squared curvature) \HT{as}
-a potential regularizer. Energies involving \HT{both length and} squared curvature are often called \HT{the {\em Elastica}}
-model (\HT{that} dates back to Euler) . \HT{The {\em Willmore energy} is its $n$-dimensional extension. These were brought to
-attention} in computer vision by Mumford \cite{mumford1994elastica}. A similar concept is also present in the
-second-order regularizer of the \HT{original} snake model \cite{kass1988snakes}. \HT{Indeed, an explicit curvature
-  term was often employed in early level-set methods, like~\cite{malladi1995image,malladi1995shape,ballester01filljoint}
-  for segmentation or inpainting,} \HT{However, Casselles {\em et al.} in~\cite{casseles97geodesic} observed that these
-  terms as employed were not geometric, in the sense that they depended on the discretization parameters}.
+However length regularization shows limitations when segmenting small
+or thin and elongated objects, as it tends to shrink solutions or
+yields disconnected solutions. Such drawbacks can be problematic in
+image segmentation, image restoration or image inpainting. It is thus
+rather natural to consider curvature (especially squared curvature) as
+a potential regularizer. Energies involving both length and squared
+curvature are often called the {\em Elastica} model (that dates back
+to Euler). The {\em Willmore energy} is its $n$-dimensional
+extension. These were brought to attention in computer vision by
+Mumford \cite{mumford1994elastica}. A similar concept is also present
+in the second-order regularizer of the original snake model
+\cite{kass1988snakes}.Indeed, an explicit curvature term was often
+employed in early level-set methods,
+like~\cite{malladi1995image,malladi1995shape,ballester01filljoint} for
+segmentation or inpainting. However, Casselles {\em et al.}
+in~\cite{casseles97geodesic} observed that these terms as employed
+were not geometric, in the sense that they depend on the
+discretization parameters.
 
 \subsection{Existing works}
-\HT{The use of curvature for surface regularization in the case of the Willmore energy was studied
-  in~\cite{bobenko2005discrete}, although results look promising, authors used an inexact linearized version of the
-  square curvature at every step.}
+The use of curvature for surface regularization in the case of the
+Willmore energy was studied in~\cite{bobenko2005discrete}. Although
+results look promising, authors used an inexact linearized version of
+the square curvature at every step.
 
-One of the first successful uses of \HT{geometric, squared} curvature in image processing is the inpainting algorithm
-described in \cite{masnou98inpainting}\HT{, where authors} evaluate
-the absolute curvature along the level lines of a
-simply-connected image to reconstruct its occluded parts. The non-intersection property of level lines \HT{induces} the
-construction of an efficient dynamic programming algorithm. \HT{However, } the curvature energy is \HT{only} coarsely
-approximated.  \cite{chan02elasticainpainting} \HT{is} another geometric inpainting method involving elastica
-\HT{optimized with level-sets}.
+One of the first successful uses of geometric, squared curvature in
+image processing is the inpainting algorithm described in
+\cite{masnou98inpainting}, where authors evaluate the absolute
+curvature along the level lines of a simply-connected image to
+reconstruct its occluded parts. The non-intersection property of level
+lines induces the construction of an efficient dynamic programming
+algorithm. The curvature energy is nevertheless only coarsely
+approximated. We may quote \cite{chan02elasticainpainting} as another
+geometric inpainting method involving elastica, which is optimized with
+level-sets.
 
 
-In image segmentation, Zehiry and Grady have shown that injecting curvature as a regularizer can help recover thin
-and elongated objects \cite{zehiry10fast}. Similarly Schoenemann {\em et al.}  \cite{schoenemann09linear} have
-considered the elastica energy in their ratio-based image segmentation approach. In~\cite{schoenemann2011elastic},
-Schoenemann~{\em et al.} extend ratio-cut approaches to segmentation with a curvature term. Their global optimization
-framework shows the considerable \HT{advantages} of using such regularizer in common binary image segmentation tasks.
-However the time complexity of their algorithm \HT{is prohibitive,} even if curvature is \HT{again} coarsely
-approximated.  \HT{In more recent work, Lim {\em et al.} propose an edge-weighted Willmore-like flow to segment
-vertebra~\cite{lim2012introducing} using a level-set formulation. They observe improved results compared
-to~\cite{casseles97geodesic} and other perimeter-based priors, but observe that a shape prior and a close-enough
-solution must also be provided to achieve good results.}
+In image segmentation, Zehiry and Grady have shown that injecting
+curvature as a regularizer can help recover thin and elongated objects
+\cite{zehiry10fast}. Similarly Schoenemann {\em et al.}
+\cite{schoenemann09linear} have considered the elastica energy in
+their ratio-based image segmentation
+approach. In~\cite{schoenemann2011elastic}, Schoenemann~{\em et al.}
+extend ratio-cut approaches to segmentation with a curvature
+term. Their global optimization framework shows the considerable
+advantages of using such regularizer in common binary image
+segmentation tasks.  However the time complexity of their algorithm
+is prohibitive, even if curvature is again coarsely
+approximated.  In a more recent work, Lim {\em et al.} propose an
+edge-weighted Willmore-like flow to segment
+vertebra~\cite{lim2012introducing} using a level-set
+formulation. They observe improved results compared
+to~\cite{casseles97geodesic} and other perimeter-based priors, but
+observe that a shape prior and a close-enough initialization must also be
+provided to achieve good results.
 
-In fact, it is still a very challenging task to \HT{efficiently handle} curvature in the context of image segmentation.
-\HT{State-of-art methods are in practice} difficult to optimize and \HT{do not scale easily}
-\cite{zehiry10fast,schoenemann09linear,strandmark11globalframework,nieuwenhuis14efficient}. In order to achieve
-reasonable running times, such approaches make use of coarse curvature estimations for which the approximation error is
-\HT{often} unknown. Improving the quality of the curvature estimator has an important impact on the accuracy of the
-results, but is computationally too costly in these methods.
+In fact, it is still a very challenging task to efficiently handle
+curvature in the context of image segmentation.  State-of-art methods
+are in practice difficult to optimize and do not scale easily
+\cite{zehiry10fast,schoenemann09linear,strandmark11globalframework,nieuwenhuis14efficient}. In
+order to achieve reasonable running times, such approaches make use of
+coarse curvature estimations for which the approximation error is
+often unknown. Improving the quality of the curvature estimator has an
+important impact on the accuracy of the results, but is
+computationally too costly in these methods.
 
-Segmentation methods using Elastica or Willmore energies \HT{can be formulated via the computation of} corresponding
-flow, i.e. following its gradient. Well-founded level-set methods involving Willmore energy \cite{droske2004level} have
-been used in medical image segmentation \cite{lim2012introducing}. Another level-set formulation similar to the
-Chan-Vese model \HT{was} proposed in \cite{zhu2013image}. Willmore flow can also be carried out by phase-field models
-(see \cite{bretin2015phase}) but they are less suited to image segmentation since interfaces are blurred in such
-models. Threshold dynamics can also be considered for such energies \cite{esedoglu2008threshold} and has been proposed
-for image desocclusion \cite{esedoglu2005threshold}. \HT{However, flow-based methods will always deliver a local
-  minimum, which heavily depend on initialization for good results}.  \HT{A similar approach is to formulate the
-  Elastica as a regularization in a variational framework and use operator splitting to optimize it. Tai {\em et
-    al.}~\cite{tai11elastica} and more recently Deng~{\em et al.}~\cite{deng2019new} have proposed this approach, which
-  is well-suited to inverse problem solving. The problem remains non-convex and the nature of the converged iterate
-are not studied, i.e. how close they are to a global optimum.}
+Segmentation methods using Elastica or Willmore energies can be
+formulated via the computation of the corresponding flow,
+i.e. following its gradient. Well-founded level-set methods involving
+Willmore energy \cite{droske2004level} have been used in medical image
+segmentation \cite{lim2012introducing}. Another level-set formulation
+similar to the Chan-Vese model was proposed in
+\cite{zhu2013image}. Willmore flow can also be carried out by
+phase-field models (see \cite{bretin2015phase}) but they are less
+suited to image segmentation since interfaces are blurred in such
+models. Threshold dynamics can also be considered for such energies
+\cite{esedoglu2008threshold} and has been proposed for image
+desocclusion \cite{esedoglu2005threshold}. However, flow-based methods
+will always deliver a local minimum, which heavily depend on
+initialization for good results. A similar approach is to formulate
+the Elastica as a regularization in a variational framework and use
+operator splitting to optimize it. Tai {\em et
+  al.}~\cite{tai11elastica} and more recently Deng~{\em et
+  al.}~\cite{deng2019new} have proposed this approach, which is
+well-suited to inverse problem solving. The problem remains non-convex
+and the nature of the converged iterates are not studied, i.e. how
+close they are to a global optimum.
 
-\HT{In contrast, researchers have sought convex relaxation of curvature-related
-  formulation. In~\cite{goldluecke11totalcurvature}, Goldluecke and Cremers introduce the {\em Total Curvature}, based
-  on the Menger-Melnikov curvature of a measure. The formulation is non-convex but can be relaxed into a well-correlated
-  but non-tight convex one. The relaxed formulation can be used to solve inverse problems including segmentation,
-  however computing a solution is still expensive, requiring signifiant parallelisation efforts with a GPU to achieve
-  acceptable computing times}. \HT{In~\cite{bredies15convex}, Bredies {\em et al.} study a convex approximation of the
-  Elastica energy, using a lifting scheme. Thanks to the lifting, it is not restritcted to binary sets. It shows
+In contrast, researchers have sought convex relaxation of curvature-related
+formulation. In~\cite{goldluecke11totalcurvature}, Goldluecke and Cremers introduce the {\em Total Curvature}, based
+on the Menger-Melnikov curvature of a measure. The formulation is non-convex but can be relaxed into a well-correlated
+but non-tight convex one. The relaxed formulation can be used to solve inverse problems including segmentation. However computing a solution is still expensive, requiring signifiant parallelisation efforts with a GPU to achieve
+  acceptable computing times. In~\cite{bredies15convex}, Bredies {\em et al.} study a convex approximation of the
+  Elastica energy, using a lifting scheme. Thanks to the lifting, it is not restricted to binary sets. It shows
   promising results and can be used for image restoration in addition to inpainting and segmentation. The scheme is
   however neither tight nor exact, and required 4 dimensions for a 2D approximation. In addition, it does not carry over
-to $nD$. It also remains computationally expensive.}
+to $nD$. It also remains computationally expensive.
 
 
-\HT{Discrete approaches have been used to tackle the Elastica difficulties. As noted before~\cite{schoenemann09linear}
-  have linearized a mesh-based approach, which was expanded upon by~\cite{strandmark11globalframework}, while
-  \cite{zehiry10fast} have used a binary solver for a non-submodular approach on a regular square grid of pixels, which
-  was expanded in~\cite{el2016contrast}. In~\cite{nieuwenhuis14efficient} , a specific solver is developed to yield a
-  better solution to an extension of the formulation in~\cite{zehiry10fast}.}
+Discrete approaches have been used to tackle the Elastica
+difficulties. As noted before, \cite{schoenemann09linear} have
+linearized a mesh-based approach, which was expanded upon
+by~\cite{strandmark11globalframework}, while \cite{zehiry10fast} have
+used a binary solver for a non-submodular approach on a regular square
+grid of pixels, which was expanded
+in~\cite{el2016contrast}. In~\cite{nieuwenhuis14efficient} , a
+specific solver is developed to yield a better solution to an
+extension of the formulation in~\cite{zehiry10fast}.
 
 
 \subsection{Motivation}
-\HT{In spite of the multiplicity of existing approaches, it seems none is currently completely satisfactory. While the
-  sought solution is expected to be very smooth based on geometrical expectations, the mathematical properties
-  of the related operators make this smoothness elusive. Non-convexity and the presence of high-order terms make
-  Elastica difficult to optimize and to approximate, let alone compute efficiently. The computed solution in the
-  literature are rarely evaluated, and the complexity of the proposed solution is often high.}
+In spite of the multiplicity of existing approaches, it seems none is
+currently completely satisfactory. While the sought solution is
+expected to be very smooth based on geometrical expectations, the
+mathematical properties of the related operators make this smoothness
+elusive. Non-convexity and the presence of high-order terms make
+Elastica difficult to optimize and to approximate, let alone compute
+efficiently. The computed solutions in the literature are rarely
+evaluated, and the complexity of the proposed solution is often high.
 
 %%\item{What are the difficulties in use curvature as a regularizer (point out convex relaxation approaches) and how a digital approach may help us }
 %%\item{Outline: We present two models that illustrate how digital estimators can be used to minimize the elastica energy on digital sets.  }
 %%\item{\todo{Add related works : geometric priors, binary segmentation, other digital curve evolution models}}
 %%\item{\todo{Talk about Willmore flow with phase field or with threshold dynamics}}
 
-\HT{Consequently,} we are interested in \HT{studying} purely discrete variational segmentation models involving an
-elastica energy. Recently, new estimators of curvature along digital contours have been proposed
-\cite{roussillon11mdca,coeurjolly13integral,schindele17mdca} with the desirable multigrid convergence property. This
-motivates us to propose models in which they can be used successfully.
+Consequently, we are interested in studying purely discrete
+variational segmentation models involving an Elastica
+energy. Recently, new estimators of curvature along digital contours
+have been proposed
+\cite{roussillon11mdca,coeurjolly13integral,schindele17mdca} with the
+desirable multigrid convergence property. This motivates us to propose
+models in which they can be used successfully.
 
 
-\HT{In the remainder, we propose to} investigate the use of the digital integral invariant curvature estimator
-\cite{coeurjolly13integral} in a discrete variational segmentation framework. More precisely, we show how to incorporate
-it in a digital flow minimizing its squared curvature. This model is expressible as a discrete combinatorial
-optimization model, which we solve using a classical variant of QPBO algorithm \cite{rother07qpbo}. \HT{Our solution
-  does not} compute a global solution to the whole domain, but our approach leads to a digital flow similar to
-continuous \HT{Elastica}, as shown by our experiments. We present an application of the model as a post-processing step
-in a segmentation framework, and demonstrate how it can improve standard results. 
-\daniel{This paper is an extended version of a previous work that appeared in \cite{antunes19}. We've included a deeper
-  discussion on the optimization method we've used and we present a comparison of our segmentation method with two other
-  related works, and illustrate the results with several examples. Moreover, we have included a new local combinatorial
-  optimization approach for elastica minimization. Finnaly,  the code produced in this paper is freely available on
-  github\footnote{https://www.github.com/danoan/BTools}.}
+In this paper, we propose to investigate the use of the digital
+integral invariant curvature estimator \cite{coeurjolly13integral} in
+a discrete variational segmentation framework. More precisely, we show
+how to incorporate it in a digital flow minimizing its squared
+curvature. This model is expressible as a discrete combinatorial
+optimization model, which we solve using a classical variant of QPBO
+algorithm \cite{rother07qpbo}. Our solution does not compute a global
+solution to the whole domain but a global solution to a band
+surrounding a given shape. Our approach thus leads to a digital flow
+similar to continuous Elastica, as shown by our experiments. We
+present an application of this model as a post-processing step in a
+segmentation framework, and demonstrate how it can improve standard
+results. This paper is an extended version of a previous work that
+appeared in \cite{antunes19}. We have included a deeper discussion on
+our optimization method and we present a more thorough comparison of
+our segmentation method with two other related works. Moreover, we
+have included a new local combinatorial optimization approach for
+elastica minimization, which show that our discrete model is
+well-founded. Finally, the code produced in this paper is freely
+available on github.\footnote{https://www.github.com/danoan/BTools}
 
 
-\subsection{Outline}.
-Section two reviews the concept of multigrid convergence and highlights its importance for the
-definition of digital estimators. Next, we describe two convergent estimators used in this paper, one for tangent and
-the other for curvature. They are used in the optimization model and in the definition of the digital elastica. Section
-three describes a local combinatorial optimization model suitable for different curvature estimators. Section four
-describes the proposed curvature evolution model along with several illustrations of digital flows. Section five
-explains how to use the evolution model as a post-processing step in an image segmentation framework.
+\subsection{Outline}
+Section~2 reviews the concept of multigrid convergence and highlights
+its importance for the definition of digital estimators. We describe
+two convergent estimators used in this paper, one that approaches the
+length of elementary discrete contour elements, and the other that
+approaches the curvature of a discrete contour. They are used in the
+optimization model and in the definition of the digital
+elastica. Section~3 describes a local combinatorial optimization model
+suitable for different curvature estimators, that presents interesting
+results but is too costly in practice. Section~4 describes the
+proposed Elastica-driven curvature evolution model along with several
+illustrations of digital flows. Section~5 explains how to use this
+evolution model as a post-processing step in an image segmentation
+framework and compares it to two related approaches. We conclude and
+draw some perspectives to this work in Section~6.
 
 
 
