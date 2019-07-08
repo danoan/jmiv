@@ -254,7 +254,7 @@ length of elementary discrete contour elements, and the other that
 approaches the curvature of a discrete contour. They are used in the
 optimization model and in the definition of the digital
 elastica. Section~3 describes a local combinatorial optimization model
-suitable for different curvature estimators, that presents interesting
+suitable for several curvature estimators, that presents interesting
 results but is too costly in practice. Section~4 describes the
 proposed Elastica-driven curvature evolution model along with several
 illustrations of digital flows. Section~5 explains how to use this
@@ -887,14 +887,14 @@ varies across $m$ values differs from shape to shape, as is illustrated in figur
 \subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-5/plot-model-flower-concavities-probe.eps}}\\%
 \subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-7/plot-model-flower-concavities-probe.eps}}%
 \end{minipage}
-\caption{For each plot, we first produce shapes $\left\{ S^{(i)} \right\}$ executing DCE with $m=r$. Then, for each shape in $\left\{ S^{(i)} \right\}$, we execute one iteration of DCE for different values of $m$ and we count the unlabeled pixels. The number of unlabeled pixels by QPBOP remains high for lower values of $m$, and goes to zero when $m=r$. We observe the same behaviour for different radius values.}
+\caption{For each plot, we first produce shapes $\left\{ S^{(i)} \right\}$ executing DCE with $m=r$. Then, for each shape in $\left\{ S^{(i)} \right\}$, we execute one iteration of DCE for different values of $m$ and we count the unlabeled pixels. The number of unlabeled pixels by QPBOP remains high for lower values of $m$, and goes to zero when $m=r$. We observe the same behaviour for varying radius values.}
 \label{fig:unlabeled-versus-iterations}
 \end{figure}
 
 \section{Application to image segmentation}
 
 We present an application of our digital curve evolution algorithm to supervised image segmentation. The DCE acts as a
-contour correction method. Here we are going to use a data fidelity term in order to characterize the object of
+contour correction method. Here we use a data fidelity term in order to characterize the object of
 interest. Given foreground and background seeds selected by the user, we derive mixed gaussian distributions  of color
 intensities $G_f$ and $G_b$, and we define the data fidelity term as the cross-entropy, i.e.
 	
@@ -1004,28 +1004,27 @@ Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
 We evaluate our method using the BSD300 database \cite{martinFTM01berkeley}. All images contains the same number of pixels, the resolution being 321x481 in portrait mode. We compare the results of our method with segmentations given by GrabCut and Schoenemanns's method \cite{schoenemann09linear}. We report an average of $3s$ per flow iteration, and an average of $30$ iterations per image. While GrabCut executes in less than one second, Schoenemann's method may take several hours to complete.
 
 
-\daniel{In figure \ref{fig:parameters-influence} we can observe the results of a curvature regularization in comparison with a pure length regularization. The curvature can fill gaps and is smoother than the one produced by length only, resulting in more pleasant segmentations. In figures \ref{fig:segmentation-results} and \ref{fig:more-segmentation-results} we list several results of our method and we compare them with segmentation produced by GrabCut and Schoenemann's method. Our method is successful in producing curvature regularized segmentations and demonstrates the completion property of curvature. Moreover, it does not suffer from over segmentation, it is faster than Schoenemann's, and in several opportunities produces better segmentations than GrabCut.}
+{In figure \ref{fig:parameters-influence} we can observe the results of a curvature regularization in comparison with a
+  pure length regularization. The curvature can fill gaps and is smoother than the one produced by length only,
+  resulting in more pleasant segmentations. In figures \ref{fig:segmentation-results} and
+  \ref{fig:more-segmentation-results} we list several results of our method and we compare them with segmentation
+  produced by GrabCut and Schoenemann's method. Our method is successful in producing curvature regularized
+  segmentations and demonstrates the completion property of curvature. Moreover, it does not suffer from over
+  segmentation, it is much faster than Schoenemann's, and in several opportunities produces better segmentations than
+  GrabCut.
 
 \section{Conclusion}\label{sec:conclusion}
 
 
-We have studied in depth several digital curve evolution models based
-on the Elastica energy and we have presented an application of one of
-them to image segmentation. The processes we have described are
-completely digital, and do not suffer from issues that typically
-arises in models that passes through a discretization stage, as
-rounding. Moreover, the model can handle changes in topology and its
-results are competitive with similar approaches while achieving
-reasonable running times.
+We have studied in depth several digital curve evolution models based on a digital version of the Elastica energy and we
+have presented an application to image segmentation. The processes we have described are completely digital, and do not
+suffer from issues that typically arise in models that passes through a discretization stage, such as
+rounding. Moreover, the model can handle changes in topology and its results are competitive with similar approaches
+while achieving reasonable running times.
 
-Future developments of this work may include automatization, no more
-dependence on seeds selected by the user and automatic choice of ball
-estimation radius based on the reach of the shape. One can also think
-to extend the DCE algorithm to $3$d, as the integral invariant
-estimator preserves its properties in that space. In future works, a
-denoising application may be derived by running the flow on the $3$d
-shape with data fidelity defined by image intensities or by distance
-to initial position.
+Future developments of this work will include extending the DCE algorithm to $3$d, as the integral invariant estimator
+is available in higher dimensions. As a result, a denoising application may be derived by lifting the flow to $3$d
+with a data fidelity defined by image intensities or by distance to initial position.
 
 
 
