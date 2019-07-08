@@ -893,7 +893,10 @@ varies across $m$ values differs from shape to shape, as is illustrated in figur
 
 \section{Application to image segmentation}
 
-We present an application of our digital curve evolution algorithm to supervised image segmentation. The DCE will act as a contour correction method. Here we are going to use a data fidelity term in order to characterize the object of interest. Given foreground and background seeds selected by the user, we derive mixed gaussian distributions  of color intensities $G_f$ and $G_b$, and we define the data fidelity term as
+We present an application of our digital curve evolution algorithm to supervised image segmentation. The DCE acts as a
+contour correction method. Here we are going to use a data fidelity term in order to characterize the object of
+interest. Given foreground and background seeds selected by the user, we derive mixed gaussian distributions  of color
+intensities $G_f$ and $G_b$, and we define the data fidelity term as the cross-entropy, i.e.
 	
 \begin{align}
   g(y) = -(1-y)\log{G_f(I(y))} - y\log{G_b(I(y))}.
