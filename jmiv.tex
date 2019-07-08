@@ -777,13 +777,13 @@ curvature value.
 \caption{By positioning the estimation ball on farther rings, we minimize artifacts creation. \label{fig:mx-square-flow}}
 \end{figure}
 
-\daniel{In our experiments, the best results are obtained by executing DCE algorithm with $m$ equal to $r$, where $r$ is
+{In our experiments, the best results are obtained by executing DCE algorithm with $m$ equal to $r$, where $r$ is
   the estimation ball radius (see figure \ref{fig:mx-square-flow} ). We observe that Elastica may increase after some
   iterations if chosen radius is too large, as in the case of the triangle in figure \ref{fig:mx-flow-gs-radius-effect}
   in which the flow converges to a single point. We conjecture that an appropriated value for the radius should be given
   by the shape reach.  The produced flow has no difficulties in handling changes on topology, and it presents different
   speeds for regions with low and high curvature values, as illustrated in figure
-  \ref{fig:mx-speed-variation-hole-filling}.}
+  \ref{fig:mx-speed-variation-hole-filling}.
 
 \begin{figure}[hp!]
 \center				
@@ -844,34 +844,27 @@ Function $f$ is submodular if and only if the following inequality holds for eac
   \quad f_{j,k}(0,0) + f_{j,k}(1,1) \leq f_{j,k}(0,1) + f_{j,k}(1,0).
 \end{align*}
 
-Energy $E_m$ is non-submodular and optimizing it is a difficult
-problem, which constrains us to use heuristics and approximation
-algorithms. The QPBO method \cite{rother07qpbo} transforms the
-original problem in a max-flow/min-cut formulation and returns a full
-optimal labeling for submodular energies. For non-submodular energies
-the method is guaranteed to return a partial labeling with the
-property that the set of labeled variables is part of an optimal
+Energy $E_m$ is non-submodular and optimizing it is a difficult problem, which constrains us to use heuristics and
+approximation algorithms. The QPBO method \cite{rother07qpbo} transforms the original problem in a max-flow/min-cut
+formulation and yields a full optimal labeling for submodular energies. For non-submodular energies the method is
+guaranteed to return a partial labeling with the property that the set of labeled variables is part of an optimal
 solution. That property is called partial optimality.
 
-In practice, QPBO can leave many pixels unlabeled. There exist two
-extensions of QPBO that alleviate this limitation: QPBOI (improve) and
-QPBOP (probe). The first is an approximation method that is guaranteed
-to not increase the energy, but we lost the property of partial
-optimality. The second is an exact method which is reported to label
-more variables than QPBO.
+In practice, QPBO can leave many pixels unlabeled. There exist two extensions to QPBO that alleviate this limitation:
+QPBOI (improve) and QPBOP (probe). The first is an approximation method that is guaranteed to not increase the energy,
+but loses the property of partial optimality. The second is an exact method which is reported to label more variables
+than QPBO.
 
-The percentage of unlabeled pixels by QPBOP for $E_1$ is quite high,
-but the percentage decreases to zero as we set $m$ equal to
-$r$. Therefore, we are more confident to take the solution for values
-of $m$ close to $r$. However, the way it varies across $m$ values
-differs from shape to shape, as is illustrated in figure
-\ref{fig:unlabeled-versus-iterations}. We also noticed that, for
-$m=r$, all the pixels were labeled, \daniel{which may indicate that $E_r$ is an an easy 
-instance of the general non-submodular energy $E_m$, but this remains to be proved. The number of pairwise
-terms in $E_r$ is roughly half of those in $E_1$ (see figure \ref{fig:ratio-pairwise-terms}).}
+The percentage of unlabeled pixels by QPBOP for $E_1$ is quite high, but the percentage decreases to zero as we set $m$
+equal to $r$. Therefore, we are more confident in taking the solution for values of $m$ close to $r$. However, the way it
+varies across $m$ values differs from shape to shape, as is illustrated in figure
+\ref{fig:unlabeled-versus-iterations}. We also noticed that, for $m=r$, all the pixels were labeled, {which may
+  indicate that $E_r$ is an an easy instance of the general non-submodular energy $E_m$, but this remains to be
+  proved. The number of pairwise terms in $E_r$ is roughly half of those in $E_1$ (see figure
+  \ref{fig:ratio-pairwise-terms}).
 
-We have used QPBOI to solve $E_m$. Naturally, in the case where all
-pixels are labeled by QPBOP, QPBOI returns the same labeling as QPBOP.
+  We have used QPBOI to solve $E_m$. Naturally, in the case where all pixels are labeled by QPBOP, QPBOI returns the
+  same labeling as QPBOP.
 
 
 \begin{figure}[h!]
