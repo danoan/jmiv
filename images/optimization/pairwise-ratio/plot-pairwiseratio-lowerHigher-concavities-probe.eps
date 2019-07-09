@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: my-plot.ps
 %%Creator: gnuplot 4.6 patchlevel 6
-%%CreationDate: Wed Jul  3 13:35:45 2019
+%%CreationDate: Mon Jul  8 10:46:03 2019
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 554 482
 %%Orientation: Portrait
@@ -14,7 +14,7 @@ gnudict begin
 % The following true/false flags may be edited by hand if desired.
 % The unit line width and grayscale image gamma correction may also be changed.
 %
-/Color false def
+/Color true def
 /Blacktext false def
 /Solid false def
 /Dashlength 1 def
@@ -24,7 +24,7 @@ gnudict begin
 /ClipToBoundingBox false def
 /SuppressPDFMark false def
 /TransparentPatterns false def
-/gnulinewidth 5.000 def
+/gnulinewidth 10.000 def
 /userlinewidth gnulinewidth def
 /Gamma 1.0 def
 /BackgroundColor {-1.000 -1.000 -1.000} def
@@ -463,7 +463,7 @@ SDict begin [
   /Author (dantu1)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Wed Jul  3 13:35:45 2019)
+  /CreationDate (Mon Jul  8 10:46:03 2019)
   /DOCINFO pdfmark
 end
 } ifelse
@@ -481,6 +481,7 @@ newpath
 BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {gsave BackgroundColor C clippath fill grestore} if
 1.000 UL
 LTb
+LCb setrgbcolor
 1100 640 M
 63 0 V
 3516 0 R
@@ -491,6 +492,7 @@ stroke
 ] -66.7 MRshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1100 1153 M
 63 0 V
 3516 0 R
@@ -501,6 +503,7 @@ stroke
 ] -66.7 MRshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1100 1666 M
 63 0 V
 3516 0 R
@@ -511,6 +514,7 @@ stroke
 ] -66.7 MRshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1100 2180 M
 63 0 V
 3516 0 R
@@ -521,6 +525,7 @@ stroke
 ] -66.7 MRshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1100 2693 M
 63 0 V
 3516 0 R
@@ -531,6 +536,7 @@ stroke
 ] -66.7 MRshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1100 3206 M
 63 0 V
 3516 0 R
@@ -541,6 +547,7 @@ stroke
 ] -66.7 MRshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1100 3719 M
 63 0 V
 3516 0 R
@@ -551,6 +558,7 @@ stroke
 ] -66.7 MRshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1100 640 M
 0 63 V
 0 3016 R
@@ -561,6 +569,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1458 640 M
 0 63 V
 0 3016 R
@@ -571,6 +580,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1816 640 M
 0 63 V
 0 3016 R
@@ -581,6 +591,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 2174 640 M
 0 63 V
 0 3016 R
@@ -591,6 +602,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 2532 640 M
 0 63 V
 0 3016 R
@@ -601,6 +613,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 2890 640 M
 0 63 V
 0 3016 R
@@ -611,6 +624,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 3247 640 M
 0 63 V
 0 3016 R
@@ -621,6 +635,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 3605 640 M
 0 63 V
 0 3016 R
@@ -631,6 +646,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 3963 640 M
 0 63 V
 0 3016 R
@@ -641,6 +657,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 4321 640 M
 0 63 V
 0 3016 R
@@ -651,6 +668,7 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 4679 640 M
 0 63 V
 0 3016 R
@@ -661,8 +679,10 @@ stroke
 ] -66.7 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1.000 UL
 LTb
+LCb setrgbcolor
 1100 3719 N
 0 -3079 V
 3579 0 V
@@ -687,9 +707,11 @@ LTb
 1.000 UP
 1.000 UL
 LTb
+LCb setrgbcolor
 % Begin plot #1
 1.000 UL
 LT0
+LC0 setrgbcolor
 LCb setrgbcolor
 3776 3556 M
 [ [(Helvetica) 200.0 0.0 true true 0 (square\(m=1\))]
@@ -801,6 +823,7 @@ LT0
 % Begin plot #2
 stroke
 LT1
+LC1 setrgbcolor
 LCb setrgbcolor
 3776 3356 M
 [ [(Helvetica) 200.0 0.0 true true 0 (square\(m=5\))]
@@ -912,6 +935,7 @@ LT1
 % Begin plot #3
 stroke
 LT2
+LC2 setrgbcolor
 LCb setrgbcolor
 3776 3156 M
 [ [(Helvetica) 200.0 0.0 true true 0 (flower\(m=1\))]
@@ -1023,6 +1047,7 @@ LT2
 % Begin plot #4
 stroke
 LT3
+LC3 setrgbcolor
 LCb setrgbcolor
 3776 2956 M
 [ [(Helvetica) 200.0 0.0 true true 0 (flower\(m=5\))]
@@ -1133,6 +1158,7 @@ LT3
 % End plot #4
 stroke
 LTb
+LCb setrgbcolor
 1100 3719 N
 0 -3079 V
 3579 0 V
@@ -1142,6 +1168,7 @@ Z stroke
 1.000 UP
 1.000 UL
 LTb
+LCb setrgbcolor
 stroke
 grestore
 end
