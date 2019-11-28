@@ -84,7 +84,7 @@ low-level image analysis, especially when little prior information is
 known about the shape of interest. Length penalization is a
 well-behaved, general purpose regularizer and many models in the
 literature make use of it, from active contours
-\cite{casseles97geodesic} to level-set formulations
+\cite{caseles97geodesic} to level-set formulations
 \cite{malladi1995image,malladi1995shape}. Discrete graph-based
 variational models have been particularly succesful to incorporate
 length penalization as a penalizer, while keeping the ability to
@@ -104,8 +104,8 @@ in the second-order regularizer of the original snake model
 \cite{kass1988snakes}.Indeed, an explicit curvature term was often
 employed in early level-set methods,
 like~\cite{malladi1995image,malladi1995shape,ballester01filljoint} for
-segmentation or inpainting. However, Casselles {\em et al.}
-in~\cite{casseles97geodesic} observed that these terms as employed
+segmentation or inpainting. However, Caselles {\em et al.}
+in~\cite{caseles97geodesic} observed that these terms as employed
 were not geometric, in the sense that they depend on the
 discretization parameters.
 
@@ -142,7 +142,7 @@ approximated.  In a more recent work, Lim {\em et al.} propose an
 edge-weighted Willmore-like flow to segment
 vertebra~\cite{lim2012introducing} using a level-set
 formulation. They observe improved results compared
-to~\cite{casseles97geodesic} and other perimeter-based priors, but
+to~\cite{caseles97geodesic} and other perimeter-based priors, but
 observe that a shape prior and a close-enough initialization must also be
 provided to achieve good results.
 
@@ -167,7 +167,7 @@ phase-field models (see \cite{bretin2015phase}) but they are less
 suited to image segmentation since interfaces are blurred in such
 models. Threshold dynamics can also be considered for such energies
 \cite{esedoglu2008threshold} and has been proposed for image
-desocclusion \cite{esedoglu2005threshold}. However, flow-based methods
+disocclusion \cite{esedoglu2005threshold}. However, flow-based methods
 will always deliver a local minimum, which heavily depend on
 initialization for good results. A similar approach is to formulate
 the Elastica as a regularization in a variational framework and use
@@ -181,7 +181,7 @@ close they are to a global optimum.
 In contrast, researchers have sought convex relaxation of curvature-related
 formulation. In~\cite{goldluecke11totalcurvature}, Goldluecke and Cremers introduce the {\em Total Curvature}, based
 on the Menger-Melnikov curvature of a measure. The formulation is non-convex but can be relaxed into a well-correlated
-but non-tight convex one. The relaxed formulation can be used to solve inverse problems including segmentation. However computing a solution is still expensive, requiring signifiant parallelisation efforts with a GPU to achieve
+but non-tight convex one. The relaxed formulation can be used to solve inverse problems including segmentation. However computing a solution is still expensive, requiring significant parallelisation efforts with a GPU to achieve
   acceptable computing times. In~\cite{bredies15convex}, Bredies {\em et al.} study a convex approximation of the
   Elastica energy, using a lifting scheme. Thanks to the lifting, it is not restricted to binary sets. It shows
   promising results and can be used for image restoration in addition to inpainting and segmentation. The scheme is
@@ -195,7 +195,7 @@ linearized a mesh-based approach, which was expanded upon
 by~\cite{strandmark11globalframework}, while \cite{zehiry10fast} have
 used a binary solver for a non-submodular approach on a regular square
 grid of pixels, which was expanded
-in~\cite{el2016contrast}. In~\cite{nieuwenhuis14efficient} , a
+in~\cite{el2016contrast}. In~\cite{nieuwenhuis14efficient}, a
 specific solver is developed to yield a better solution to an
 extension of the formulation in~\cite{zehiry10fast}.
 
@@ -242,7 +242,7 @@ our optimization method and we present a more thorough comparison of
 our segmentation method with two other related works. Moreover, we
 have included a new local combinatorial optimization approach for
 elastica minimization, which show that our discrete model is
-well-founded. Finally, the code produced in this paper is freely
+well-founded. Finally, the code related to this paper is freely
 available on github.\footnote{https://www.github.com/danoan/BTools}
 
 
@@ -375,7 +375,7 @@ where $\kappa(X,p)$ is the curvature of $X$ at point $p$. By isolating $\kappa$ 
 Such an approximation is convenient as one can simply devise a multigrid convergent estimator for the area.
 
 \begin{definition}	
-  Given a digital shape $D \subset (h \mathbb{Z})^2$,  the area estimatir $\widehat{\text{Area}}(D,h)$ is defined as	
+  Given a digital shape $D \subset (h \mathbb{Z})^2$,  the area estimator $\widehat{\text{Area}}(D,h)$ is defined as	
   \begin{align}
     \widehat{\text{Area}}(D,h) \coloneqq h^2\text{Card}\left( D \right).	
     \label{eq:digital_estimator_area}
@@ -465,7 +465,7 @@ An oriented closed curve $C$ is a closed connected sequence of linels with a wel
 	\subfloat[\label{}]{%
 	\includegraphics[scale=0.2]{images/local_search/definitions/glued-curve.eps}
 	}%	
-	\caption{The blue pixels in figure (a) illustrates a $2$-ring set, while the green pixels its inner-pixel boundary. In figure (b) we highlight an element of set $\mathcal{G}_{11}(C_1,C_2)$. The curve segments of $C_1$ and $C_2$ are colored in red and green, while the junction linels in blue.}
+	\caption{The blue pixels in figure (a) illustrates a $2$-ring set, while the green pixels form its inner-pixel boundary. In figure (b) we highlight an element of set $\mathcal{G}_{11}(C_1,C_2)$. The curve segments of $C_1$ and $C_2$ are colored in red and green, while the junction linels in blue.}
 \end{figure}
 
 \begin{definition}[Glued Curve]
@@ -481,7 +481,7 @@ Given closed curves $C_1,C_2$ with same orientation, its set of $n$-glued curves
 
 Let $S_O = ( S \cup R_1^+(S) ) $ and $S_I = ( S \setminus R_1^-(S) ) $, the neighborhood set to shape $S$ is defined as
 \begin{align*}
-	\mathcal{N}(S,N) = \bigcup_{1 \leq n \leq N} int \big( \mathcal{G}_{n}(\partial S_O, \partial S) \; \big) \cup int \big( \;  \; \mathcal{G}_{n}(\partial S, \partial S_I) \; \big),
+	\mathcal{N}(S,N) = \bigcup_{1 \leq n \leq N} int \big(\; \mathcal{G}_{n}( \partial S_O, \partial S) \; \big) \cup int \big( \; \mathcal{G}_{n}(\partial S, \partial S_I) \; \big),
 \end{align*}
 
 where $int(C)$ is the interior of the shape bounded by the close oriented curve $C$. Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with $N=20$.
@@ -510,8 +510,8 @@ where $int(C)$ is the interior of the shape bounded by the close oriented curve 
 	$S^{(i)} \longleftarrow X^\star$\;
 	\Delta $\longleftarrow$ $\hat{E}(S^{(i-1)}) - \hat{E}(S^{(i)})$\;	
  }
- \label{alg:local-search} 
  \caption{Local combinatorial optimization for elastica minimization.}
+ \label{alg:local-search} 
 \end{algorithm}
 
 		
@@ -638,7 +638,7 @@ of energies for given parameters $\alpha,\beta, \gamma \geq 0$.
   & + \sum_{x \in X}{\gamma g(S,x)},
   \label{eq:energy-family}
 \end{align}
-where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or data fidelity term and $s(x)$ denotes a length penalization term. Each choice of $m$ generates a different flow, which is generaly described in the Digital Curve Evolution (DCE) algorithm \ref{alg:evolution-model}.
+where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or data fidelity term and $s(x)$ denotes a length penalization term. Each choice of $m$ generates a different flow, which is generally described in the Digital Curve Evolution (DCE) algorithm \ref{alg:evolution-model}.
 
 
 \begin{algorithm}[H]
@@ -667,8 +667,8 @@ where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or dat
 	\It $\longleftarrow$ \It $+1$\;
 	
  }
- \label{alg:evolution-model} 
  \caption{Digital curvature evolution algorithm (DCE).}
+ \label{alg:evolution-model}  
 \end{algorithm}
 
 
@@ -778,7 +778,7 @@ curvature value.
 \end{figure}
 
 {In our experiments, the best results are obtained by executing DCE algorithm with $m$ equal to $r$, where $r$ is
-  the estimation ball radius (see figure \ref{fig:mx-square-flow} ). We observe that Elastica may increase after some
+  the estimation ball radius (see figure \ref{fig:mx-square-flow}). We observe that Elastica may increase after some
   iterations if chosen radius is too large, as in the case of the triangle in figure \ref{fig:mx-flow-gs-radius-effect}
   in which the flow converges to a single point. We conjecture that an appropriated value for the radius should be given
   by the shape reach.  The produced flow has no difficulties in handling changes on topology, and it presents different
@@ -839,12 +839,12 @@ Let $f$ be a function of $n$ binary variables with unary and pairwise terms, i.e
 f(y_1,\cdots, y_n) = \sum_{j}{f_j(y_j)} + \sum_{j < k}{f_{j,k}(y_j,y_k)}.
 \end{align*}
 
-Function $f$ is submodular if and only if the following inequality holds for each pairwise term $f_{j,k}$ \cite{kolmogorov04whatenergies}:
+The function $f$ is submodular if and only if the following inequality holds for each pairwise term $f_{j,k}$ \cite{kolmogorov04whatenergies}:
 \begin{align*}
   \quad f_{j,k}(0,0) + f_{j,k}(1,1) \leq f_{j,k}(0,1) + f_{j,k}(1,0).
 \end{align*}
 
-Energy $E_m$ is non-submodular and optimizing it is a difficult problem, which constrains us to use heuristics and
+The energy $E_m$ is non-submodular and optimizing it is a difficult problem, which constrains us to use heuristics and
 approximation algorithms. The QPBO method \cite{rother07qpbo} transforms the original problem in a max-flow/min-cut
 formulation and yields a full optimal labeling for submodular energies. For non-submodular energies the method is
 guaranteed to return a partial labeling with the property that the set of labeled variables is part of an optimal
@@ -857,9 +857,9 @@ than QPBO.
 
 The percentage of unlabeled pixels by QPBOP for $E_1$ is quite high, but the percentage decreases to zero as we set $m$
 equal to $r$. Therefore, we are more confident in taking the solution for values of $m$ close to $r$. However, the way it
-varies across $m$ values differs from shape to shape, as is illustrated in figure
+varies across values of $m$ differs from shape to shape, as is illustrated in figure
 \ref{fig:unlabeled-versus-iterations}. We also noticed that, for $m=r$, all the pixels were labeled, {which may
-  indicate that $E_r$ is an an easy instance of the general non-submodular energy $E_m$, but this remains to be
+  indicate that $E_r$ is an easy instance of the general non-submodular energy $E_m$, but this remains to be
   proved. The number of pairwise terms in $E_r$ is roughly half of those in $E_1$ (see figure
   \ref{fig:ratio-pairwise-terms}).
 
@@ -870,7 +870,7 @@ varies across $m$ values differs from shape to shape, as is illustrated in figur
 \begin{figure}[h!]
 \center
 \includegraphics[scale=0.5]{images/optimization/pairwise-ratio/plot-pairwiseratio-lowerHigher-concavities-probe.eps}
-\caption{We plot the ratio of pairwise terms among all $\binom{|X^{(i)}|}{2}$ combinations. The highest ring has rougly half the number of pairwise terms  than the lowest ring.}
+\caption{We plot the ratio of pairwise terms among all $\binom{|X^{(i)}|}{2}$ combinations. The highest ring has roughly half the number of pairwise terms as the lowest ring.}
 \label{fig:ratio-pairwise-terms}
 \end{figure}
 
@@ -895,7 +895,7 @@ varies across $m$ values differs from shape to shape, as is illustrated in figur
 
 We present an application of our digital curve evolution algorithm to supervised image segmentation. The DCE acts as a
 contour correction method. Here we use a data fidelity term in order to characterize the object of
-interest. Given foreground and background seeds selected by the user, we derive mixed gaussian distributions  of color
+interest. Given foreground and background seeds selected by the user, we derive mixed Gaussian distributions  of color
 intensities $G_f$ and $G_b$, and we define the data fidelity term as the cross-entropy, i.e.
 	
 \begin{align}
@@ -903,7 +903,7 @@ intensities $G_f$ and $G_b$, and we define the data fidelity term as the cross-e
   \label{eq:data-fidelity}
 \end{align}	
 
-We use the DCE algorithm to regularize an initial contour outputed by some segmentation algorithm or delineated by the user. In this application, the similarity term of the DCE
+We use the DCE algorithm to regularize an initial contour output by some segmentation algorithm or delineated by the user. In this application, the similarity term of the DCE
 is set to the data fidelity term \eqref{eq:data-fidelity}.
 	
 \begin{algorithm}[H]
@@ -968,7 +968,7 @@ Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
 		\includegraphics[scale=0.2]{images/segmentation/bc/vase/gc-seg.png} &
 		\includegraphics[scale=0.2]{images/segmentation/bc/vase/corrected-seg.png} &					\includegraphics[scale=0.2]{images/segmentation/schoenemann/vase/vase-seg.png}		
 	\end{tabular}
-	\caption{The proposed method regularizes GrabCut contours and returns meaningful results. We can observe the completion feature of curvature in the second row, and we don't suffer from oversegmentation issues as Schoenemann's method. However, our flow may stop in a local optima as in the fourth row, while Schoenemann's is able to extrapolate such solutions.}
+	\caption{The proposed method regularizes GrabCut contours and returns meaningful results. We can observe the completion feature of curvature in the second row, and we don't suffer from over-segmentation issues as Schoenemann's method. However, our flow may stop in a local optimum as in the fourth row, while Schoenemann's is able to extrapolate such solutions.}
 	\label{fig:segmentation-results}	
 \end{figure}
 
@@ -1001,7 +1001,7 @@ Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
 \end{figure}
 
 
-We evaluate our method using the BSD300 database \cite{martinFTM01berkeley}. All images contains the same number of pixels, the resolution being 321x481 in portrait mode. We compare the results of our method with segmentations given by GrabCut and Schoenemanns's method \cite{schoenemann09linear}. We report an average of $3s$ per flow iteration, and an average of $30$ iterations per image. While GrabCut executes in less than one second, Schoenemann's method may take several hours to complete.
+We evaluate our method using the BSD300 database \cite{martinFTM01berkeley}. All images contain the same number of pixels, the resolution being 321x481 in portrait mode. We compare the results of our method with segmentations given by GrabCut and Schoenemanns's method \cite{schoenemann09linear}. We report an average of $3s$ per flow iteration, and an average of $30$ iterations per image. While GrabCut executes in less than one second, Schoenemann's method may take several hours to complete.
 
 
 {In figure \ref{fig:parameters-influence} we can observe the results of a curvature regularization in comparison with a
@@ -1009,8 +1009,7 @@ We evaluate our method using the BSD300 database \cite{martinFTM01berkeley}. All
   resulting in more pleasant segmentations. In figures \ref{fig:segmentation-results} and
   \ref{fig:more-segmentation-results} we list several results of our method and we compare them with segmentation
   produced by GrabCut and Schoenemann's method. Our method is successful in producing curvature regularized
-  segmentations and demonstrates the completion property of curvature. Moreover, it does not suffer from over
-  segmentation, it is much faster than Schoenemann's, and in several opportunities produces better segmentations than
+  segmentations and demonstrates the completion property of curvature. Moreover, it does not suffer from over-segmentation, it is much faster than Schoenemann's, and in several cases produces better segmentations than
   GrabCut.
 
 \section{Conclusion}\label{sec:conclusion}
