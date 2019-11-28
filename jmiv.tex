@@ -434,7 +434,19 @@ estimator but also for other curvature estimators, for example, MDCA
 \cite{roussillon11mdca}. As a matter of fact, our experiments have
 shown that either estimators induce similar results.
 
-Let $S$ be a $2$-dimensional digital shape. We adopt the cellular-grid model to represent $S$, i.e., pixels and its lower dimensional counterparts, linels and pointels, are part of $S$. In particular, we denote by $\partial S$ the topological boundary of $S$, i.e., the connected sequence of linels such that for each linel we have one of its incident pixels in $S$ and the other not in $S$.
+Let $S$ be a $2$-dimensional digital shape. We adopt the cellular-grid model to represent $S$, i.e., pixels and its lower dimensional counterparts, linels and pointels, are part of $S$ (see figure \ref{fig:cellular-grid-model}). In particular, we denote by $\partial S$ the topological boundary of $S$, i.e., the connected sequence of linels such that for each linel we have one of its incident pixels in $S$ and the other not in $S$.
+
+\begin{figure}[h!]
+	\center
+	\subfloat[\label{}]{%
+	\includegraphics[scale=2.0]{images/local_search/definitions/flower.png}
+	}\hspace{40pt}%
+	\subfloat[\label{}]{%	
+	\includegraphics[scale=0.3]{images/local_search/definitions/cellular-grid-illustration.eps}
+	}
+	\caption{The flower shape in figure (a) and the cellular-grid model representation in (b) of the rectangle-bounded region. In figure (b), pixels are colored in gray, linels in green and pointels in blue.}
+	\label{fig:cellular-grid-model}
+\end{figure}
 
 
 Let $d_{S}:\Omega \rightarrow \mathcal{R}$ be the Euclidean distance transformation with respect to shape $S$. The value $d_S(x)$ gives the Euclidean distance between $x$ and the closest pixel in $S$. 
