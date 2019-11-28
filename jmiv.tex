@@ -650,18 +650,19 @@ where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or dat
  
  \Input{A digital set $S$; The ring number $m$; Length($\alpha$), curvature($\beta$) and similarity($\gamma$) coefficients; the maximum number of iterations \MIt;}
  \BlankLine
- $S^{(i)} \longleftarrow S$\;
+ $S^{(0)} \longleftarrow S$\;
+ $i \longleftarrow 1$\;
  \While{ \It $<$ \MIt  }{ 	
 	\comment{Expansion mode}
 	\If{ \It is odd }{	 
-	 	$X^{(i)} \longleftarrow \argmin_X E_m(X,\overline{S^{(i)}})$\;
- 		$S^{(i)} \longleftarrow F^{(i)} + \overline{X^{(i)}}$\;
+	 	$X^{(i)} \longleftarrow \argmin_X E_m(X,\overline{S^{(i-1)}})$\;
+ 		$S^{(i)} \longleftarrow F^{(i-1)} + \overline{X^{(i)}}$\;
  		$S^{(i)} \longleftarrow \overline{S^{(i)}}$\;	 	
  	}
 	\comment{Shrinking mode} 	
  	\Else{	
-	 	$X^{(i)} \longleftarrow \argmin_X E_m(X,S^{(i)})$\; 	
- 		$S^{(i)} \longleftarrow F^{(i)} + \overline{X^{(i)}}$\;
+	 	$X^{(i)} \longleftarrow \argmin_X E_m(X,S^{(i-1)})$\; 	
+ 		$S^{(i)} \longleftarrow F^{(i-1)} + \overline{X^{(i)}}$\;
  	}
  	
 	\It $\longleftarrow$ \It $+1$\;
