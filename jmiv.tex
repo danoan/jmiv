@@ -467,7 +467,7 @@ Consider the following set of neighbor candidates to $S$:
 
 Such set can be extremely large and its complete exhaustion is prohibitively expensive.  Instead, we explore a subset of it with the help of $n$-glued curves.
 
-An oriented closed curve $C$ is a closed connected sequence of linels with a well-defined interior. A segment of $C$ is a connected subsequence $c \in C$ of its linels.
+An oriented closed curve $C$ is a closed connected sequence of linels with a well-defined interior. A segment of $C$ is a connected subsequence $c \in C$ of its linels. We denote by $int(C)$ the interior of the shape bounded by curve $C$. Moreover, for a set of curves $\mathcal{C}$, we define $int(\mathcal{C}) = \bigcup_{C \in \mathcal{C}} int(C) $.
 
 \begin{figure}[!h]
 \center
@@ -481,7 +481,7 @@ An oriented closed curve $C$ is a closed connected sequence of linels with a wel
 \end{figure}
 
 \begin{definition}[Glued Curve]
-Given a closed curve $C_1$ with orientation $q$, and curve $C_2$ with same orientation $q$ such that $C_2$ encloses a region that contains $C_1$, a glued curve is a closed curve  $(c_1,\ell_1,c_2,\ell_2)$ with orientation $q$ and $c_1 \subset C_1, c_2 \subset C_2$. The linels $\ell_1,\ell_2$ are called junction linels.
+Given closed curves $C_1,C_2$ agreeing with some orientation $q$ such that $int(C_1) \subset int(C_2)$, a glued curve is a closed curve  $(c_1,\ell_1,c_2,\ell_2)$ with orientation $q$ and $c_1 \subset C_1, c_2 \subset C_2$. The linels $\ell_1,\ell_2$ are called junction linels.
 \end{definition}
 
 
@@ -493,12 +493,14 @@ Given closed curves $C_1,C_2$ with same orientation, its set of $n$-glued curves
 \end{align*}
 \end{definition}
 
+
+
 Let $S_O = ( S \cup R_1^+(S) ) $ and $S_I = ( S \setminus R_1^-(S) ) $, the neighborhood set to shape $S$ is defined as
 \begin{align*}
-	\mathcal{N}(S,N) = \bigcup_{1 \leq n \leq N} int \big(\; \mathcal{G}_{n}( \partial S_O, \partial S) \; \big) \cup int \big( \; \mathcal{G}_{n}(\partial S, \partial S_I) \; \big),
+	\mathcal{N}(S,N) = \bigcup_{1 \leq n \leq N} int \big(\; \mathcal{G}_{n}( \partial S_O, \partial S) \; \big) \cup int \big( \; \mathcal{G}_{n}(\partial S, \partial S_I) \; \big).
 \end{align*}
 
-where $int(C)$ is the interior of the shape bounded by the close oriented curve $C$. Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with $N=20$.
+Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with $N=20$.
 
 
 \begin{algorithm}
