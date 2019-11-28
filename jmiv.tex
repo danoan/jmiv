@@ -626,7 +626,7 @@ where $c_1=3/r^6$ and $c_2=\pi r^2/2$.
 
 We define $O_{r}^{(i)}(y) := O^{(i)} \cap B_r(y)$ and an analogous definition holds for $F_{r}^{(i)}(y)$. Expanding \eqref{eq:curvature-estimator-pixels}, we get 
 \begin{align*}
-  \hat{\kappa}^2(y) &= c_1\Big( c_2 - \sum_{x_j \in B_r(y)} \big( {x_j} + |F_{r}^{(i)}(y)| \big) \Big)^2 \\
+  \hat{\kappa}^2(y) &= c_1\Big( c_2 - |F_{r}^{(i)}(y)| - \sum_{x_j \in O_r^{(i)}(y)} \big( {x_j}  \big) \Big)^2 \\
    &= c_1 \cdot \Big( C + 2\left( |F_{r}^{(i)}(y)| - c_2 \right) \hspace{-2mm}\sum_{x_j \in O_{r}^{(i)}(y)}\hspace{-2mm}{x_j} + \hspace{-2mm}\sum_{x_j \in O_{r}^{(i)}(y)}\hspace{-2mm}{x_j^2} + \hspace{-2mm}\sum_{ \substack{x_j,x_k \in O_{r}^{(i)}(y) \\ j<k} }\hspace{-2mm}{2x_jx_k}  \Big),
 \end{align*}
 where $C=c_2^2 - 2c_2 \cdot |F_{r}^{(i)}(y)| + |F_{r}^{(i)}(y)|^2$ is a constant. By ignoring constants and multiplication factors and using
