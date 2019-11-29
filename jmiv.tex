@@ -415,7 +415,7 @@ The digital version of Elastica energy approaching the continuous Elastica energ
 	\label{eq:digital-energy}
 \end{align}
 where $\dot{\vec{e}}$ denotes the center of the edge $\vec{e}$. In the
-expression above, we will substitute an arbitrary subset $Z$ of
+expression above, we will substitute an arbitrary subset $S$ of
 $\mathbb{Z}^2$ to $D_h(X)$ since the continuous shape $X$ is unknown.
 In the following we omit the grid step $h$ to simplify expressions
 (or, putting it differently, we assume that the shape of interest is
@@ -434,7 +434,7 @@ estimator but also for other curvature estimators, for example, MDCA
 \cite{roussillon11mdca}. As a matter of fact, our experiments have
 shown that either estimators induce similar results.
 
-Let $S$ be a $2$-dimensional digital shape. We adopt the cellular-grid model to represent $S$, i.e., pixels and its lower dimensional counterparts, linels and pointels, are part of $S$ (see figure \ref{fig:cellular-grid-model}). In particular, we denote by $\partial S$ the topological boundary of $S$, i.e., the connected sequence of linels such that for each linel we have one of its incident pixels in $S$ and the other not in $S$.
+Let $S$ be a $2$-dimensional digital shape embedded in a domain $\Omega \subset \mathbb{Z}^2$. We adopt the cellular-grid model to represent $S$, i.e., pixels and its lower dimensional counterparts, linels and pointels, are part of $S$ (see figure \ref{fig:cellular-grid-model}). In particular, we denote by $\partial S$ the topological boundary of $S$, i.e., the connected sequence of linels such that for each linel we have one of its incident pixels in $S$ and the other not in $S$.
 
 \begin{figure}[h!]
 	\center
@@ -449,13 +449,13 @@ Let $S$ be a $2$-dimensional digital shape. We adopt the cellular-grid model to 
 \end{figure}
 
 
-Let $d_{S}:\Omega \rightarrow \mathcal{R}$ be the Euclidean distance transformation with respect to shape $S$. The value $d_S(x)$ gives the Euclidean distance between $x$ and the closest pixel in $S$. 
+Let $d_{S}:\Omega \rightarrow \mathcal{R}$ be the Euclidean distance transformation with respect to shape $S$. The value $d_S(p)$ gives the Euclidean distance between $p$ and the closest pixel in $S$. 
 
 \begin{definition}[m-Ring Set]
 Given a digital shape $S\in\Omega$, its distance transformation $d_S$ and natural numbers $m > 0$, the {\em $m$-ring set of $S$} is defined as
 \begin{align*}
 	\quad R_m(S) &:= R_m^-(S) \; \cup \; R_m^+(S) \\
-	&:= \left\{ x \in \Omega \; | \; m-1 < d_S(x) \leq m \right\} \; \cup \;  \left\{ x \in \Omega \; | \; 	m-1 < d_{\overline{S}}(x) \leq m \right\}.
+	&:= \left\{ p \in \Omega \; | \; m-1 < d_S(p) \leq m \right\} \; \cup \;  \left\{ p \in \Omega \; | \; 	m-1 < d_{\overline{S}}(p) \leq m \right\}.
 \end{align*}
 \end{definition}
 
@@ -514,6 +514,7 @@ Algorithm~\ref{alg:local-search} describes the local combinatorial process and F
  \Input{A digital set $S$; the maximum length of glued curves $N$; the maximum number of iterations \MIt; and a stop condition \Tol}
  \BlankLine
  \Delta $\longleftarrow$ \Tol+1\;
+ $i \longleftarrow 0$\;
  \While{ \It $<$ \MIt \bf{and} \Delta $>$ \Tol  }{
   	\For{$ X \in \mathcal{N}(S^{(i)},N) $}
 	{
@@ -620,37 +621,43 @@ Flower & 1235s (23s/it)  & 8516s (52s/it)\\
 
 
 
-Given a digital shape $S \in \Omega$, the idea is to evolve a flow $S^{(i)}$ where $S^{(i+1)}$ is derived from the minimization of the sum of the squared curvature at $S^{(i)}$. In order to guarantee connectivity, we limit the optimization region to a subset of $\Omega$, namely the inner pixel boundary of  $S^{(i)}$. We also use the notation $| S |$ to denote the cardinal of a digital set $S$.
+Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the idea is to evolve a flow $S^{(i)}$ where $S^{(i+1)}$ is derived from the minimization of the sum of the squared curvature at $S^{(i)}$. In order to guarantee connectivity, we limit the optimization region to a subset of $\Omega$, namely the inner pixel boundary of  $S^{(i)}$. We also use the notation $| S |$ to denote the cardinal of a digital set $S$.
 
 \subsection{Discrete variational model for discrete curve evolution}
 
 We start by definition the optimization variables.
 \begin{definition}[Inner pixel boundary]
-Given a digital shape $S$ embedded in a domain $\Omega$, we define its inner pixel boundary set $O(S)$ as
+Given a digital shape $S$ embedded in a domain $\Omega$, we define its inner pixel boundary set $I(S)$ as
 \begin{align*}
-	O(S) = \left\{ \: x \; | \; x \in S, |\mathcal{N}_4(x) \cap S|<4 \: \right\},
+	I(S) = \left\{ \: p \; | \; p \in S, |\mathcal{N}_4(x) \cap S|<4 \: \right\},
 \end{align*}
-where $\mathcal{N}_4(x)$ denotes the $4$-adjacent neighbor set of $x$ (without $x$).
+where $\mathcal{N}_4(p)$ denotes the $4$-adjacent neighbor set of $p$ (without $p$).
 \end{definition}
 
-In other words, each flow iteration decides which pixels in the inner boundary are to be removed and which are to be kept. To simplify notation, we denote the optimization region of $S^{(i)}$ as $O^{(i)}$, and the foreground set as $F^{(i)} = S^{(i)} \setminus O^{(i)}$. We recall the definition of our digital curvature estimator :
+The optimization variables set is defined as
+
+\begin{align*}
+	X(S) = \left\{ x_j \in \{0,1\} \; | \; p_j \in I(S) \right \}.
+\end{align*}
+
+In other words, each flow iteration decides which pixels in the inner boundary are to be removed from $S$ and which are to be kept in $S$. To simplify notation, we denote the optimization region of $S^{(i)}$ as $X^{(i)}$, and the foreground set as $F^{(i)} = S^{(i)} \setminus X^{(i)}$. We recall the definition of our digital curvature estimator:
 \begin{align}
-	\hat{\kappa}^2(y) &= c_1\Big( c_2 - | B_r(y) \cap S | \Big)^2, 
+	\hat{\kappa}^2(p) &= c_1\Big( c_2 - | B_r(p) \cap S | \Big)^2, 
 	\label{eq:curvature-estimator-pixels}
 \end{align}
 where $c_1=3/r^6$ and $c_2=\pi r^2/2$. 
 
-We define $O_{r}^{(i)}(y) := O^{(i)} \cap B_r(y)$ and an analogous definition holds for $F_{r}^{(i)}(y)$. Expanding \eqref{eq:curvature-estimator-pixels}, we get 
+We define $X_{r}^{(i)}(p) := X^{(i)} \cap B_r(p)$ and an analogous definition holds for $F_{r}^{(i)}(p)$. Expanding \eqref{eq:curvature-estimator-pixels}, we get 
 \begin{align*}
-  \hat{\kappa}^2(y) &= c_1\Big( c_2 - |F_{r}^{(i)}(y)| - \sum_{x_j \in O_r^{(i)}(y)} \big( {x_j}  \big) \Big)^2 \\
-   &= c_1 \cdot \Big( C + 2\left( |F_{r}^{(i)}(y)| - c_2 \right) \hspace{-2mm}\sum_{x_j \in O_{r}^{(i)}(y)}\hspace{-2mm}{x_j} + \hspace{-2mm}\sum_{x_j \in O_{r}^{(i)}(y)}\hspace{-2mm}{x_j^2} + \hspace{-2mm}\sum_{ \substack{x_j,x_k \in O_{r}^{(i)}(y) \\ j<k} }\hspace{-2mm}{2x_jx_k}  \Big),
+  \hat{\kappa}^2(p) &= c_1\Big( c_2 - |F_{r}^{(i)}(p)| - \sum_{x_j \in X_r^{(i)}(p)} {x_j} \Big)^2 \\
+   &= c_1 \cdot \Big( C + 2\left( |F_{r}^{(i)}(p)| - c_2 \right) \hspace{-2mm}\sum_{x_j \in X_{r}^{(i)}(p)}\hspace{-2mm}{x_j} + \hspace{-2mm}\sum_{x_j \in X_{r}^{(i)}(p)}\hspace{-2mm}{x_j^2} + \hspace{-2mm}\sum_{ \substack{x_j,x_k \in X_{r}^{(i)}(p) \\ j<k} }\hspace{-2mm}{2x_jx_k}  \Big),
 \end{align*}
-where $C=c_2^2 - 2c_2 \cdot |F_{r}^{(i)}(y)| + |F_{r}^{(i)}(y)|^2$ is a constant. By ignoring constants and multiplication factors and using
+where $C=c_2^2 - 2c_2 \cdot |F_{r}^{(i)}(p)| + |F_{r}^{(i)}(p)|^2$ is a constant. By ignoring constants and multiplication factors and using
 the binary character of the variables, we define the following family
 of energies for given parameters $\alpha,\beta, \gamma \geq 0$.
 \begin{align}
   E_m(X,S) =& \sum_{x \in X}{\alpha s(x)} \nonumber \\ 
-  & + \sum_{y \in R_m(S)}{ \beta \Big( { (1/2+ |F_{r}^{(i)}(y)|-c_2) \cdot \sum_{x_j \in O_{r}^{(i)}(y)}{x_j} } + \sum_{ \substack{x_j,x_k \in O_{r}^{(i)}(y) \\ j<k} }{x_jx_k} \Big) } \nonumber \\
+  & + \sum_{p \in R_m(S)}{ \beta \Big( { (1/2+ |F_{r}^{(i)}(p)|-c_2) \cdot \sum_{x_j \in X_{r}^{(i)}(p)}{x_j} } + \sum_{ \substack{x_j,x_k \in X_{r}^{(i)}(p) \\ j<k} }{x_jx_k} \Big) } \nonumber \\
   & + \sum_{x \in X}{\gamma g(S,x)},
   \label{eq:energy-family}
 \end{align}
@@ -706,7 +713,7 @@ Length and similarity terms should be properly defined in order to comply with t
 algorithm. The length penalization is defined as
 \begin{align}
   s(x)=\sum_{x_j \in \mathcal{N}_4(x)}{ t(x_j) }, \quad \text{where } t(x_j) = \left\{\begin{array}{ll}
-  (x-x_j)^2, & \text{if } x_j \in O_{r}^{(i)}\\
+  (x-x_j)^2, & \text{if } x_j \in X_{r}^{(i)}\\
   (x-0), & \text{if } x_j \in F_{r}^{(i)}\\
   (x-1), & \text{otherwise }
   \end{array}\right.
