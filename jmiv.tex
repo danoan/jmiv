@@ -500,7 +500,7 @@ Let $S_O = ( S \cup R_1^+(S) ) $ and $S_I = ( S \setminus R_1^-(S) ) $, the neig
 	\mathcal{N}(S,N) = \bigcup_{1 \leq n \leq N} int \big(\; \mathcal{G}_{n}( \partial S_O, \partial S) \; \big) \cup int \big( \; \mathcal{G}_{n}(\partial S, \partial S_I) \; \big).
 \end{align*}
 
-Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with $N=20$.
+Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with $N=50$.
 
 
 \begin{algorithm}
@@ -535,28 +535,28 @@ Algorithm~\ref{alg:local-search} describes the local combinatorial process and F
 \begin{figure}[!h]
 \center
 	\subfloat[h=1.0\label{}]{%
-	\includegraphics[scale=0.125]{images/local_search/square/h1/summary-flow.eps}
+	\includegraphics[scale=0.125]{images/local_search/square/h1/summary.eps}
 	}%
 	\hspace{10pt}
 	\subfloat[h=0.5\label{}]{%
-	\includegraphics[scale=0.125]{images/local_search/square/h05/summary-flow.eps}
+	\includegraphics[scale=0.125]{images/local_search/square/h05/summary.eps}
 	}%
 	\hspace{10pt}
 	\subfloat[h=1.0\label{}]{%
-	\includegraphics[scale=0.125]{images/local_search/flower/h1/summary-flow.eps}
+	\includegraphics[scale=0.125]{images/local_search/flower/h1/summary.eps}
 	}%
 	\hspace{10pt}
 	\subfloat[h=0.5\label{}]{%
-	\includegraphics[scale=0.125]{images/local_search/flower/h05/summary-flow.eps}
+	\includegraphics[scale=0.125]{images/local_search/flower/h05/summary.eps}
 	}%
-		\caption{Local combinatorial optimization process results for the square and flower shapes. Shapes displayed at every $2$ iterations for the square and $7$ iterations for the flower.}	
+		\caption{Local combinatorial optimization process results for the square and flower shapes. Shapes displayed at every $2$ iterations for the square and $5$ iterations for the flower.}	
 		\label{fig:local-comb-square-results}
 \end{figure}
 
 
 The running time of algorithm \ref{alg:local-search} is summarized in table \ref{tab:summary-local-comb-rtime}. All the
-experiments in this paper were executed on a five-core $3.4Ghz$ CPU and the number of pixels in the triangle, square and
-flower shapes are respectively $841,1867,521$ for grid step $h=1.0$. Although its use in practical applications is
+experiments in this paper were executed on a $32$-core $2.4Ghz$ CPU and the number of pixels in the square and
+flower shapes are respectively $841,1867$ for grid step $h=1.0$. Although its use in practical applications is
 limited, we demonstrate that digital estimators are effective in their measurements and the flows evolve as expected. We
 observe that it is a complete digital approach, and we do not suffer from discretization and rounding problems, a common
 issue in continuous models.  Furthermore we have checked that this approach works indifferently with Integral Invariant
@@ -570,7 +570,7 @@ we explore a more efficient approach.
 \begin{minipage}[b]{0.5\textwidth}
 \center
 \includegraphics[scale=0.35]{images/local_search/square-flower.eps}
-\caption{Elastica computation along iterations of algorithm \ref{alg:local-search}}
+\caption{Elastica computation along iterations of algorithm \ref{alg:local-search}. The final shape has energy value closer to the optimal solution $2\pi/5$ (dashed line).}
 \label{fig:plot-elastica-local-search}
 \end{minipage}\hspace{40pt}%
 \begin{minipage}[b]{0.45\textwidth}
@@ -580,12 +580,12 @@ we explore a more efficient approach.
 \hline
 & $h=1.0$ & $h=0.5$\\
 \hline
-Square & 47s (5s/it) & 260s (12s/it)\\
+Square & 4s (0.4s/it) & 77s (3s/it)\\
 \hline
-Flower & 1235s (23s/it)  & 8516s (52s/it)\\
+Flower & 252s (4s/it)  & 3246s (42s/it)\\
 \hline
 \end{tabular}
-\caption{Running times for the local combinatorial optimization algorithm with $k=1,N=20$. Four threads were used.}
+\caption{Running times for the local combinatorial optimization algorithm with $k=1,N=50$. Four threads were used.}
 \label{tab:summary-local-comb-rtime}
 \end{minipage}
 \end{figure}
