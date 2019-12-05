@@ -557,7 +557,7 @@ Algorithm~\ref{alg:local-search} describes the local combinatorial process and F
 The running time of algorithm \ref{alg:local-search} is summarized in table \ref{tab:summary-local-comb-rtime}. All the
 experiments in this paper were executed on a $32$-core $2.4Ghz$ CPU and the number of pixels in the square and
 flower shapes are respectively $841,1867$ for grid step $h=1.0$. Although its use in practical applications is
-limited, we demonstrate that digital estimators are effective in their measurements and the flows evolve as expected. We
+limited, we demonstrate that digital estimators are effective in their measurements and the flows evolve as expected. In particular, the digital elastica energy for the experiments in figure \ref{fig:local-comb-square-results} approaches the global optimum (figure  \ref{fig:plot-elastica-local-search}). We
 observe that it is a complete digital approach, and we do not suffer from discretization and rounding problems, a common
 issue in continuous models.  Furthermore we have checked that this approach works indifferently with Integral Invariant
 curvature estimator and Maximal Digital Circular Arc curvature estimator. So the convergence of the digital curvature
@@ -570,7 +570,7 @@ we explore a more efficient approach.
 \begin{minipage}[b]{0.5\textwidth}
 \center
 \includegraphics[scale=0.35]{images/local_search/square-flower.eps}
-\caption{Elastica computation along iterations of algorithm \ref{alg:local-search}. The final shape has energy value closer to the optimal solution $2\pi/5$ (dashed line).}
+\caption{Elastica computation along iterations of algorithm \ref{alg:local-search}. The final shape has energy value closer to the optimal value $2\pi/5$ (dashed line).}
 \label{fig:plot-elastica-local-search}
 \end{minipage}\hspace{40pt}%
 \begin{minipage}[b]{0.45\textwidth}
