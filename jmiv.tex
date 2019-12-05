@@ -621,11 +621,16 @@ Flower & 252s (4s/it)  & 3246s (42s/it)\\
 
 
 
-Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the idea is to evolve a flow $S^{(i)}$ where $S^{(i+1)}$ is derived from the minimization of the sum of the squared curvature at $S^{(i)}$. In order to guarantee connectivity, we limit the optimization region to a subset of $\Omega$, namely the inner pixel boundary of  $S^{(i)}$. We also use the notation $| S |$ to denote the cardinal of a digital set $S$.
+Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the goal is to evolve a flow $S^{(i)}$ where $S^{(i+1)}$ has lower digital elastica than its precedent.
+
+
+We observe that the integral invariant estimator \eqref{eq:curvature_approximation} is originaly designed to be evaluated on the digital boundary of some shape, which is the unknown of our problem. Enforcing this restriction implies to incorporate topological information in the form of constraints or penalization terms in the same lines of \cite{schoenemann09linear}, but such approach would result in a third order model, which we prefer to avoid. Instead, we are going to exploit the II estimator definition in order to create a flow that evolves proportionally to the squared curvature of the current shape.
+
+ In order to guarantee connectivity, we limit the optimization region to a subset of $\Omega$, namely the inner pixel boundary of  $S^{(i)}$. We also use the notation $| S |$ to denote the cardinal of a digital set $S$.
 
 \subsection{Discrete variational model for discrete curve evolution}
 
-We start by definition the optimization variables.
+We start by defining the optimization variables.
 \begin{definition}[Inner pixel boundary]
 Given a digital shape $S$ embedded in a domain $\Omega$, we define its inner pixel boundary set $I(S)$ as
 \begin{align*}
@@ -695,9 +700,7 @@ where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or dat
  \label{alg:evolution-model}  
 \end{algorithm}
 
-
-
-Recall that the integral invariant estimator approaches curvature by computing the difference between half of the area
+We remark that the minimization of \eqref{eq:energy-family} for $S^{(i)}$ is not sufficient to derive the next shape $S^{(i+1)}$ because topolical information is not included in the model. Instead, the minimization of \eqref{eq:energy-family} is used as a guide. Recall that the integral invariant estimator approaches curvature by computing the difference between half of the area
 of a chosen ball and the area of the intersection of this ball with the shape.  In particular, regions of positive
 curvature have fewer pixels in their intersection set than on its complement w.r.t the estimation ball. This implies
 that variables in such regions are labeled with 1, as the unbalance grows otherwise. We attenuate curvature if we shift
@@ -708,6 +711,8 @@ The same reasoning applies for non-convex parts. Indeed, concave regions are con
 expansion mode we apply the same reasoning on the image complement, and by doing this we are able to handle
 concavities. It is called expansion mode because the optimization region, in this case, is the outer pixel boundary of
 the original shape. Table~\ref{tab:flow-summary} sums up these arguments.
+
+
 
 Length and similarity terms should be properly defined in order to comply with the complement step of the DCE
 algorithm. The length penalization is defined as
