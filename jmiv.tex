@@ -450,18 +450,18 @@ shown that either estimators induce similar results.
 \end{figure}
 
 
-Let $d_{S}:\Omega \rightarrow \mathcal{R}$ be the \revision{signed} Euclidean distance transformation with respect to shape $S$. The value $d_S(p)$ gives the Euclidean distance between \revision{$p \notin S$ and the closest pixel in $S$. For points $p \in S$, $d_S(p)$ gives the distance between $p$ and the closest pixel not in $S$.}
+Let $d_{S}:\Omega \rightarrow \mathbb{R}$ be the \revision{signed} Euclidean distance transformation with respect to shape $S$. The value $d_S(p)$ gives the Euclidean distance between \revision{$p \notin S$ and the closest pixel in $S$. For points $p \in S$, $d_S(p)$ gives the distance between $p$ and the closest pixel not in $S$.}
 
 
 \begin{definition}[m-Ring Set]
 \revision{
 Given a digital shape $S\in\Omega$, its signed distance transformation $d_S$ and natural number $m \neq 0$, the {\em $m$-ring set of $S$} is defined as
 \begin{align*}
-	\mathcal{R}_m(S) &:= \mathcal{L}_m \cup \mathcal{L}_{-m},
+	R_m(S) &:= L_m \cup L_{-m},
 \end{align*}
 where
 \begin{align*}
-	\mathcal{L}_m(S) &:= \left\{ \quad \begin{array}{cc}
+	L_m(S) &:= \left\{ \quad \begin{array}{cc}
 		\left\{ p \in \Omega \; | \; m-1 < d_S(p) \leq m \right\} & , \quad m>0\\
 		\left\{ p \in \Omega \; | \; m+1 > d_S(p) \geq m \right\} & , \quad m<0
 		\end{array} \right.
@@ -494,7 +494,7 @@ Such set can be extremely large and its complete exhaustion is prohibitively exp
 	\caption{\revision{The blue pixels in figure (a) illustrates a $3$-ring set. In figure (b) we highlight the contour of an element of set $\mathcal{N}_{11}$.}}
 \end{figure}
 
-Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with $n=50$.
+Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with \revision{$n=50$}.
 
 
 \begin{algorithm}
@@ -616,10 +616,10 @@ Flower & 252s (4s/it)  & 3246s (42s/it)\\
 
 
 
-
-Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the goal is to compute a flow $S^{(i)}$ where $S^{(i+1)}$ has lower digital elastica than its precedent.
-
 \revision{
+Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the goal is to compute a flow $S^{(i)}$ where $S^{(i+1)}$ has lower digital elastica $S^{(i)}$.
+
+
 We observe that the integral invariant estimator \eqref{eq:curvature_approximation} is originaly designed to be evaluated on the digital boundary of some shape, which is the unknown of our problem. Injecting contour information leads to a third order model, which we prefer to avoid. Instead, we are going to exploit the II estimator definition in order to compute a flow that evolves proportionally to the squared curvature of the current shape.}
 
  In order to guarantee connectivity, we limit the optimization region to a subset of $\Omega$, namely the inner pixel boundary of  $S^{(i)}$. We also use the notation $| S |$ to denote the cardinal of a digital set $S$.
@@ -717,7 +717,7 @@ where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or dat
 \end{algorithm}
 
 \revision{
-We emphasize that the minimization of \eqref{eq:energy-family} for $S^{(i)}$ is not sufficient to derive the next shape $S^{(i+1)}$ because topolical information is not included in the model (see figure \ref{fig:contour-info})}. Recall that the integral invariant estimator approaches curvature by computing the difference between half of the area
+We emphasize that the minimization of \eqref{eq:energy-family} for $S^{(i)}$ is not sufficient to derive the next shape $S^{(i+1)}$ because contour information is not included in the model (see figure \ref{fig:contour-info})}. Recall that the integral invariant estimator approaches curvature by computing the difference between half of the area
 of a chosen ball and the area of the intersection of this ball with the shape.  In particular, regions of positive
 curvature have fewer pixels in their intersection set than on its complement w.r.t the estimation ball. This implies
 that variables in such regions are labeled with 1, as the unbalance grows otherwise. We attenuate curvature if we shift
