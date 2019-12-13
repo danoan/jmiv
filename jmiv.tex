@@ -574,7 +574,7 @@ Square & 4s (0.4s/it) & 77s (3s/it)\\
 Flower & 252s (4s/it)  & 3246s (42s/it)\\
 \hline
 \end{tabular}
-\caption{Running times for the local combinatorial optimization algorithm with $k=1,N=50$. Four threads were used.}
+\caption{Running times for the local combinatorial optimization algorithm with $k=1,n=50$. Four threads were used.}
 \label{tab:summary-local-comb-rtime}
 \end{minipage}
 \end{figure}
@@ -610,10 +610,10 @@ Flower & 252s (4s/it)  & 3246s (42s/it)\\
 
 
 
-Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the goal is to evolve a flow $S^{(i)}$ where $S^{(i+1)}$ has lower digital elastica than its precedent.
+Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the goal is to compute a flow $S^{(i)}$ where $S^{(i+1)}$ has lower digital elastica than its precedent.
 
 
-We observe that the integral invariant estimator \eqref{eq:curvature_approximation} is originaly designed to be evaluated on the digital boundary of some shape, which is the unknown of our problem. Enforcing this restriction implies to incorporate topological information in the form of constraints or penalization terms in the same lines of \cite{schoenemann09linear}, but such approach would result in a third order model, which we prefer to avoid. Instead, we are going to exploit the II estimator definition in order to create a flow that evolves proportionally to the squared curvature of the current shape.
+We observe that the integral invariant estimator \eqref{eq:curvature_approximation} is originaly designed to be evaluated on the digital boundary of some shape, which is the unknown of our problem. Injecting contour information leads to a third order model, which we prefer to avoid. Instead, we are going to exploit the II estimator definition in order to compute a flow that evolves proportionally to the squared curvature of the current shape.
 
  In order to guarantee connectivity, we limit the optimization region to a subset of $\Omega$, namely the inner pixel boundary of  $S^{(i)}$. We also use the notation $| S |$ to denote the cardinal of a digital set $S$.
 
@@ -658,6 +658,21 @@ of energies for given parameters $\alpha,\beta, \gamma \geq 0$.
 where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or data fidelity term and $s(x)$ denotes a length penalization term. Each choice of $m$ generates a different flow, which is generally described in the Digital Curve Evolution (DCE) algorithm \ref{alg:evolution-model}.
 
 
+\begin{figure}
+\begin{minipage}{0.5\textwidth}
+\center
+\includegraphics[scale=0.1]{images/flow/contour-information/before-opt.pdf}
+\label{fig:contour-info-1}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\center
+\includegraphics[scale=0.1]{images/flow/contour-information/after-opt.pdf}
+\label{fig:contour-info-2}
+\end{minipage}%
+\caption{Directly using the optimization result of \eqref{eq:energy-family} doesn't decrease squared curvature because contour information is not present in the energy.}
+\label{fig:contour-info}
+\end{figure}
+
 \begin{algorithm}[H]
  \SetKwData{It}{i}
  \SetKwData{MIt}{maxIt}
@@ -689,7 +704,7 @@ where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or dat
  \label{alg:evolution-model}  
 \end{algorithm}
 
-We remark that the minimization of \eqref{eq:energy-family} for $S^{(i)}$ is not sufficient to derive the next shape $S^{(i+1)}$ because topolical information is not included in the model. Instead, the minimization of \eqref{eq:energy-family} is used as a guide. Recall that the integral invariant estimator approaches curvature by computing the difference between half of the area
+We emphasize that the minimization of \eqref{eq:energy-family} for $S^{(i)}$ is not sufficient to derive the next shape $S^{(i+1)}$ because topolical information is not included in the model (see figure \ref{fig:contour-info}). Recall that the integral invariant estimator approaches curvature by computing the difference between half of the area
 of a chosen ball and the area of the intersection of this ball with the shape.  In particular, regions of positive
 curvature have fewer pixels in their intersection set than on its complement w.r.t the estimation ball. This implies
 that variables in such regions are labeled with 1, as the unbalance grows otherwise. We attenuate curvature if we shift
