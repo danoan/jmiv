@@ -449,13 +449,19 @@ Let $S$ be a $2$-dimensional digital shape embedded in a domain $\Omega \subset 
 \end{figure}
 
 
-Let $d_{S}:\Omega \rightarrow \mathcal{R}$ be the Euclidean distance transformation with respect to shape $S$. The value $d_S(p)$ gives the Euclidean distance between $p$ and the closest pixel in $S$. 
+Let $d_{S}:\Omega \rightarrow \mathcal{R}$ be the signed Euclidean distance transformation with respect to shape $S$. The value $d_S(p)$ gives the Euclidean distance between $p \notin S$ and the closest pixel in $S$. For points $p \in S$, $d_S(p)$ gives the distance between $p$ and the closest pixel not in $S$. The \emph{$m$-level set of $S$}
 
 \begin{definition}[m-Ring Set]
-Given a digital shape $S\in\Omega$, its distance transformation $d_S$ and natural numbers $m > 0$, the {\em $m$-ring set of $S$} is defined as
+Given a digital shape $S\in\Omega$, its signed distance transformation $d_S$ and natural number $m \neq 0$, the {\em $m$-ring set of $S$} is defined as
 \begin{align*}
-	\quad R_m(S) &:= R_m^-(S) \; \cup \; R_m^+(S) \\
-	&:= \left\{ p \in \Omega \; | \; m-1 < d_S(p) \leq m \right\} \; \cup \;  \left\{ p \in \Omega \; | \; 	m-1 < d_{\overline{S}}(p) \leq m \right\}.
+	\mathcal{R}_m(S) &:= \mathcal{L}_m \cup \mathcal{L}_{-m},
+\end{align*}
+where
+\begin{align*}
+	\mathcal{L}_m(S) &:= \left\{ \quad \begin{array}{cc}
+		\left\{ p \in \Omega \; | \; m-1 < d_S(p) \leq m \right\} & , \quad m>0\\
+		\left\{ p \in \Omega \; | \; m+1 > d_S(p) \geq m \right\} & , \quad m<0
+		\end{array} \right.
 \end{align*}
 \end{definition}
 
@@ -465,42 +471,25 @@ Consider the following set of neighbor candidates to $S$:
 \end{align*}
 
 
-Such set can be extremely large and its complete exhaustion is prohibitively expensive.  Instead, we explore a subset of it with the help of $n$-glued curves.
+Such set can be extremely large and its complete exhaustion is prohibitively expensive.  Instead, we are going to use a subset of it.
 
-An oriented closed curve $C$ is a closed connected sequence of linels with a well-defined interior. A segment of $C$ is a connected subsequence $c \in C$ of its linels. We denote by $int(C)$ the interior of the shape bounded by curve $C$. Moreover, for a set of curves $\mathcal{C}$, we define $int(\mathcal{C}) = \bigcup_{C \in \mathcal{C}} int(C) $.
+\begin{definition}[$n$-neighborhood]
+	Given a digital shape $S \in \Omega$, its $n$-neighborhood $\mathcal{N}_n(S)$ is defined as the set of digital shapes that can be built from $S$ by adding or removing a sequence of $n$ connected pixels in $R_1(S)$.
+\end{definition}
+
 
 \begin{figure}[!h]
 \center
 	\subfloat[\label{}]{%
-	\includegraphics[scale=0.2]{images/local_search/definitions/model-regions-square.eps}
+	\includegraphics[scale=0.03]{images/local_search/definitions/R3.pdf}
 	}\hspace{40pt}%
 	\subfloat[\label{}]{%
 	\includegraphics[scale=0.22]{images/local_search/definitions/glued-curve.eps}
 	}%	
-	\caption{The blue pixels in figure (a) illustrates a $2$-ring set, while the green pixels form its inner-pixel boundary. In figure (b) we highlight an element of set $\mathcal{G}_{11}(C_1,C_2)$. The curve segments of $C_1$ and $C_2$ are colored in red and green, while the junction linels in blue.}
+	\caption{The blue pixels in figure (a) illustrates a $3$-ring set. In figure (b) we highlight the contour of an element of set $\mathcal{N}_{11}$.}
 \end{figure}
 
-\begin{definition}[Glued Curve]
-Given closed curves $C_1,C_2$ agreeing with some orientation $q$ such that $int(C_2) \subset int(C_1)$, a glued curve is a closed curve  $(c_1,\ell_1,c_2,\ell_2)$ with orientation $q$ and $c_1 \subset C_1, c_2 \subset C_2$. The linels $\ell_1,\ell_2$ are called junction linels.
-\end{definition}
-
-
-
-\begin{definition}[$n$-Glued Curve Set]
-Given closed curves $C_1,C_2$ with same orientation, its set of $n$-glued curves is defined as
-\begin{align*}
-	\mathcal{G}_n(C_1,C_2) = \{ (c_1,\ell_1,c_2,\ell_2) \; | \; |c_2|=n \},
-\end{align*}
-\end{definition}
-
-
-
-Let $S_O = ( S \cup R_1^+(S) ) $ and $S_I = ( S \setminus R_1^-(S) ) $, the neighborhood set to shape $S$ is defined as
-\begin{align*}
-	\mathcal{N}(S,N) = \bigcup_{1 \leq n \leq N} int \big(\; \mathcal{G}_{n}( \partial S_O, \partial S) \; \big) \cup int \big( \; \mathcal{G}_{n}(\partial S, \partial S_I) \; \big).
-\end{align*}
-
-Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with $N=50$.
+Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with $n=50$.
 
 
 \begin{algorithm}
@@ -511,12 +500,12 @@ Algorithm~\ref{alg:local-search} describes the local combinatorial process and F
  \SetKwData{Best}{best} 
  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
  
- \Input{A digital set $S$; the maximum length of glued curves $N$; the maximum number of iterations \MIt; and a stop condition \Tol}
+ \Input{A digital set $S$; the neighborhood parameter $n$; the maximum number of iterations \MIt; and a stop condition \Tol}
  \BlankLine
  \Delta $\longleftarrow$ \Tol+1\;
  $i \longleftarrow 0$\;
  \While{ \It $<$ \MIt \bf{and} \Delta $>$ \Tol  }{
-  	\For{$ X \in \mathcal{N}(S^{(i)},N) $}
+  	\For{$ X \in \mathcal{N}_n(S^{(i)}) $}
 	{
 		\If{ $\hat{E}(X)$ $<$ $\hat{E}(X^\star)$ }
 		{
