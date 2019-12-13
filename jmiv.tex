@@ -23,6 +23,7 @@
 \newcommand{\jaco}[1]{{\textcolor{green!50!black}{#1}}}
 \newcommand{\HT}[1]{{\textcolor{violet}{#1}}}
 \newcommand{\daniel}[1]{\textcolor{NavyBlue}{#1}}
+\newcommand{\revision}[1]{\textcolor{red}{#1}}
 
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -104,7 +105,7 @@ in the second-order regularizer of the original snake model
 \cite{kass1988snakes}.Indeed, an explicit curvature term was often
 employed in early level-set methods,
 like~\cite{malladi1995image,malladi1995shape,ballester01filljoint} for
-segmentation or inpainting. However, Caselles {\em et al.}
+segmentation or inpainting. However, \revision{Caselles} {\em et al.}
 in~\cite{caseles97geodesic} observed that these terms as employed
 were not geometric, in the sense that they depend on the
 discretization parameters.
@@ -167,7 +168,7 @@ phase-field models (see \cite{bretin2015phase}) but they are less
 suited to image segmentation since interfaces are blurred in such
 models. Threshold dynamics can also be considered for such energies
 \cite{esedoglu2008threshold} and has been proposed for image
-disocclusion \cite{esedoglu2005threshold}. However, flow-based methods
+\revision{disocclusion} \cite{esedoglu2005threshold}. However, flow-based methods
 will always deliver a local minimum, which heavily depend on
 initialization for good results. A similar approach is to formulate
 the Elastica as a regularization in a variational framework and use
@@ -242,7 +243,7 @@ our optimization method and we present a more thorough comparison of
 our segmentation method with two other related works. Moreover, we
 have included a new local combinatorial optimization approach for
 elastica minimization, which show that our discrete model is
-well-founded. Finally, the code related to this paper is freely
+well-founded. Finally, \revision{the code related to} this paper is freely
 available on github.\footnote{https://www.github.com/danoan/BTools}
 
 
@@ -375,7 +376,7 @@ where $\kappa(X,p)$ is the curvature of $X$ at point $p$. By isolating $\kappa$ 
 Such an approximation is convenient as one can simply devise a multigrid convergent estimator for the area.
 
 \begin{definition}	
-  Given a digital shape $D \subset (h \mathbb{Z})^2$,  the area estimator $\widehat{\text{Area}}(D,h)$ is defined as	
+  Given a digital shape $D \subset (h \mathbb{Z})^2$,  the area \revision{estimator} $\widehat{\text{Area}}(D,h)$ is defined as	
   \begin{align}
     \widehat{\text{Area}}(D,h) \coloneqq h^2\text{Card}\left( D \right).	
     \label{eq:digital_estimator_area}
@@ -415,7 +416,7 @@ The digital version of Elastica energy approaching the continuous Elastica energ
 	\label{eq:digital-energy}
 \end{align}
 where $\dot{\vec{e}}$ denotes the center of the edge $\vec{e}$. In the
-expression above, we will substitute an arbitrary subset $S$ of
+expression above, we will substitute an arbitrary subset \revision{$S$} of
 $\mathbb{Z}^2$ to $D_h(X)$ since the continuous shape $X$ is unknown.
 In the following we omit the grid step $h$ to simplify expressions
 (or, putting it differently, we assume that the shape of interest is
@@ -434,7 +435,7 @@ estimator but also for other curvature estimators, for example, MDCA
 \cite{roussillon11mdca}. As a matter of fact, our experiments have
 shown that either estimators induce similar results.
 
-Let $S$ be a $2$-dimensional digital shape embedded in a domain $\Omega \subset \mathbb{Z}^2$. We adopt the cellular-grid model to represent $S$, i.e., pixels and its lower dimensional counterparts, linels and pointels, are part of $S$ (see figure \ref{fig:cellular-grid-model}). In particular, we denote by $\partial S$ the topological boundary of $S$, i.e., the connected sequence of linels such that for each linel we have one of its incident pixels in $S$ and the other not in $S$.
+\revision{Let $S$ be a $2$-dimensional digital shape embedded in a domain $\Omega \subset \mathbb{Z}^2$}. We adopt the cellular-grid model to represent $S$, i.e., pixels and its lower dimensional counterparts, linels and pointels, are part of $S$ \revision{(see figure \ref{fig:cellular-grid-model})}. In particular, we denote by $\partial S$ the topological boundary of $S$, i.e., the connected sequence of linels such that for each linel we have one of its incident pixels in $S$ and the other not in $S$.
 
 \begin{figure}[h!]
 	\center
@@ -444,14 +445,16 @@ Let $S$ be a $2$-dimensional digital shape embedded in a domain $\Omega \subset 
 	\subfloat[\label{}]{%	
 	\includegraphics[scale=0.3]{images/local_search/definitions/cellular-grid-illustration.eps}
 	}
-	\caption{The flower shape in figure (a) and the cellular-grid model representation in (b) of the rectangle-bounded region. In figure (b), pixels are colored in gray, linels in green and pointels in blue.}
+	\caption{\revision{The flower shape in figure (a) and the cellular-grid model representation in (b) of the rectangle-bounded region. In figure (b), pixels are colored in gray, linels in green and pointels in blue.}}
 	\label{fig:cellular-grid-model}
 \end{figure}
 
 
-Let $d_{S}:\Omega \rightarrow \mathcal{R}$ be the signed Euclidean distance transformation with respect to shape $S$. The value $d_S(p)$ gives the Euclidean distance between $p \notin S$ and the closest pixel in $S$. For points $p \in S$, $d_S(p)$ gives the distance between $p$ and the closest pixel not in $S$. The \emph{$m$-level set of $S$}
+Let $d_{S}:\Omega \rightarrow \mathcal{R}$ be the \revision{signed} Euclidean distance transformation with respect to shape $S$. The value $d_S(p)$ gives the Euclidean distance between \revision{$p \notin S$ and the closest pixel in $S$. For points $p \in S$, $d_S(p)$ gives the distance between $p$ and the closest pixel not in $S$.}
+
 
 \begin{definition}[m-Ring Set]
+\revision{
 Given a digital shape $S\in\Omega$, its signed distance transformation $d_S$ and natural number $m \neq 0$, the {\em $m$-ring set of $S$} is defined as
 \begin{align*}
 	\mathcal{R}_m(S) &:= \mathcal{L}_m \cup \mathcal{L}_{-m},
@@ -462,7 +465,7 @@ where
 		\left\{ p \in \Omega \; | \; m-1 < d_S(p) \leq m \right\} & , \quad m>0\\
 		\left\{ p \in \Omega \; | \; m+1 > d_S(p) \geq m \right\} & , \quad m<0
 		\end{array} \right.
-\end{align*}
+\end{align*}}
 \end{definition}
 
 Consider the following set of neighbor candidates to $S$:
@@ -474,7 +477,9 @@ Consider the following set of neighbor candidates to $S$:
 Such set can be extremely large and its complete exhaustion is prohibitively expensive.  Instead, we are going to use a subset of it.
 
 \begin{definition}[$n$-neighborhood]
+\revision{
 	Given a digital shape $S \in \Omega$, its $n$-neighborhood $\mathcal{N}_n(S)$ is defined as the set of digital shapes that can be built from $S$ by adding or removing a sequence of $n$ connected pixels in $R_1(S)$.
+}
 \end{definition}
 
 
@@ -486,7 +491,7 @@ Such set can be extremely large and its complete exhaustion is prohibitively exp
 	\subfloat[\label{}]{%
 	\includegraphics[scale=0.22]{images/local_search/definitions/glued-curve.eps}
 	}%	
-	\caption{The blue pixels in figure (a) illustrates a $3$-ring set. In figure (b) we highlight the contour of an element of set $\mathcal{N}_{11}$.}
+	\caption{\revision{The blue pixels in figure (a) illustrates a $3$-ring set. In figure (b) we highlight the contour of an element of set $\mathcal{N}_{11}$.}}
 \end{figure}
 
 Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with $n=50$.
@@ -538,15 +543,15 @@ Algorithm~\ref{alg:local-search} describes the local combinatorial process and F
 	\subfloat[h=0.5\label{}]{%
 	\includegraphics[scale=0.125]{images/local_search/flower/h05/summary.eps}
 	}%
-		\caption{Local combinatorial optimization process results for the square and flower shapes. Shapes displayed at every $2$ iterations for the square and $5$ iterations for the flower.}	
+		\caption{\revision{Local combinatorial optimization process results for the square and flower shapes. Shapes displayed at every $2$ iterations for the square and $5$ iterations for the flower.}}	
 		\label{fig:local-comb-square-results}
 \end{figure}
 
 
 The running time of algorithm \ref{alg:local-search} is summarized in table \ref{tab:summary-local-comb-rtime}. All the
-experiments in this paper were executed on a $32$-core $2.4Ghz$ CPU and the number of pixels in the square and
-flower shapes are respectively $841,1867$ for grid step $h=1.0$. Although its use in practical applications is
-limited, we demonstrate that digital estimators are effective in their measurements and the flows evolve as expected. In particular, the digital elastica energy for the experiments in figure \ref{fig:local-comb-square-results} approaches the global optimum (figure  \ref{fig:plot-elastica-local-search}). We
+experiments in this paper were executed on a \revision{$32$-core $2.4Ghz$ CPU and the number of pixels in the square and
+flower shapes are respectively $841,1867$ for grid step $h=1.0$}. Although its use in practical applications is
+limited, we demonstrate that digital estimators are effective in their measurements and the flows evolve as expected. \revision{In particular, the digital elastica energy for the experiments in figure \ref{fig:local-comb-square-results} approaches the global optimum (figure  \ref{fig:plot-elastica-local-search})}. We
 observe that it is a complete digital approach, and we do not suffer from discretization and rounding problems, a common
 issue in continuous models.  Furthermore we have checked that this approach works indifferently with Integral Invariant
 curvature estimator and Maximal Digital Circular Arc curvature estimator. So the convergence of the digital curvature
@@ -559,10 +564,11 @@ we explore a more efficient approach.
 \begin{minipage}[b]{0.5\textwidth}
 \center
 \includegraphics[scale=0.35]{images/local_search/square-flower.eps}
-\caption{Elastica computation along iterations of algorithm \ref{alg:local-search}. The final shape has energy value closer to the optimal value $2\pi/5$ (dashed line).}
+\caption{Elastica computation along iterations of algorithm \ref{alg:local-search}. \revision{The final shape has energy value closer to the optimal value $2\pi/5$ (dashed line)}.}
 \label{fig:plot-elastica-local-search}
 \end{minipage}\hspace{40pt}%
 \begin{minipage}[b]{0.45\textwidth}
+\revision{
 \center
 \captionsetup{type=table}
 \begin{tabular}{|l|c|c|}
@@ -574,7 +580,8 @@ Square & 4s (0.4s/it) & 77s (3s/it)\\
 Flower & 252s (4s/it)  & 3246s (42s/it)\\
 \hline
 \end{tabular}
-\caption{Running times for the local combinatorial optimization algorithm with $k=1,n=50$. Four threads were used.}
+}
+\caption{Running times for the local combinatorial optimization algorithm with $k=1,\revision{n=50}$. Four threads were used.}
 \label{tab:summary-local-comb-rtime}
 \end{minipage}
 \end{figure}
@@ -612,8 +619,8 @@ Flower & 252s (4s/it)  & 3246s (42s/it)\\
 
 Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the goal is to compute a flow $S^{(i)}$ where $S^{(i+1)}$ has lower digital elastica than its precedent.
 
-
-We observe that the integral invariant estimator \eqref{eq:curvature_approximation} is originaly designed to be evaluated on the digital boundary of some shape, which is the unknown of our problem. Injecting contour information leads to a third order model, which we prefer to avoid. Instead, we are going to exploit the II estimator definition in order to compute a flow that evolves proportionally to the squared curvature of the current shape.
+\revision{
+We observe that the integral invariant estimator \eqref{eq:curvature_approximation} is originaly designed to be evaluated on the digital boundary of some shape, which is the unknown of our problem. Injecting contour information leads to a third order model, which we prefer to avoid. Instead, we are going to exploit the II estimator definition in order to compute a flow that evolves proportionally to the squared curvature of the current shape.}
 
  In order to guarantee connectivity, we limit the optimization region to a subset of $\Omega$, namely the inner pixel boundary of  $S^{(i)}$. We also use the notation $| S |$ to denote the cardinal of a digital set $S$.
 
@@ -621,18 +628,23 @@ We observe that the integral invariant estimator \eqref{eq:curvature_approximati
 
 We start by defining the optimization variables.
 \begin{definition}[Inner pixel boundary]
-Given a digital shape $S$ embedded in a domain $\Omega$, we define its inner pixel boundary set $I(S)$ as
+
+Given a digital shape $S$ embedded in a domain $\Omega$, we define its inner pixel boundary set \revision{$I(S)$} as
 \begin{align*}
-	I(S) = \left\{ \: p \; | \; p \in S, |\mathcal{N}_4(x) \cap S|<4 \: \right\},
+	\revision{I(S)} = \left\{ \: p \; | \; p \in S, |\mathcal{N}_4(x) \cap S|<4 \: \right\},
 \end{align*}
 where $\mathcal{N}_4(p)$ denotes the $4$-adjacent neighbor set of $p$ (without $p$).
 \end{definition}
 
-The optimization variables set is defined as
+\revision{
+The optimization variables set is defined as}
 
 \begin{align*}
+\revision{
 	X(S) = \left\{ x_j \in \{0,1\} \; | \; p_j \in I(S) \right \}.
+}
 \end{align*}
+
 
 In other words, each flow iteration decides which pixels in the inner boundary are to be removed from $S$ and which are to be kept in $S$. To simplify notation, we denote the optimization region of $S^{(i)}$ as $X^{(i)}$, and the foreground set as $F^{(i)} = S^{(i)} \setminus X^{(i)}$. We recall the definition of our digital curvature estimator:
 \begin{align}
@@ -669,7 +681,7 @@ where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or dat
 \includegraphics[scale=0.1]{images/flow/contour-information/after-opt.pdf}
 \label{fig:contour-info-2}
 \end{minipage}%
-\caption{Directly using the optimization result of \eqref{eq:energy-family} doesn't decrease squared curvature because contour information is not present in the energy.}
+\caption{ \revision{Directly using the optimization result of \eqref{eq:energy-family} doesn't decrease squared curvature because contour information is not present in the energy.}}
 \label{fig:contour-info}
 \end{figure}
 
@@ -688,7 +700,7 @@ where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or dat
 	\comment{Expansion mode}
 	\If{ \It is odd }{	 
 	 	$X^{(i)} \longleftarrow \argmin_X E_m(X,\overline{S^{(i-1)}})$\;
- 		$S^{(i)} \longleftarrow F^{(i-1)}_{\overline{S}} + \overline{X^{(i)}}$\;
+ 		$S^{(i)} \longleftarrow \revision{F^{(i-1)}_{\overline{S}}} + \overline{X^{(i)}}$\;
  		$S^{(i)} \longleftarrow \overline{S^{(i)}}$\;	 	
  	}
 	\comment{Shrinking mode} 	
@@ -704,7 +716,8 @@ where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or dat
  \label{alg:evolution-model}  
 \end{algorithm}
 
-We emphasize that the minimization of \eqref{eq:energy-family} for $S^{(i)}$ is not sufficient to derive the next shape $S^{(i+1)}$ because topolical information is not included in the model (see figure \ref{fig:contour-info}). Recall that the integral invariant estimator approaches curvature by computing the difference between half of the area
+\revision{
+We emphasize that the minimization of \eqref{eq:energy-family} for $S^{(i)}$ is not sufficient to derive the next shape $S^{(i+1)}$ because topolical information is not included in the model (see figure \ref{fig:contour-info})}. Recall that the integral invariant estimator approaches curvature by computing the difference between half of the area
 of a chosen ball and the area of the intersection of this ball with the shape.  In particular, regions of positive
 curvature have fewer pixels in their intersection set than on its complement w.r.t the estimation ball. This implies
 that variables in such regions are labeled with 1, as the unbalance grows otherwise. We attenuate curvature if we shift
@@ -803,7 +816,7 @@ curvature value.
 	}%
 \end{minipage}%
 \begin{minipage}[b]{0.33\textwidth}
-	\subfloat[$r=5, m=5$\label{}]{%
+	\subfloat[\revision{$r=5, m=5$}\label{}]{%
 	\includegraphics[scale=0.2]{images/flow/farther-rings/square-r5-l5/summary_flow.eps}
 	}%
 \end{minipage}%
@@ -845,7 +858,7 @@ curvature value.
 		\subfloat{%
 \includegraphics[scale=0.2]{images/flow/grid-radius-effect/flower/r5-h0.5/summary_flow.eps}}%
 		}\\
-		\subfloat[Elastica evaluation]{%
+		\subfloat[\revision{Elastica evaluation}]{%
 		\includegraphics[scale=0.5]{images/flow/elastica-energy-plot/square-flower-triangle.eps}						
 		}
 \caption{The choice of radius impacts the flow. In the figures, the flow ceases to evolve for all shapes  when $r=3$ (a). In figure (b), for $r=5$, the triangle evolves to a single point, while the others stop  in an intermediate shape, as in (a). In figure (c), we observe that for a given choice of radius, the elastica may increase after a certain number of iterations. }
@@ -970,7 +983,7 @@ The algorithm can be initialized by a collection of compact sets, or with the re
 \begin{figure}[ht!]
 \center
 \begin{tabular}{ccc}
-Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
+\revision{Seeds} & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
  	\includegraphics[scale=0.25]{images/segmentation/bc/coala/seeds.png} & 
 	\includegraphics[scale=0.25]{images/segmentation/bc/coala/r3/lg0_sq05_dt1_it50.png} & 
 	\includegraphics[scale=0.25]{images/segmentation/bc/coala/r3/lg0_sq1_dt1_it50.png} \\
@@ -979,7 +992,7 @@ Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
 	\includegraphics[scale=0.25]{images/segmentation/bc/coala/r3/lg1_sq0_dt1_it50.png} &
 	\includegraphics[scale=0.25]{images/segmentation/bc/coala/r3/lg2_sq0_dt1_it50.png} \\
 
-	GrabCut & $(\alpha=0.5, \beta=0)$ & $(\alpha=1, \beta=0)$
+	\revision{GrabCut} & $(\alpha=0.5, \beta=0)$ & $(\alpha=1, \beta=0)$
 \end{tabular}	
 \caption{Comparison of squared curvature regularization (first row) and length regularization (second row). }
 \label{fig:parameters-influence}
@@ -1029,12 +1042,12 @@ Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
 		\includegraphics[scale=0.2]{images/segmentation/bc/coral/corrected-seg.png} &					\includegraphics[scale=0.2]{images/segmentation/schoenemann/coral/coral-seg.png}\\				
 						
 	\end{tabular}
-	\caption{Additional comparison results between GrabCut, Schoenemman and Contour correction segmentation methods.}
+	\caption{\revision{Additional comparison results between GrabCut, Schoenemman and Contour correction segmentation methods.}}
 	\label{fig:more-segmentation-results}	
 \end{figure}
 
 
-We evaluate our method using the BSD300 database \cite{martinFTM01berkeley}. All images contain the same number of pixels, the resolution being 321x481 (481x321) in portrait (landscape) mode. We compare the results of our method with segmentations given by GrabCut and Schoenemanns's method \cite{schoenemann09linear}. We report an average of $3s$ per flow iteration, and an average of $30$ iterations per image. While GrabCut executes in less than one second, Schoenemann's method may take several hours to complete.
+We evaluate our method using the BSD300 database \cite{martinFTM01berkeley}. All images contain the same number of pixels, \revision{the resolution being 321x481 (481x321) in portrait (landscape) mode}. We compare the results of our method with segmentations given by GrabCut and Schoenemanns's method \cite{schoenemann09linear}. We report an average of $3s$ per flow iteration, and an average of $30$ iterations per image. While GrabCut executes in less than one second, Schoenemann's method may take several hours to complete.
 
 
 {In figure \ref{fig:parameters-influence} we can observe the results of a curvature regularization in comparison with a
