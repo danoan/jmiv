@@ -617,12 +617,11 @@ Flower & 252s (4s/it)  & 3246s (42s/it)\\
 
 
 \revision{
-Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the goal is to compute a flow $S^{(i)}$ where $S^{(i+1)}$ has lower digital elastica $S^{(i)}$.
+Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the goal is to compute a flow $S^{(i)}$ where $S^{(i+1)}$ has lower digital elastica $S^{(i)}$.}
 
+\revision{We observe that the integral invariant estimator \eqref{eq:curvature_approximation} is originaly designed to be evaluated on the digital boundary of the shape, which is the unknown of our problem. Injecting contour information leads to a third order model, which we prefer to avoid. Instead, we are going to exploit the II estimator definition in order to compute a flow that evolves proportionally to the squared curvature of the current shape.}
 
-We observe that the integral invariant estimator \eqref{eq:curvature_approximation} is originaly designed to be evaluated on the digital boundary of some shape, which is the unknown of our problem. Injecting contour information leads to a third order model, which we prefer to avoid. Instead, we are going to exploit the II estimator definition in order to compute a flow that evolves proportionally to the squared curvature of the current shape.}
-
- In order to guarantee connectivity, we limit the optimization region to a subset of $\Omega$, namely the inner pixel boundary of  $S^{(i)}$. We also use the notation $| S |$ to denote the cardinal of a digital set $S$.
+In order to guarantee connectivity, we limit the optimization region to a subset of $\Omega$, namely the inner pixel boundary of  $S^{(i)}$. We also use the notation $| S |$ to denote the cardinal of a digital set $S$.
 
 \subsection{Discrete variational model for discrete curve evolution}
 
