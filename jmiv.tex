@@ -624,13 +624,7 @@ Given a digital shape $S \subset \Omega \subset \mathbb{Z}^2$, the goal is to co
 
 \subsection{Discrete variational model for discrete curve evolution}
 
-\revision{We assume an ordering in $\Omega$, i.e., there exists a bijective function $\omega : \Omega \rightarrow \{1 \cdots |\Omega| \}$. Moreover, we associate to every pixel in $\Omega$ a binary variable grouped in the set $X(\Omega)$}
-
-\begin{align*}
-	\revision{X(\Omega) := \left\{ x_{\omega(p)} \in \{0,1\} \; | \; p \in \Omega \right\}.}
-\end{align*}
-
-\revision{We extend the definition for every subset $P \in \Omega$, i.e.,}
+\revision{We assume an ordering in $\Omega$, i.e., there exists a bijective function $\omega : \Omega \rightarrow \{1 \cdots |\Omega| \}$. Moreover, we associate to any subset $P \subset \Omega$ the set of binary variables $X(P)$ defined as}
 
 \begin{align*}
 	\revision{X(P) := \left\{ x_{\omega(p)} \in \{0,1\} \; | \; p \in P \right\}.}
