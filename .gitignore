@@ -8,3 +8,9 @@
 *.lplog
 *.info
 mask-boundary.png
+cover-letter/cover-letter.bbl
+cover-letter/cover-letter.blg
+cover-letter/cover-letter.pdf
+jmiv.bbl
+jmiv.blg
+jmiv.pdf
