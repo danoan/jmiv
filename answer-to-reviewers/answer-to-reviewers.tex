@@ -16,7 +16,8 @@ according to their recommendations. Changes in the text are highlighted in red. 
 \paragraph{This is an interesting contribution to digital processing of images. Alternative approaches to discretization of elastica based on polygonal approximations for discrete elastica and their convergence issues could be mentioned for comparison}
 
 ~\\
-Thanks.
+In section 5, we compare our segmentation model with the work of \cite{schoenemann09linear} which uses a discretization of curvature proposed in \cite{bruckstein96} which $\Gamma$-convergence is proved in \cite{bruckstein01}. We remark that our approach never leaves the digital domain, in other words, is purely digital and it doesn't rely in any curve representation. The notions of multigrid convergence and $\Gamma$-convergence are not easily comparable, as the former is especially designed for digital data. In this sense, multigrid convergence is more appropriated in our case as our main object of interest are digital images.
+~\\
 
 \section{Reviewer \#2}
 
@@ -59,13 +60,13 @@ $\in$ symbol (=element of a set?!) does not express this well. $\subset$ or
 $\subseteq$ would be better but would still need some constraining sentence.}
 
 ~\\
-$\rightarrow$ We agree. We assume that region enclosed by $C_2$ is contained in the region enclosed by $C_1$. The hypothesis was included in the manuscript.
+$\rightarrow$ We agree. In fact, the former presentation included gratuitous technical difficulties. We've decided to change the presentation to an equivalent one, easier to read.
 ~\\
 
 \textbf{9:21--26 In the unnumbered displayed equation int is applied to sets of curves (according to Def. 8) but it is only explained in the text what int is for a single curve. Some explanation is needed how this transfers to sets of curves, in order for the reader to interpret the unnumbered displayed equation.}
 
 ~\\
-$\rightarrow$ Indeed, an extension of the operator int(.) for set of curves is needed. The extended definition was included in the manuscript.
+$\rightarrow$ Indeed, an extension of the operator int(.) for set of curves was necessary. However, as said in the previous answer, the presentation of this section has changed, and such definition is no more needed.
 ~\\
 
 \textbf{Section 4.1: This was the part that I had really difficulties to warp my mind
@@ -89,32 +90,42 @@ $\rightarrow$ We agree. We hope that the modifications implemented in the presen
 ~\\
 
 
-Next, I conjecture that the first line of the unnumbered equation at 11:29
+\textbf{Next, I conjecture that the first line of the unnumbered equation at 11:29
 needs a minor correction: The opening bracket after the $\sum$ symbol should
-probably go before the $\sum$ symbol so the $|F_r^{(i)}(y)|$ is not included
-in the summation. 
+probably go before the $\sum$ symbol so the $|F_r^{(i)}(y)|$ is not included in the summation. }
 
-→ That's correct. Fixed!
+~\\
+$\rightarrow$ That's correct. Fixed!
+~\\
 
-Moreover, the summation should be over $O_r^{(i)}(y)$ as in the following line because otherwise the pixels j in the foreground would be counted twice, once with their $x_j$ in the sum over $B_r(y)$ and a second time lumped up in the $|F_r|$ expression. (Of course, one can argue that $X$ is a subset of $O^{(i)}$, thus the $x_j$ -- actually $1_X(x_j)$ -- are zero for pixels outside S and in the foreground set; but despite formal correctness, this would be confusing. Better define $1_X(x_j)$ only within $O^{(i)}$.) 
+\textbf{Moreover, the summation should be over $O_r^{(i)}(y)$ as in the following line because otherwise the pixels j in the foreground would be counted twice, once with their $x_j$ in the sum over $B_r(y)$ and a second time lumped up in the $|F_r|$ expression. (Of course, one can argue that $X$ is a subset of $O^{(i)}$, thus the $x_j$ -- actually $1_X(x_j)$ -- are zero for pixels outside S and in the foreground set; but despite formal correctness, this would be confusing. Better define $1_X(x_j)$ only within $O^{(i)}$.) }
 
-→ That's also correct. Fixed!
-
-
-Next, I stumbled over Algorithm 1. In the expansion mode, I wonder whether $F^{(i)}$ in Line 6 is the foreground set of $S^{(i)}$ as defined in the text, or whether it is tacitly assumed that, since in Line 5 the energy $E_m$ was written for the complement set $\bar{S^{(i)}}$, $F^{(i)}$ is in fact the set of non-boundary pixels of $\bar{S}$. To me it appears most plausible that the latter is meant but this needs to be made clear somehow.
-
-→ That's correct! In the expansion mode, $F$ represents the foreground pixels of $\bar{S}$. We changed the notation to make this point clear.
+~\\
+$\rightarrow$ That's also correct. Fixed!
+~\\
 
 
+\textbf{Next, I stumbled over Algorithm 1. In the expansion mode, I wonder whether $F^{(i)}$ in Line 6 is the foreground set of $S^{(i)}$ as defined in the text, or whether it is tacitly assumed that, since in Line 5 the energy $E_m$ was written for the complement set $\bar{S^{(i)}}$, $F^{(i)}$ is in fact the set of non-boundary pixels of $\bar{S}$. To me it appears most plausible that the latter is meant but this needs to be made clear somehow.}
 
-Finally, the paragraphs 12:26--41 provide a heuristic reasoning why to use the complement of optimization sets $X^{(i)}$ in the algorithm. However, if (5) indeed is a discrete approximation of the squared curvature, and $E_m$ then discretizes a continuous energy involving the squared curvature, and $E_m$ is minimized to find $X$, the reduction of the (modulus of the) curvature should be achieved using $X$, not $\bar{X}$. The heuristics in 12:26--41 seem plausible in themselves but somewhere here is a contradiction. Using stringent energy minimization and then, by a heuristic argument, just the inverse of the result, would put the entire theoretical approach at question. It might be that this is somehow related with the placement of $y$ in $E_m$ off the actual shape boundary (on the ring sets $R_m$) but from what I read I cannot see how the contradiction is resolved. As the experiments demonstrate that the method actually works, I think this can be clarified by careful additional explanations, or minor corrections in the formulas.
+~\\
+$\rightarrow$ That's correct! In the expansion mode, $F$ represents the foreground pixels of $\bar{S}$. We changed the notation to make this point clear.
+~\\
 
-→ We included a paragraph in the text clarifying this point. To sum up, we cannot use directly the minimization of energy $E_m$ because we are not incorporating topological information into the model, which would lead to a third order model that we wish to avoid. The heuristic comes up to solve this issue of not having topological information in the model.
+
+
+\textbf{Finally, the paragraphs 12:26--41 provide a heuristic reasoning why to use the complement of optimization sets $X^{(i)}$ in the algorithm. However, if (5) indeed is a discrete approximation of the squared curvature, and $E_m$ then discretizes a continuous energy involving the squared curvature, and $E_m$ is minimized to find $X$, the reduction of the (modulus of the) curvature should be achieved using $X$, not $\bar{X}$. The heuristics in 12:26--41 seem plausible in themselves but somewhere here is a contradiction. Using stringent energy minimization and then, by a heuristic argument, just the inverse of the result, would put the entire theoretical approach at question. It might be that this is somehow related with the placement of $y$ in $E_m$ off the actual shape boundary (on the ring sets $R_m$) but from what I read I cannot see how the contradiction is resolved. As the experiments demonstrate that the method actually works, I think this can be clarified by careful additional explanations, or minor corrections in the formulas.}
+
+~\\
+$\rightarrow$ We included a paragraph in the text clarifying this point. To sum up, we cannot use directly the minimization of energy $E_m$ because we are not incorporating contour information into the model, which would lead to a third order energy that we wish to avoid. The heuristic comes up to solve this issue of not having contour information in the model.
+~\\
 
 \subsection{MINOR TYPOS ETC.}
 
 [List of suggestions and corrections]
-→ We thank you for your careful reading! The grammar corrections and style suggestions were very appreciated.
+~\\
+
+$\rightarrow$ We thank you for your careful reading! The grammar corrections and style suggestions were very appreciated.
+~\\
 
 
 
@@ -124,37 +135,52 @@ Digital analogs of continuous definitions related mathematical image analysis ar
 
 \subsection{Comments}
 
-Cross references are incorrect. Algorithm 1 is cited as algorithm 11 in the manuscript.
-Please check latex file of your manuscript.
+\textbf{Cross references are incorrect. Algorithm 1 is cited as algorithm 11 in the manuscript.
+Please check latex file of your manuscript.}
 
-→ Thank you for pointing out. Corrections were made.
+~\\
+$\rightarrow$ Thank you for pointing out. Corrections were made.
+~\\
 
 
-Eq. (4) is proposed in this paper.
+~\\
+\textbf{Eq. (4) is proposed in this paper.
 "Gradient flow" like evolution of digital planar boundary which minimises energy of eq. (4).
 For the understanding of the differences and similarity between definitions for eqs. (3) and (4),
-step-by-step graphical descriptions of definitions and equations in section 2 are preferable.
+step-by-step graphical descriptions of definitions and equations in section 2 are preferable.}
 
-→ Not sure to comply with this request or not. I’m not sure what to answer
-
-
-Second paragraph insection3 describes the main mathematical idea for curve evolution in digital space. In the process selection of the local neighbourhood is essential in your proposal. The graphical explanation is preferable. These descriptions provide the necessity of the distance transform in the local operations.
-
-→ New figures were included in section 3. We they will help clarify this point.
+~\\
+$\rightarrow$ Not sure to comply with this request or not. I’m not sure what to answer
+~\\
 
 
-In algorithm 1 (11) $X^\ast$ s.t .$\hat{E}(X)< E(X^ast)$ is searched, how can you mathematically guarantee $\hat{E}(X)< E(X^\ast)$? Please describe why such $X^{\ast}$ exists.
+\textbf{Second paragraph insection3 describes the main mathematical idea for curve evolution in digital space. In the process selection of the local neighbourhood is essential in your proposal. The graphical explanation is preferable. These descriptions provide the necessity of the distance transform in the local operations.}
 
-→ It may not exist! If the neighborhood is exhausted and such X* is not found, the algorithm stops. In particular, the shapes S(i) and S(i-1) will be the same, hence delta will be zero and there will be no next iteration.
+~\\
+$\rightarrow$ New figures were included in section 3. We they will help clarify this point.
+~\\
 
 
+\textbf{In algorithm 1 (11) $X^\ast$ s.t .$\hat{E}(X)< E(X^ast)$ is searched, how can you mathematically guarantee $\hat{E}(X)< E(X^\ast)$? Please describe why such $X^{\ast}$ exists.}
 
-4. Relation between section 3 and section 4 is unclear.
+~\\
+$\rightarrow$ It may not exist! If the neighborhood is exhausted and such X* is not found, the algorithm stops. In particular, the shapes S(i) and S(i-1) will be the same, hence delta will be zero and there will be no next iteration.
+~\\
+
+
+\textbf{Relation between section 3 and section 4 is unclear.
 Please describe relations between the Elastica minimisation motion and curvature flow.
 Is the curvature flow of yours is derived as curve evolution process?
 If so, please describe the derivation step-by-step
-If not, please clarify the relation of them in your manuscript.
+If not, please clarify the relation of them in your manuscript.}
 
-→ Section 3 plays two roles. The first is to validate the use of multigrid convergent estimator in an optimization model. In particular, the experiments in section 3 converged to the theoretical global optimum. However, the model in section 3 is of limited use in practice, but since we were successful in proving its pertinence, we can use this model as a base of comparison for other digital models. For example, comparing the results achieved for the model in section 3 with those achieved for the model proposed in section 4, which is more likely to be used in practice.
+~\\
+$\rightarrow$ Section 3 plays two roles. The first is to validate the use of multigrid convergent estimator in an optimization model. In particular, the experiments in section 3 converged to the theoretical global optimum. However, the model in section 3 is of limited use in practice, but since we were successful in proving its pertinence, we can use this model as a base of comparison for other digital models. For example, comparing the results achieved for the model in section 3 with those achieved for the model proposed in section 4, which is more likely to be used in practice.
+~\\
+
+
+\bibliographystyle{plain}
+\bibliography{answers.bib}
+
 
 \end{document}
