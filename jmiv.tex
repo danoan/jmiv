@@ -156,7 +156,7 @@ order to achieve reasonable running times, such approaches make use of
 coarse curvature estimations for which the approximation error is
 often unknown. Improving the quality of the curvature estimator has an
 important impact on the accuracy of the results, but is
-computationally too costly in these methods. \revision{Moreover, parametric approaches to Elastica  as snakes and splines depend on the choice of anchor points and  multigrid convergence hasn't been proven for them.}
+computationally too costly in these methods. \revision{Moreover, parametric approaches to Elastica  as snakes and splines are way to sensitive to the choice of anchor points and  multigrid convergence hasn't been proven for them.}
 
 Segmentation methods using Elastica or Willmore energies can be
 formulated via the computation of the corresponding flow,
@@ -519,30 +519,20 @@ Algorithm~\ref{alg:local-search} describes the local combinatorial process and F
 
 		
 \begin{figure}[!h]
-\center
-	\subfloat[h=1.0\label{}]{%
-	\includegraphics[scale=0.125]{images/local_search/square/h1/summary.eps}
-	}%
-	\hspace{10pt}
-	\subfloat[h=0.5\label{}]{%
-	\includegraphics[scale=0.125]{images/local_search/square/h05/summary.eps}
-	}%
-	\hspace{10pt}
-	\subfloat[h=1.0\label{}]{%
-	\includegraphics[scale=0.125]{images/local_search/flower/h1/summary.eps}
-	}%
-	\hspace{10pt}
-	\subfloat[h=0.5\label{}]{%
-	\includegraphics[scale=0.125]{images/local_search/flower/h05/summary.eps}
-	}%
-		\caption{\revision{Local combinatorial optimization process results using II estimator with radius $7$ for the square and flower shapes. Shapes displayed at every $2$ iterations for the square and $5$ iterations for the flower.}}	
-		\label{fig:local-comb-square-results}
+	\center
+	\begin{tabular}{ccc}
+		$h=1.0$ & $h=0.5$ & $h=0.25$\\
+		\includegraphics[scale=0.2]{images/local_search/square/h1/summary.eps} & \includegraphics[scale=0.2]{images/local_search/square/h05/summary.eps} & \includegraphics[scale=0.2]{images/local_search/square/h025/summary.eps} \\
+		\includegraphics[scale=0.2]{images/local_search/flower/h1/summary.eps} & \includegraphics[scale=0.2]{images/local_search/flower/h05/summary.eps} & \includegraphics[scale=0.2]{images/local_search/flower/h025/summary.eps}
+	\end{tabular}	
+		\caption{\revision{Local combinatorial optimization process results using II estimator with radius $5$ for the square and flower shapes. Shapes are displayed at every $5$ iterations.}}	
+		\label{fig:local-comb-square-results}		
 \end{figure}
 
 
 The running time of algorithm \ref{alg:local-search} is summarized in table \ref{tab:summary-local-comb-rtime}. All the
 experiments in this paper were executed on a \revision{$32$-core $2.4Ghz$ CPU and the number of pixels in the square and
-flower shapes are respectively $841,1867$ for grid step $h=1.0$}. Although its use in practical applications is
+flower shapes are respectively $841,1641$ for grid step $h=1.0$}. Although its use in practical applications is
 limited, we demonstrate that digital estimators are effective in their measurements and the flows evolve as expected. \revision{In particular, the digital elastica energy for the experiments in figure \ref{fig:local-comb-square-results} approaches the global optimum (figure  \ref{fig:plot-elastica-local-search})}. We
 observe that it is a complete digital approach, and we do not suffer from discretization and rounding problems, a common
 issue in continuous models.  Furthermore, we have checked that this approach works indifferently with Integral Invariant
@@ -550,32 +540,33 @@ curvature estimator and Maximal Digital Circular Arc curvature estimator. So the
 estimator seems to be the cornerstone to get a digital curve behaving like a continuous Elastica.  In the next section,
 we explore a more efficient approach.
 
+\begin{figure}
+	\center
+	\captionsetup{type=table}	
+	\revision{
+	\begin{tabular}{|c|c|c|}
+	\hline
+	& Square & Flower \\
+	\hline
+	$h=1.0$ & 4s & 124s \\
+	\hline
+	$h=0.5$ & 77s & 1924s\\
+	\hline
+	$h=0.25$ & 1886s & 28445s\\
+	\hline
+	\end{tabular}
+	}
+	\caption{Running times for the local combinatorial optimization algorithm with $0 \leq n \leq 50$. Thirty two threads were used.}
+	\label{tab:summary-local-comb-rtime}
+\end{figure}
 
 
 \begin{figure}[!h]
-\begin{minipage}[b]{0.5\textwidth}
 \center
-\includegraphics[scale=0.35]{images/local_search/square-flower.eps}
-\caption{Digital elastica computation along iterations of algorithm \ref{alg:local-search}. \revision{The final shape has energy value closer to the optimal value $2\pi/5$ (dashed line)}.}
+\subfloat[\label{}]{\includegraphics[scale=0.6]{images/local_search/square.eps}}
+\subfloat[\label{}]{\includegraphics[scale=0.6]{images/local_search/flower.eps}}
+\caption{Digital elastica computation along iterations of algorithm \ref{alg:local-search}. \revision{The final shape has energy value closer to the optimal value $2\pi/5$ (thin horizontal dashed line)}.}
 \label{fig:plot-elastica-local-search}
-\end{minipage}\hspace{40pt}%
-\begin{minipage}[b]{0.45\textwidth}
-\revision{
-\center
-\captionsetup{type=table}
-\begin{tabular}{|l|c|c|}
-\hline
-& $h=1.0$ & $h=0.5$\\
-\hline
-Square & 4s (0.4s/it) & 77s (3s/it)\\
-\hline
-Flower & 252s (4s/it)  & 3246s (42s/it)\\
-\hline
-\end{tabular}
-}
-\caption{Running times for the local combinatorial optimization algorithm with $\revision{ 0 \leq n \leq 50}$. Thirty two threads were used.}
-\label{tab:summary-local-comb-rtime}
-\end{minipage}
 \end{figure}
 
 \section{Digital Curvature Flow}
@@ -665,7 +656,7 @@ where $g(S,x)$ denotes a \revision{data term (e.g., distance to initial shape $S
 \label{fig:contour-info}
 \end{figure}
 
-\begin{algorithm}[H]
+\begin{algorithm}
  \SetKwData{It}{i}
  \SetKwData{MIt}{maxIt}
  \SetKwData{Delta}{delta}
@@ -835,7 +826,7 @@ curvature value.
 		\subfloat{%
 \includegraphics[scale=0.2]{images/flow/grid-radius-effect/flower/r5-h0.5/summary_flow.eps}}%
 		}\\
-		\subfloat[\revision{Digital elastica evaluation}]{%
+		\subfloat[\revision{Digital elastica evaluation ($r=5,h=0.5$)}]{%
 		\includegraphics[scale=0.5]{images/flow/elastica-energy-plot/square-flower-triangle.eps}						
 		}
 \caption{The choice of radius impacts the flow. In the figures, the flow ceases to evolve for all shapes  when $r=3$ (a). In figure (b), for $r=5$, the triangle evolves to a single point, while the others stop  in an intermediate shape, as in (a). In figure (c), we observe that for a given choice of radius, the digital elastica may increase after a certain number of iterations. }
@@ -890,7 +881,7 @@ varies across values of $m$ differs from shape to shape, as is illustrated in fi
   same labeling as QPBOP.
 
 
-\begin{figure}[h!]
+\begin{figure}
 \center
 \includegraphics[scale=0.5]{images/optimization/pairwise-ratio/plot-pairwiseratio-lowerHigher-concavities-probe.eps}
 \caption{We plot the ratio of pairwise terms among all $\binom{|X^{(i)}|}{2}$ combinations. The highest ring has roughly half the number of pairwise terms as the lowest ring.}
@@ -929,7 +920,7 @@ intensities $G_f$,$G_b$, and we define the data fidelity term as the cross-entro
 We use the DCE algorithm to regularize an initial contour output by some segmentation algorithm or delineated by the user. In this application, the \revision{data} term of the DCE
 is set to the data fidelity term \eqref{eq:data-fidelity}.
 	
-\begin{algorithm}[H]
+\begin{algorithm}
  \SetKwData{It}{i}
  \SetKwData{MIt}{maxIt}
  \SetKwData{Tol}{tolerance}
