@@ -15,9 +15,32 @@ according to their recommendations. Changes in the text are highlighted in red. 
 
 \paragraph{This is an interesting contribution to digital processing of images. Alternative approaches to discretization of elastica based on polygonal approximations for discrete elastica and their convergence issues could be mentioned for comparison}
 
-~\\
-In section 5, we compare our segmentation model with the work of \cite{schoenemann09linear} which uses a discretization of curvature proposed in \cite{bruckstein96} which $\Gamma$-convergence is proved in \cite{bruckstein01}. We remark that our approach never leaves the digital domain, in other words, it's purely digital and it doesn't rely on any curve representation. The notions of multigrid convergence and $\Gamma$-convergence are not easily comparable. The former is specially designed for digital data, hence more appropriated in our case as our main object is a digital image.
-~\\
+~\\ In section 5, we indeed compare our segmentation model with the
+work of \cite{schoenemann09linear}, which uses a polygonal
+approximation of discrete elastica. In this work, the curvature is
+estimated with a simple formula involving angle and edge lengths at
+polygon vertices as proposed in \cite{bruckstein96}. This discrete
+elastica problem with fixed end-points is proven to be
+$\Gamma$-convergent toward the continuous elastica problem in
+\cite{bruckstein01}. However it is not straightforward to include
+image date term in these work, since the optimization variables of the
+polygonal approximation are not related to the digital domain. For
+instance, one could also use splines approximation with exact
+curvature information and the same kind of approach would have the
+same pros and cons.
+
+We remark that our approach never leaves the digital domain. In other
+words, it is purely digital and it does not rely on any curve
+representation. With this approach, all the optimization variables are
+related to the digital domain, and we can thus optimize in the same
+process data terms and elastica terms. Hence there is no alternate
+minimization involved.
+
+Finally, the notions of multigrid convergence and $\Gamma$-convergence
+are not easily comparable. The former concerns the accuracy of an
+estimation, the latter concerns a sequence of minimizers. The former
+is specifically designed for digital data, hence more appropriated in
+our case as our main objects of interest are digital images.  ~\\
 
 \section{Reviewer \#2}
 
