@@ -606,7 +606,7 @@ where $\mathcal{N}_4(p)$ denotes the $4$-adjacent neighbor set of $p$ (without $
 \end{align*}
 
 
-In other words, each flow iteration decides which pixels in the inner boundary are to be removed from \revision{$S^{(i)}$} and which are to be kept in \revision{$S^{(i)}$}. We recall the definition of our digital curvature estimator:
+In other words, each flow iteration decides which pixels in the inner boundary are to be removed from \revision{$S^{(i)}$} and which are to be kept in \revision{$S^{(i)}$}. We recall the definition of the II digital curvature estimator:
 \begin{align}
 	\hat{\kappa}^2(p) &= c_1\Big( c_2 - | B_r(p) \cap S^{\revision{(i)}} | \Big)^2, 
 	\label{eq:curvature-estimator-pixels}
@@ -617,7 +617,8 @@ where $c_1=3/r^6$ and $c_2=\pi r^2/2$.
 
 \revision{
 \begin{align*}
-	F_r^{(i)}(p) &:= \big( S^{(i)} \setminus I^{(i)} \big) \cap B_r(p)\\
+	F^{(i)} &:= S^{(i)} \setminus I^{(i)} \\
+	F_r^{(i)}(p) &:= F^{(i)} \cap B_r(p)\\
 	I_r^{(i)}(p) &:= I^{(i)} \cap B_r(p) \\
 	X_r^{(i)}(p) &:= X\big( I_r^{(i)}(p) \big).
 \end{align*}
@@ -703,14 +704,15 @@ the original shape. Table~\ref{tab:flow-summary} sums up these arguments.
 
 Length and \revision{data} terms should be properly defined in order to comply with the complement step of the DCE
 algorithm. The length penalization is defined as
+\revision{
 \begin{align}
-  s(x)=\sum_{x_j \in \mathcal{N}_4(x)}{ t(x_j) }, \quad \text{where } t(x_j) = \left\{\begin{array}{ll}
-  (x-x_j)^2, & \text{if } x_j \in X_{r}^{(i)}\\
-  (x-0), & \text{if } x_j \in F_{r}^{(i)}\\
-  (x-1), & \text{otherwise }
+  s(x_{w(p)})=\sum_{q \in \mathcal{N}_4(p)}{ t(q) }, \quad \text{where } t(q) = \left\{\begin{array}{ll}
+  (x_{w(p)}-x_{w(q)})^2, & \text{if } q \in I^{(i)}\\
+  (x_{w(p)}-0), & \text{if } q \in F^{(i)}\\
+  (x_{w(p)}-1), & \text{otherwise }
   \end{array}\right.
   \label{eq:length-penalization}
-\end{align}
+\end{align}}
 	
 We do not use \revision{data} terms in this section, thus we postpone the definition of such terms until later in this
 article, with the description of how DCE can be used in an image segmentation framework.
@@ -913,7 +915,7 @@ interest. Given foreground and background seeds selected by the user, we derive 
 intensities $G_f$,$G_b$, and we define the data fidelity term as the cross-entropy, i.e.
 	
 \begin{align}
-  g(y) = -(1-y)\log{G_f(I(y))} - y\log{G_b(I(y))}.
+  g(\revision{x_{w(p)}}) = -(1-\revision{x_{w(p)}})\log{G_f(p)} - \revision{x_{w(p)}}\log{G_b(p)}.
   \label{eq:data-fidelity}
 \end{align}	
 
