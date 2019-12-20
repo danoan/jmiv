@@ -154,9 +154,17 @@ are in practice difficult to optimize and do not scale easily
 \cite{zehiry10fast,schoenemann09linear,strandmark11globalframework,nieuwenhuis14efficient}. In
 order to achieve reasonable running times, such approaches make use of
 coarse curvature estimations for which the approximation error is
-often unknown. Improving the quality of the curvature estimator has an
-important impact on the accuracy of the results, but is
-computationally too costly in these methods. \revision{Moreover, parametric approaches to Elastica  as snakes and splines are too sensitive to the choice of anchor points and multigrid convergence hasn't been proven for them.}
+often unknown. \revision{In the segmentation method of \cite{schoenemann09linear}, for example, the curvature is estimated by a simple formula involving angles and edge lengths at polygon vertices. The quality of the estimation is higly influenced by the number of vertices and where they are located along the curve. More important, in this estimator, the curve representation lies in the continuous domain and the properties of such estimator are not immediately valid when the curve is translated to the digital domain.  In particular, it is not straightforward to include a image data term in this model without adding extra assumptions about the curve representation. One could use a spline approximation with exact curvature information and the same kind of approach would have the same pros and cons.} Improving the quality of the curvature estimator has an important impact on the accuracy of the results, \revision{but we should use the appropriate tools to evaluate its quality. In the context of measurements in digital data, this tool is multigrid convergence.}
+
+
+
+
+%Improving the quality of the curvature estimator has an
+%important impact on the accuracy of the results, but is
+%computationally too costly in these methods. 
+
+%\revision{Moreover, parametric approaches to Elastica  as snakes and splines are too sensitive to the choice of anchor points and multigrid convergence hasn't been proven for them.}
+
 
 Segmentation methods using Elastica or Willmore energies can be
 formulated via the computation of the corresponding flow,
