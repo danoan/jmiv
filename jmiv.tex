@@ -478,7 +478,7 @@ Such set can be extremely large and its complete exhaustion is prohibitively exp
 
 \begin{definition}[$n$-neighborhood]
 \revision{
-	Given a digital shape $S \in \Omega$, its $n$-neighborhood $\mathcal{N}_n(S)$ is defined as the set of digital shapes that can be built from $S$ by adding or removing a sequence of $n$ connected pixels in $R_1(S)$.
+	Given a digital shape $S \in \Omega$, its $n$-neighborhood $\mathcal{N}_n(S)$ is defined as the set of digital shapes that can be built from $S$ by adding or removing a sequence of $k \in [0,n]$ connected pixels in $R_1(S)$.
 }
 \end{definition}
 
@@ -494,7 +494,7 @@ Such set can be extremely large and its complete exhaustion is prohibitively exp
 	\caption{\revision{The blue pixels in figure (a) illustrates a $3$-ring set. In figure (b) we highlight the contour of an element of set $\mathcal{N}_{11}$.}}
 \end{figure}
 
-Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with \revision{$0 \leq n \leq 50$}.
+Algorithm~\ref{alg:local-search} describes the local combinatorial process and Figure~\ref{fig:local-comb-square-results} presents the digital curve evolution when executing this algorithm for two different shapes with \revision{$n=50$}.
 
 
 \begin{algorithm}
@@ -564,7 +564,7 @@ we explore a more efficient approach.
 	\hline
 	\end{tabular}
 	}
-	\caption{Running times for the local combinatorial optimization algorithm with $0 \leq n \leq 50$. Thirty two threads were used.}
+	\caption{Running times for the local combinatorial optimization algorithm with $n=50$. Thirty two threads were used.}
 	\label{tab:summary-local-comb-rtime}
 \end{figure}
 
