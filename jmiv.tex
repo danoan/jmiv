@@ -2,14 +2,15 @@
 % LLNCS macro package for Springer Computer Science proceedings;
 % Version 2.20 of 2017/10/04
 %
-\documentclass[runningheads]{llncs}
+%\documentclass[runningheads]{llncs}
+\documentclass[smallextended]{svjour3}       % onecolumn (second format)
 %
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx,subfig}
 \usepackage{amstext,amsmath,amssymb,bm,bbm,mathtools}
 \usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
 \usepackage[export]{adjustbox}
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
@@ -21,6 +22,7 @@
 \newcommand{\test}[1]{{\textcolor{red}{#1}}}
 \newcommand{\jaco}[1]{{\textcolor{green!50!black}{#1}}}
 \newcommand{\HT}[1]{{\textcolor{violet}{#1}}}
+\newcommand{\daniel}[1]{\textcolor{NavyBlue}{#1}}
 
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -31,28 +33,33 @@
 
 \begin{document}
 %
-\title{A\HT{n Elastica-driven} Digital Curve Evolution Model for Image Segmentation\thanks{This  work has  been  partially  funded by CoMeDiC ANR-15-CE40-0006 research grant.}}
-  \titlerunning{Digital Curve Evolution by Elastica Energy}
+\title{An Elastica-driven Digital Curve Evolution Model for Image Segmentation\thanks{This  work has  been  partially  funded by CoMeDiC ANR-15-CE40-0006 research grant.}}
+\titlerunning{Digital Curve Evolution by Elastica Energy}
   %\title{Digital Curvature Evolution Models for Image Segmentation\thanks{This  work has  been  partially  funded by CoMeDiC ANR-15-CE40-0006 research grant.}}
 
-\author{Daniel Antunes\inst{1}
-Jacques-Olivier Lachaud\inst{1}
-Hugues Talbot\inst{2}}
+\author{Daniel Antunes%\inst{1}
+\and Jacques-Olivier Lachaud%\inst{1}
+\and Hugues Talbot%\inst{2}
+}
 %
 \authorrunning{D. Antunes et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{Universit{\'e} Savoie Mont Blanc, LAMA, UMR CNRS 5127, F-73376, France
-\email{daniel.martins-antunes, jacques-olivier.lachaud@univ-savoie.fr} \and
-CentraleSupelec Inria \'equipe OPIS, Universit\'e Paris-Saclay, 9 rue Joliot-Curie, F-91190 Gif-sur-Yvette \\
-\email{hugues.talbot@centralesupelec.fr}}
+\institute{%Universit{\'e} Savoie Mont Blanc, LAMA, UMR CNRS 5127, F-73376, France
+  Daniel Antunes \at
+  Univ. Grenoble Alpes, Univ. Savoie Mont Blanc, CNRS, LAMA, 73000 Chambéry, France \\
+  \email{daniel.martins-antunes@univ-smb.fr} \and
+  Jacques-Olivier~Lachaud \at  Univ. Grenoble Alpes, Univ. Savoie Mont Blanc, CNRS, LAMA, 73000 Chambéry, France \\
+  \email{jacques-olivier.lachaud@univ-smb.fr} \and
+  Hugues Talbot \at CentraleSupelec, Inria, Universit\'e Paris-Saclay, 9 rue Joliot-Curie, F-91190 Gif-sur-Yvette \\
+  \email{hugues.talbot@centralesupelec.fr}}
 %
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-  \HT{Geometric priors have been shown to be useful in image segmentation to regularize results. For example, the classical
-    Mumford-Shah functional uses regions perimeter as prior. This has inspired much research in the last few decades,
+  Geometric priors have been shown to be useful in image segmentation to regularize results. For example, the classical
+    Mumford-Shah functional uses region perimeter as prior. This has inspired much research in the last few decades,
     with classical approaches like the Rudin-Osher-Fatemi and most graph-cut formulations, which all use a weighted or
     binary perimeter prior. It has been observed that this prior is not suitable in many applications, for example for
     segmenting thin objects or some textures, which may have high perimeter/surface ratio. Mumford observed that an
@@ -61,9 +68,9 @@ CentraleSupelec Inria \'equipe OPIS, Universit\'e Paris-Saclay, 9 rue Joliot-Cur
     well-approximated by curvature-related flow like the Willmore flow. 
     However, curvature-related flows are not easy to compute because curvature is difficult to estimate accurately, and the
     underlying optimisation processes are not convex. In this article, we propose to formulate a digital flow that
-    approximates a curvature-related flow using a multigrid-convergent curvature estimator, within a discrete
-    variational framework. We also present an application of this model as a post-processing step in a segmentation
-    framework.}
+    approximates an Elastica-related flow using a multigrid-convergent curvature estimator, within a discrete
+    variational framework. We also present an application of this model as a post-processing step to a segmentation
+    framework.
 \keywords{Multigrid convergence  \and Digital estimator \and Curvature \and Shape Optimization \and Image Segmentation.}
 \end{abstract}
 %
@@ -71,7 +78,6 @@ CentraleSupelec Inria \'equipe OPIS, Universit\'e Paris-Saclay, 9 rue Joliot-Cur
 %
 \setcounter{footnote}{0}
 \section{Introduction} %% \todo{(To be extended)}}
-
 
 Geometric quantities are particularly useful as regularizers in
 low-level image analysis, especially when little prior information is
@@ -125,133 +131,195 @@ solution must also be provided to achieve good results.}
 In fact, it is still a very challenging task to inject curvature in
 the context of image segmentation.  
 \HT{State-of-art methods are in practice} difficult to optimize and \HT{do not scale}
+=======
+known about the shape of interest. Length penalization is a
+well-behaved, general purpose regularizer and many models in the
+literature make use of it, from active contours
+\cite{casseles97geodesic} to level-set formulations
+\cite{malladi1995image,malladi1995shape}. Discrete graph-based
+variational models have been particularly succesful to incorporate
+length penalization as a penalizer, while keeping the ability to
+extract a global optimum \cite{boykov01graphcut,appleton05geodesic}.
+
+However length regularization shows limitations when segmenting small
+or thin and elongated objects, as it tends to shrink solutions or
+yields disconnected solutions. Such drawbacks can be problematic in
+image segmentation, image restoration or image inpainting. It is thus
+rather natural to consider curvature (especially squared curvature) as
+a potential regularizer. Energies involving both length and squared
+curvature are often called the {\em Elastica} model (that dates back
+to Euler). The {\em Willmore energy} is its $n$-dimensional
+extension. These were brought to attention in computer vision by
+Mumford \cite{mumford1994elastica}. A similar concept is also present
+in the second-order regularizer of the original snake model
+\cite{kass1988snakes}.Indeed, an explicit curvature term was often
+employed in early level-set methods,
+like~\cite{malladi1995image,malladi1995shape,ballester01filljoint} for
+segmentation or inpainting. However, Casselles {\em et al.}
+in~\cite{casseles97geodesic} observed that these terms as employed
+were not geometric, in the sense that they depend on the
+discretization parameters.
+
+\subsection{Existing works}
+The use of curvature for surface regularization in the case of the
+Willmore energy was studied in~\cite{bobenko2005discrete}. Although
+results look promising, authors used an inexact linearized version of
+the square curvature at every step.
+
+One of the first successful uses of geometric, squared curvature in
+image processing is the inpainting algorithm described in
+\cite{masnou98inpainting}, where authors evaluate the absolute
+curvature along the level lines of a simply-connected image to
+reconstruct its occluded parts. The non-intersection property of level
+lines induces the construction of an efficient dynamic programming
+algorithm. The curvature energy is nevertheless only coarsely
+approximated. We may quote \cite{chan02elasticainpainting} as another
+geometric inpainting method involving Elastica, which is optimized with
+level-sets.
+
+
+In image segmentation, Zehiry and Grady have shown that injecting
+curvature as a regularizer can help recover thin and elongated objects
+\cite{zehiry10fast}. Similarly Schoenemann {\em et al.}
+\cite{schoenemann09linear} have considered the Elastica energy in
+their ratio-based image segmentation
+approach. In~\cite{schoenemann2011elastic}, Schoenemann~{\em et al.}
+extend ratio-cut approaches to segmentation with a curvature
+term. Their global optimization framework shows the considerable
+advantages of using such regularizer in common binary image
+segmentation tasks.  However the time complexity of their algorithm
+is prohibitive, even if curvature is again coarsely
+approximated.  In a more recent work, Lim {\em et al.} propose an
+edge-weighted Willmore-like flow to segment
+vertebra~\cite{lim2012introducing} using a level-set
+formulation. They observe improved results compared
+to~\cite{casseles97geodesic} and other perimeter-based priors, but
+observe that a shape prior and a close-enough initialization must also be
+provided to achieve good results.
+
+In fact, it is still a very challenging task to efficiently handle
+curvature in the context of image segmentation.  State-of-art methods
+are in practice difficult to optimize and do not scale easily
 \cite{zehiry10fast,schoenemann09linear,strandmark11globalframework,nieuwenhuis14efficient}. In
 order to achieve reasonable running times, such approaches make use of
 coarse curvature estimations for which the approximation error is
-\HT{often} unknown. Improving the quality of the curvature estimator has an
+often unknown. Improving the quality of the curvature estimator has an
 important impact on the accuracy of the results, but is
 computationally too costly in these methods.
 
-Segmentation methods using Elastica or Willmore energies \HT{generally
-reduce to} computing the corresponding flow, i.e. following its
-gradient. Well-founded level-set methods involving Willmore energy
-\cite{droske2004level} have been used in medical image segmentation
-\cite{lim2012introducing}. Another level-set formulation similar to
-the Chan-Vese model \HT{was} proposed in \cite{zhu2013image}. Willmore
-flow can also be carried out by phase-field models (see
-\cite{bretin2015phase}) but they are less suited to image segmentation
-since interfaces are blurred in such models. Threshold dynamics can
-also be considered for such energies \cite{esedoglu2008threshold} and
-has been proposed for image desocclusion \cite{esedoglu2005threshold}.
+Segmentation methods using Elastica or Willmore energies can be
+formulated via the computation of the corresponding flow,
+i.e. following its gradient. Well-founded level-set methods involving
+Willmore energy \cite{droske2004level} have been used in medical image
+segmentation \cite{lim2012introducing}. Another level-set formulation
+similar to the Chan-Vese model was proposed in
+\cite{zhu2013image}. Willmore flow can also be carried out by
+phase-field models (see \cite{bretin2015phase}) but they are less
+suited to image segmentation since interfaces are blurred in such
+models. Threshold dynamics can also be considered for such energies
+\cite{esedoglu2008threshold} and has been proposed for image
+desocclusion \cite{esedoglu2005threshold}. However, flow-based methods
+will always deliver a local minimum, which heavily depend on
+initialization for good results. A similar approach is to formulate
+the Elastica as a regularization in a variational framework and use
+operator splitting to optimize it. Tai {\em et
+  al.}~\cite{tai11elastica} and more recently Deng~{\em et
+  al.}~\cite{deng2019new} have proposed this approach, which is
+well-suited to inverse problem solving. The problem remains non-convex
+and the nature of the converged iterates are not studied, i.e. how
+close they are to a global optimum.
 
-In this paper we are interested in purely discrete variational segmentation models involving an elastica
-energy. Recently, new estimators of curvature along digital contours have been proposed
-\cite{roussillon11mdca,coeurjolly13integral,schindele17mdca} with the \HT{desirable} multigrid convergence property. This
-motivates us to \HT{propose} models in which they can be used successfully.
+In contrast, researchers have sought convex relaxation of curvature-related
+formulation. In~\cite{goldluecke11totalcurvature}, Goldluecke and Cremers introduce the {\em Total Curvature}, based
+on the Menger-Melnikov curvature of a measure. The formulation is non-convex but can be relaxed into a well-correlated
+but non-tight convex one. The relaxed formulation can be used to solve inverse problems including segmentation. However computing a solution is still expensive, requiring signifiant parallelisation efforts with a GPU to achieve
+  acceptable computing times. In~\cite{bredies15convex}, Bredies {\em et al.} study a convex approximation of the
+  Elastica energy, using a lifting scheme. Thanks to the lifting, it is not restricted to binary sets. It shows
+  promising results and can be used for image restoration in addition to inpainting and segmentation. The scheme is
+  however neither tight nor exact, and required 4 dimensions for a 2D approximation. In addition, it does not carry over
+to $nD$. It also remains computationally expensive.
 
-\HT{In the remainder, we} investigate the use of the digital integral invariant
-curvature estimator \cite{coeurjolly13integral} in a discrete
-variational segmentation framework. More precisely, we show how to
-incorporate it in a digital flow minimizing its squared
+
+Discrete approaches have been used to tackle the Elastica
+difficulties. As noted before, \cite{schoenemann09linear} have
+linearized a mesh-based approach, which was expanded upon
+by~\cite{strandmark11globalframework}, while \cite{zehiry10fast} have
+used a binary solver for a non-submodular approach on a regular square
+grid of pixels, which was expanded
+in~\cite{el2016contrast}. In~\cite{nieuwenhuis14efficient} , a
+specific solver is developed to yield a better solution to an
+extension of the formulation in~\cite{zehiry10fast}.
+
+
+\subsection{Motivation}
+In spite of the multiplicity of existing approaches, it seems none is
+currently completely satisfactory. While the sought solution is
+expected to be very smooth based on geometrical expectations, the
+mathematical properties of the related operators make this smoothness
+elusive. Non-convexity and the presence of high-order terms make
+Elastica difficult to optimize and to approximate, let alone compute
+efficiently. The computed solutions in the literature are rarely
+evaluated, and the complexity of the proposed solution is often high.
+
+%%\item{What are the difficulties in use curvature as a regularizer (point out convex relaxation approaches) and how a digital approach may help us }
+%%\item{Outline: We present two models that illustrate how digital estimators can be used to minimize the elastica energy on digital sets.  }
+%%\item{\todo{Add related works : geometric priors, binary segmentation, other digital curve evolution models}}
+%%\item{\todo{Talk about Willmore flow with phase field or with threshold dynamics}}
+
+Consequently, we are interested in studying purely discrete
+variational segmentation models involving an Elastica
+energy. Recently, new estimators of curvature along digital contours
+have been proposed
+\cite{roussillon11mdca,coeurjolly13integral,schindele17mdca} with the
+desirable multigrid convergence property. This motivates us to propose
+models in which they can be used successfully.
+
+
+In this paper, we propose to investigate the use of the digital
+integral invariant curvature estimator \cite{coeurjolly13integral} in
+a discrete variational segmentation framework. More precisely, we show
+how to incorporate it in a digital flow minimizing its squared
 curvature. This model is expressible as a discrete combinatorial
 optimization model, which we solve using a classical variant of QPBO
-algorithm \cite{rother07qpbo}. \HT{Our solution does not} compute a global
-solution to the whole domain, but our approach leads to a digital flow
-similar to continuous \HT{Elastica}, as shown by our experiments. We
-present an application of the model as a post-processing step in a
+algorithm \cite{rother07qpbo}. Our solution does not compute a global
+solution to the whole domain but a global solution to a band
+surrounding a given shape. Our approach thus leads to a digital flow
+similar to continuous Elastica, as shown by our experiments. We
+present an application of this model as a post-processing step in a
 segmentation framework, and demonstrate how it can improve standard
-results. The code is freely available on
-github\footnote{https://www.github.com/danoan/BTools}.
-
-%% In this work, we investigate the use of a more suitable curvature
-%% estimator with multigrid convergent property and its application as a
-%% boundary regularizer in a digital flow minimizing its squared
-%% curvature. Our method decreases the elastica energy of the contour and
-%% its evolution is evaluated on several digital flows.
-
-%% Finally, we
-%% present an application of the model as a post-processing step in a
-%% segmentation framework. The code is freely available on
-%% github\footnote{https://www.github.com/danoan/BTools}.
+results. This paper is an extended version of a previous work that
+appeared in \cite{antunes19}. We have included a deeper discussion on
+our optimization method and we present a more thorough comparison of
+our segmentation method with two other related works. Moreover, we
+have included a new local combinatorial optimization approach for
+elastica minimization, which show that our discrete model is
+well-founded. Finally, the code produced in this paper is freely
+available on github.\footnote{https://www.github.com/danoan/BTools}
 
 
-\begin{itemize}
-\item{Geometric properties and regularization}
-\item{The role of curvature} 
-  
-%  Quote \cite{schoenemann2011elastic} for the interest of using curvature energy when segmenting regions in gradient-based data fitting term. It can look for global optimum within a graph representation of the image. Main problem of their approach is the computational complexity as well as rather coarse approximations of curvature. (Be more precise here).
-  
-\item{What are the difficulties in use curvatue as a regularizer (point out convex relaxation approaches) and how a digital approach may help us }
-\item{Outline: We present two models that illustrate how digital estimators can be used to minimize the elastica energy on digital sets.  }
-\item{\todo{Add related works : geometric priors, binary segmentation, other digital curve evolution models}}
-\item{\todo{Talk about Willmore flow with phase field or with threshold dynamics}}
-  
-%%\item{\textbf{Classical work on elastica and Wilmore flow in imaging}}
-  %%\begin{itemize}
-  %% \item{Level lines based disocclusion \cite{masnou98inpainting} }	%% DONE
- %%  \item{Filling-In by Joint Interpolation of Vector Fields and Gray Levels \cite{ballester01filljoint} } %% DONE
- %%  \item{Eulers Elastica and Curvature Based Inpaintings \cite{chan02elasticainpainting} } %% DONE
- %% \item{Discrete willmore flow \cite{bobenko2005discrete}}
- %%  \item{Introducing Willmore flow into level set segmentation of spinal vertebrae \cite{lim2012introducing}}	 %%% DONE
- %% \end{itemize}
-  
-%%\item{\textbf{Level-sets}}
- %% \begin{itemize}
-  %% \item{Image processing via level set curvature flow \cite{malladi1995image} } %% DONE
-  %% \item{Shape Modeling with Front Propagation: A Level Set Approach \cite{malladi1995shape} }	%% DONE
-%%	\end{itemize}	
-  
-\item{\textbf{Convex relaxation}}
-  \begin{itemize}
-  \item{A convex lower semicontinuous approximation of Eulers elastica energy \cite{bredies15convex}}
-  \item{Introducing Total Curvature for Image Processing \cite{goldluecke11totalcurvature}}
-  \end{itemize}	
-  
-\item{\textbf{Constraint optimization}}
-  \begin{itemize}
-  \item{Curvature regularity for region-based image segmentation and inpainting: A linear programming relaxation \cite{schoenemann09linear} }	
-  \item{A Fast Algorithm for Euler's Elastica Model Using Augmented Lagrangian Method \cite{tai11elastica} }		
-  %%\item{The elastic ratio: Introducing curvature into ratio-based image segmentation \cite{schoenemann2011elastic}
-  %%}		%% DONE
-  \item{Curvature Regularization for Curves and Surfaces in a Global Optimization Framework \cite{strandmark11globalframework} }
-  \end{itemize}
-  
-\item{\textbf{Discrete approaches}}
-  \begin{itemize}
-  \item{Fast global optimization of curvature \cite{zehiry10fast}	}
-  \item{Efficient Squared Curvature \cite{nieuwenhuis14efficient} 	}
-  \item{Contrast driven {E}lastica for image segmentation \cite{el2016contrast} }	
-  \end{itemize}
-  
-	
-\end{itemize}
-
-
-\textit{Outline}. Section two reviews the concept of multigrid
-convergence and highlights its importance for the definition of
-digital estimators. Next, we describe two convergent estimators used
-in this paper, one for tangent and the other for curvature. They are
-used in the optimization model and in the definition of the digital
-elastica. Section three describes a local combinatorial optimization model
-suitable for different curvature estimators. Section four describes the proposed 
-curvature evolution model along with several illustrations of digital flows. Section five
-explains how to use the evolution model as a post-processing step in
-an image segmentation framework. 
+\subsection{Outline}
+Section~2 reviews the concept of multigrid convergence and highlights
+its importance for the definition of digital estimators. We describe
+two convergent estimators used in this paper, one that approaches the
+length of elementary discrete contour elements, and the other that
+approaches the curvature of a discrete contour. They are used in the
+optimization model and in the definition of the digital
+elastica. Section~3 describes a local combinatorial optimization model
+suitable for several curvature estimators, that presents interesting
+results but is too costly in practice. Section~4 describes the
+proposed Elastica-driven curvature evolution model along with several
+illustrations of digital flows. Section~5 explains how to use this
+evolution model as a post-processing step in an image segmentation
+framework and compares it to two related approaches. We conclude and
+draw some perspectives to this work in Section~6.
 
 
 
-\section{Multigrid convergent estimators \todo{(Mostly copy/paste)}}
+\section{Multigrid convergent estimators}
+Our objective is to delineate shapes within digital images with some priors related to continuous geometry. The goal of
+this section is to introduce the concept of multigrid convergence and its potential when analyzing digital images with
+variational models involving geometric quantities, with the constraint that only digitized shapes are observed.
 
-The goal of this section is to  introduce the concept of multigrid convergenc and its potential when analyzing digital images with variational models involving geometric quantities. More precisely we wish to delineate shapes within digital images with some priors related to their unknown continuous geometry. Of course we only observe shape digitizations within images.
-%% \begin{itemize}
-%% 	\item{Why to use multigrid convergent estimators}
-%% 	\item{Multigrid convergence for local estimators}
-%% 	\item{Reference to examples of multigrid digital estimators(for curvature, length, tangent)}
-%% 	\item{Define the elastica energy estimator}
-%% 	\item{\test{(Jaco) see if two opposite II evaluations give convergent curvature}}
-%% \end{itemize}
-
-%% \hrulefill
 
 A digital shape is the result of some quantization process over an
 object $X$ lying in some continuous space of dimension $2$ (here).
@@ -301,7 +369,7 @@ we describe two estimators that are important for our purpose.
 \subsection{Tangent and Perimeter Estimators}
 
 The literature presents several perimeter estimators that are multigrid convergent (see
-\cite{coeurjolly04comparative,coeurjolly12multigrid} for a review), but in order to define the digital elastica we need a local estimation
+\cite{coeurjolly04comparative,coeurjolly12multigrid} for a review), but in order to define the digital Elastica we need a local estimation
 of length and we wish that integration over these local length elements gives a multigrid convergent estimator for the
 perimeter.
 
@@ -358,9 +426,9 @@ where $\kappa(X,p)$ is the curvature of $X$ at point $p$. By isolating $\kappa$ 
 Such an approximation is convenient as one can simply devise a multigrid convergent estimator for the area.
 
 \begin{definition}	
-  Given a digital shape $D \subset (h \mathbb{Z})^2$,  the area estimatir $\widehat{Area}(D,h)$ is defined as	
+  Given a digital shape $D \subset (h \mathbb{Z})^2$,  the area estimatir $\widehat{\text{Area}}(D,h)$ is defined as	
   \begin{align}
-    \widehat{Area}(D,h) \coloneqq h^2\text{Card}\left( D \right).	
+    \widehat{\text{Area}}(D,h) \coloneqq h^2\text{Card}\left( D \right).	
     \label{eq:digital_estimator_area}
   \end{align}
 \end{definition}
@@ -374,7 +442,7 @@ estimator for the curvature.
 \begin{definition}[Integral Invariant Curvature Estimator]
   Let $D \subset (h \mathbb{Z})^2$ a digital shape. The integral invariant curvature estimator is defined as
   \begin{align*}
-    \hat{\kappa}_{r}(D,x,h) \coloneqq \frac{3}{r^3} \left( \frac{\pi r^2}{2} - \widehat{Area} \left( B_{r} ( x ) \cap D, h \right) \right).
+    \hat{\kappa}_{r}(D,x,h) \coloneqq \frac{3}{r^3} \left( \frac{\pi r^2}{2} - \widehat{\text{Area}} \left( B_{r} ( x ) \cap D, h \right) \right).
     %% \hat{\kappa}_{r}(D,x,h) \coloneqq \frac{3}{r^3} \left( \frac{\pi r^2}{2} - \widehat{Area} \left( B_{r/h} ( \frac{1}{h} \cdot x ) \cap D, h \right) \right).
   \end{align*}
 \end{definition}
@@ -386,13 +454,13 @@ three dimensional shapes.
 
 \subsection{Elastica energy estimator}
 
-In the remaining of this paper we are going to be interested in the minimization of the elastica energy. Given a Euclidean shape $X$ with smooth enough boundary, the elastica is defined as
+In the remaining of this article, we are considering in the minimization of the Elastica energy. Given a Euclidean shape $X$ with smooth enough boundary, the Elastica is defined as
 \begin{align}
   E(X) = \int_{\partial X}{(\alpha + \beta \kappa^2) ds}, \quad \text{for~} \alpha \ge 0, \beta \ge 0.
   \label{eq:elastica}
 \end{align}
 
-The digital version of elastica energy approaching the continuous elastica energy is defined as follows (it uses multigrid convergent estimators):
+The digital version of Elastica energy approaching the continuous Elastica energy is defined as follows (it uses multigrid convergent estimators):
 \begin{align}
 	\hat{E}( D_h(X) ) = \sum_{\vec{e} \in \partial D_h(X)}{ \hat{s}(\vec{e})\left(\; \alpha + \beta \hat{\kappa}_{r}^2(D_h(X),\dot{\vec{e}},h) \; \right)},
 	\label{eq:digital-energy}
@@ -406,10 +474,10 @@ rescaled by $1/h$ and we set $h=1$).
 
 \section{Local combinatorial optimization}
 
-The objectives of this section is to show both the potential of minimizing a purely digital elastica energy but also to underline the difficulties of using it in a global combinatorial optimization framework.
+The objectives of this section is to show both the potential of minimizing a purely digital Elastica energy but also to underline the difficulties of using it in a global combinatorial optimization framework.
 
 Given a digital shape $S^{(0)}$ we describe a process that generates a
-sequence $S^{(i)}$ of shapes with non-increasing elastica energy. The
+sequence $S^{(i)}$ of shapes with non-increasing Elastica energy. The
 idea is to define a neighborhood of shapes $\mathcal{N}^{(i)}$ to the
 shape $S^{(i)}$ and choose the element of $\mathcal{N}^{(i)}$ with
 lowest energy.  The process is suited for the integral invariant
@@ -440,7 +508,7 @@ Such set can be extremely large and its complete exhaustion is prohibitively exp
 
 An oriented closed curve $C$ is a closed connected sequence of linels with a well-defined interior. A segment of $C$ is a connected subsequence $c \in C$ of its linels.
 
-\begin{figure}
+\begin{figure}[!h]
 \center
 	\subfloat[\label{}]{%
 	\includegraphics[scale=0.2]{images/local_search/definitions/model-regions-square.eps}
@@ -498,7 +566,7 @@ where $int(C)$ is the interior of the shape bounded by the close oriented curve 
 \end{algorithm}
 
 		
-\begin{figure}[!ht]
+\begin{figure}[!h]
 \center
 	\subfloat[h=1.0\label{}]{%
 	\includegraphics[scale=0.125]{images/local_search/square/h1/summary-flow.eps}
@@ -520,22 +588,19 @@ where $int(C)$ is the interior of the shape bounded by the close oriented curve 
 \end{figure}
 
 
-The running time of algorithm \ref{alg:local-search} is summarized in
-table \ref{tab:summary-local-comb-rtime}. All the experiments in this paper were executed on a five core $3.4Ghz$ cpu and the number of pixels in the triangle, square and flower shapes are respectively $841,1867,521$ for grid step $h=1.0$. Although its use in practical applications is limited, we
-demonstrate that digital estimators are effective in their measurements
-and the flows evolve as expected. We observe that it is a
-complete digital approach, and we do not suffer from discretization
-and rounding problems, a common issue in continuous models.
-Furthermore we have checked that this approach works
-indifferently with Integral Invariant curvature estimator and
-Maximal Digital Circular Arc curvature estimator. So the convergence
-of the digital curvature estimator seems to be the cornerstone to
-get a digital curve behaving like a continuous elastica.  In the
-next section, we explore a more efficient approach.
+The running time of algorithm \ref{alg:local-search} is summarized in table \ref{tab:summary-local-comb-rtime}. All the
+experiments in this paper were executed on a five-core $3.4Ghz$ CPU and the number of pixels in the triangle, square and
+flower shapes are respectively $841,1867,521$ for grid step $h=1.0$. Although its use in practical applications is
+limited, we demonstrate that digital estimators are effective in their measurements and the flows evolve as expected. We
+observe that it is a complete digital approach, and we do not suffer from discretization and rounding problems, a common
+issue in continuous models.  Furthermore we have checked that this approach works indifferently with Integral Invariant
+curvature estimator and Maximal Digital Circular Arc curvature estimator. So the convergence of the digital curvature
+estimator seems to be the cornerstone to get a digital curve behaving like a continuous Elastica.  In the next section,
+we explore a more efficient approach.
 
 
 
-\begin{figure}
+\begin{figure}[!h]
 \begin{minipage}[b]{0.5\textwidth}
 \center
 \includegraphics[scale=0.35]{images/local_search/square-flower.eps}
@@ -613,20 +678,17 @@ where $c_1=3/r^6$ and $c_2=\pi r^2/2$.
 We define $O_{r}^{(i)}(y) := O^{(i)} \cap B_r(y)$ and an analogous definition holds for $F_{r}^{(i)}(y)$. Expanding \eqref{eq:curvature-estimator-pixels}, we get 
 \begin{align*}
   \hat{\kappa}^2(y) &= c_1\Big( c_2 - \sum_{x_j \in B_r(y)} \big( {x_j} + |F_{r}^{(i)}(y)| \big) \Big)^2 \\
-   &= c_1 \cdot \Big( C + 2\left( |F_{r}^{(i)}(y)| - c_2 \right) \hspace{-2mm}\sum_{x_j \in O_{r}^{(i)}(y)}\hspace{-2mm}{x_j} + \hspace{-2mm}\sum_{x_j \in O_{r}^{(i)}(y)}\hspace{-2mm}{x_j^2} + \hspace{-2mm}\sum_{ \substack{x_j,x_k \in O_{r}^{(i)}(p) \\ j<k} }\hspace{-2mm}{2x_jx_k}  \Big),
+   &= c_1 \cdot \Big( C + 2\left( |F_{r}^{(i)}(y)| - c_2 \right) \hspace{-2mm}\sum_{x_j \in O_{r}^{(i)}(y)}\hspace{-2mm}{x_j} + \hspace{-2mm}\sum_{x_j \in O_{r}^{(i)}(y)}\hspace{-2mm}{x_j^2} + \hspace{-2mm}\sum_{ \substack{x_j,x_k \in O_{r}^{(i)}(y) \\ j<k} }\hspace{-2mm}{2x_jx_k}  \Big),
 \end{align*}
-where $C=c_2^2 - 2c_2 \cdot |F_{r}^{(i)}(y)| + |F_{r}^{(i)}(y)|^2$ is a constant. In
-order to be symmetric, the curvature at some linel $y$ is computed on
-$R_m(S)$.\todo{Que veux-tu dire?} By ignoring constants and multiplication factors and using
+where $C=c_2^2 - 2c_2 \cdot |F_{r}^{(i)}(y)| + |F_{r}^{(i)}(y)|^2$ is a constant. By ignoring constants and multiplication factors and using
 the binary character of the variables, we define the following family
-of energies for given parameters $\alpha,\beta \geq 0$.
+of energies for given parameters $\alpha,\beta, \gamma \geq 0$.
 \begin{align}
   E_m(X,S) =& \sum_{x \in X}{\alpha s(x)} \nonumber \\ 
   & + \sum_{y \in R_m(S)}{ \beta \Big( { (1/2+ |F_{r}^{(i)}(y)|-c_2) \cdot \sum_{x_j \in O_{r}^{(i)}(y)}{x_j} } + \sum_{ \substack{x_j,x_k \in O_{r}^{(i)}(y) \\ j<k} }{x_jx_k} \Big) } \nonumber \\
-  & + \sum_{x \in X}{\gamma g(S,x)}
+  & + \sum_{x \in X}{\gamma g(S,x)},
   \label{eq:energy-family}
 \end{align}
-\todo{Que vaux $X$ ici ?}	
 where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or data fidelity term and $s(x)$ denotes a length penalization term. Each choice of $m$ generates a different flow, which is generaly described in the Digital Curve Evolution (DCE) algorithm \ref{alg:evolution-model}.
 
 
@@ -662,28 +724,20 @@ where $g(S,x)$ denotes a similarity term as distance to initial shape $S$ or dat
 
 
 
-Recall that the integral invariant estimator approaches curvature by
-computing the difference between half of the area of a chosen ball and
-the area of the intersection of this ball with the shape.  In
-particular, regions of positive curvature have fewer pixels in their
-intersection set than on its complement wrt the estimation ball. This
-implies that variables in such regions are labeled one, as the
-unbalance grows otherwise. We attenuate curvature if we shift the
-center of the estimation ball towards the interior of the shape, which
-means removing the labeled one pixels. That is why we take the
-complement of the optimization solution.
+Recall that the integral invariant estimator approaches curvature by computing the difference between half of the area
+of a chosen ball and the area of the intersection of this ball with the shape.  In particular, regions of positive
+curvature have fewer pixels in their intersection set than on its complement w.r.t the estimation ball. This implies
+that variables in such regions are labeled with 1, as the unbalance grows otherwise. We attenuate curvature if we shift
+the center of the estimation ball towards the interior of the shape, which means removing the 1-labeled pixels. That is
+why we take the complement of the optimization solution.
 
-The same reasoning applies for non-convex parts. Indeed, concave
-regions are convex in the shape complement. In the expansion mode we
-apply the same reasoning on the image complement, and by doing this we
-are able to handle concavities. It is called expansion mode because
-the optimization region, in this case, is the outer pixel boundary of
-the original shape. Table~\ref{tab:flow-summary} sums up these
-arguments.
+The same reasoning applies for non-convex parts. Indeed, concave regions are convex in the shape complement. In the
+expansion mode we apply the same reasoning on the image complement, and by doing this we are able to handle
+concavities. It is called expansion mode because the optimization region, in this case, is the outer pixel boundary of
+the original shape. Table~\ref{tab:flow-summary} sums up these arguments.
 
-Length and similarity terms should be properly defined in order to
-comply with the complement step of the DCE algorithm. The length
-penalization is defined as
+Length and similarity terms should be properly defined in order to comply with the complement step of the DCE
+algorithm. The length penalization is defined as
 \begin{align}
   s(x)=\sum_{x_j \in \mathcal{N}_4(x)}{ t(x_j) }, \quad \text{where } t(x_j) = \left\{\begin{array}{ll}
   (x-x_j)^2, & \text{if } x_j \in O_{r}^{(i)}\\
@@ -693,9 +747,8 @@ penalization is defined as
   \label{eq:length-penalization}
 \end{align}
 	
-We do not use similarity terms in this section, thus we postpone the
-definition of such terms until the description of how DCE can be used
-in an image segmentation framework.
+We do not use similarity terms in this section, thus we postpone the definition of such terms until later in this
+article, with the description of how DCE can be used in an image segmentation framework.
 
 
 
@@ -710,22 +763,19 @@ in an image segmentation framework.
     $S^{(i+1)} \leftarrow \overline{\bar{S}^{(i)} \setminus \bar{X}}$ & dilated & prob. dilated & unchanged \\ \hline 
   \end{tabular}
   
-  \label{tab:flow-summary}	  
   \caption{  Since the curvature is negated when reversing the curve (i.e. $\bar{\kappa}=-\kappa$), this process can only shrink  convex parts in shrink mode and expand concave parts in expansion mode.}
+   \label{tab:flow-summary}	  
 
 \end{table}
 
 
-In figure \ref{fig:m1-square-flow} we see some results for the DCE
-algorithm with $m=1$. We observe a global movement towards roundness,
-but with several artifacts. We minimize the effects of a jaggy
-boundary by setting $\alpha > 0$. Nonetheless, a higher estimation
-ball radius creates unstable shapes. In fact, the estimator is very
-sensitive in regions of low squared curvature, and it is precisely in
-those regions that spurious pixels are created. 
+In figure \ref{fig:m1-square-flow} we see some results for the DCE algorithm with $m=1$. We observe a global evolution
+towards rounder shapes, but with several artifacts. We minimize the effects of a jaggy boundary by setting $\alpha >
+0$. Nonetheless, a higher estimation ball radius creates unstable shapes. In fact, the estimator is very sensitive in
+regions of low squared curvature, and it is precisely in those regions that spurious pixels are created.
 
 
-\begin{figure}[!ht]
+\begin{figure}[!h]
 \center
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=3, \alpha=0$\label{}]{%
@@ -748,18 +798,16 @@ those regions that spurious pixels are created.
 
 
 \subsection{A more stable model.}
-In the previous section we noticed that the algorithm produces shapes
-with many artifacts due to the small uncertainties of the estimator
-along regions of low squared curvature. We argue that, evaluating the
-estimation ball along farther ring sets we avoid those sensitive areas
-by focusing the optimization process only on regions with highest
-squared curvature value. 
+In the previous section we noticed that the algorithm produces shapes with many artifacts due to the small uncertainties
+of the estimator along regions of low squared curvature. We argue that, evaluating the estimation ball along outer
+ring sets we avoid those sensitive areas by focusing the optimization process only on regions with highest squared
+curvature value.
 
 %%\jaco{Motivation in digital geometry of why it makes sense to compute things farther.}
 
 
 
-\begin{figure}[!ht]
+\begin{figure}[!h]
 \center
 \center
 \begin{minipage}[b]{0.33\textwidth}
@@ -780,16 +828,15 @@ squared curvature value.
 \caption{By positioning the estimation ball on farther rings, we minimize artifacts creation. \label{fig:mx-square-flow}}
 \end{figure}
 
-In our experiments, the best results are obtained by executing DCE
-algorithm with $m$ equal to $r$, where $r$ is the estimation ball
-radius (see figures \ref{fig:mx-square-flow},
-\ref{fig:mx-flow-gs-radius-effect} ). In plot
-\ref{fig:mx-elastica-plots}, we observe how the elastica energy evolves along
-the iterations. If the radius is too large, the elastica energy may increase after some steps. That is what happens for the
-triangle, in which the flow converges to a single point.
+{In our experiments, the best results are obtained by executing DCE algorithm with $m$ equal to $r$, where $r$ is
+  the estimation ball radius (see figure \ref{fig:mx-square-flow} ). We observe that Elastica may increase after some
+  iterations if chosen radius is too large, as in the case of the triangle in figure \ref{fig:mx-flow-gs-radius-effect}
+  in which the flow converges to a single point. We conjecture that an appropriated value for the radius should be given
+  by the shape reach.  The produced flow has no difficulties in handling changes on topology, and it presents different
+  speeds for regions with low and high curvature values, as illustrated in figure
+  \ref{fig:mx-speed-variation-hole-filling}.
 
-
-\begin{figure}[!ht]
+\begin{figure}[hp!]
 \center				
 		\setcounter{subfigure}{-3}
 		\subfloat[$r=3,h=0.5$]{%
@@ -815,26 +862,23 @@ triangle, in which the flow converges to a single point.
 		\hspace{15pt}
 		\subfloat{%
 \includegraphics[scale=0.2]{images/flow/grid-radius-effect/flower/r5-h0.5/summary_flow.eps}}%
-		}				
-\caption{The choice of radius impacts the flow. In the figures, the flow ceases to evolve for all shapes  when $r=3$ (a). In figure (b), for $r=5$, the triangle evolves to a single point, while the others stop  in an intermediate shape, as in (a). }
+		}\\
+		\subfloat[Elastica evaluation]{%
+		\includegraphics[scale=0.5]{images/flow/elastica-energy-plot/r5h05.eps}						
+		}
+\caption{The choice of radius impacts the flow. In the figures, the flow ceases to evolve for all shapes  when $r=3$ (a). In figure (b), for $r=5$, the triangle evolves to a single point, while the others stop  in an intermediate shape, as in (a). In figure (c), we observe that for a given choice of radius, the elastica may increase after a certain number of iterations. }
 \label{fig:mx-flow-gs-radius-effect}
 \end{figure}
 
-\begin{figure}[!ht]
-\center
-\includegraphics[scale=0.5]{images/flow/elastica-energy-plot/r5h05.eps}
-\caption{Elastica computation along the iterations for different shapes. If radius is too large, elastica energy may increase after a certain number of iterations. }
-\label{fig:mx-elastica-plots}
-\end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[!h]
 \center
 \subfloat[]{%
 	\includegraphics[scale=0.5]{images/flow/faster-high-curvature/summary_flow.eps}}\\%
 \subfloat[]{%
 		\includegraphics[scale=0.25]{images/flow/fill-holes/summary_flow.eps}}%%1
-\label{fig:mx-speed-variation-hole-filling}
 \caption{High curvature regions evolves faster than lower ones (a). The flow can handle topological changes (b). }
+\label{fig:mx-speed-variation-hole-filling}
 \end{figure}
 
 
@@ -851,36 +895,38 @@ Function $f$ is submodular if and only if the following inequality holds for eac
   \quad f_{j,k}(0,0) + f_{j,k}(1,1) \leq f_{j,k}(0,1) + f_{j,k}(1,0).
 \end{align*}
 
-Energy $E_m$ is non-submodular and optimizing it is a difficult
-problem, which constrains us to use heuristics and approximation
-algorithms. The QPBO method \cite{rother07qpbo} transforms the
-original problem in a max-flow/min-cut formulation and returns a full
-optimal labeling for submodular energies. For non-submodular energies
-the method is guaranteed to return a partial labeling with the
-property that the set of labeled variables is part of an optimal
+Energy $E_m$ is non-submodular and optimizing it is a difficult problem, which constrains us to use heuristics and
+approximation algorithms. The QPBO method \cite{rother07qpbo} transforms the original problem in a max-flow/min-cut
+formulation and yields a full optimal labeling for submodular energies. For non-submodular energies the method is
+guaranteed to return a partial labeling with the property that the set of labeled variables is part of an optimal
 solution. That property is called partial optimality.
 
-In practice, QPBO can leave many pixels unlabeled. There exist two
-extensions of QPBO that alleviate this limitation: QPBOI (improve) and
-QPBOP (probe). The first is an approximation method that is guaranteed
-to not increase the energy, but we lost the property of partial
-optimality. The second is an exact method which is reported to label
-more variables than QPBO.
+In practice, QPBO can leave many pixels unlabeled. There exist two extensions to QPBO that alleviate this limitation:
+QPBOI (improve) and QPBOP (probe). The first is an approximation method that is guaranteed to not increase the energy,
+but loses the property of partial optimality. The second is an exact method which is reported to label more variables
+than QPBO.
 
-The percentage of unlabeled pixels by QPBOP for $E_1$ is quite high,
-but the percentage decreases to zero as we set $m$ equal to
-$r$. Therefore, we are more confident to take the solution for values
-of $m$ close to $r$. However, the way it varies across $m$ values
-differs from shape to shape, as is illustrated in figure
-\ref{fig:unlabeled-versus-iterations}. We also noticed that, for
-$m=r$, all the pixels were labeled. Perhaps this means that our energy
-is submodular in this case, but this remains to be proved.
+The percentage of unlabeled pixels by QPBOP for $E_1$ is quite high, but the percentage decreases to zero as we set $m$
+equal to $r$. Therefore, we are more confident in taking the solution for values of $m$ close to $r$. However, the way it
+varies across $m$ values differs from shape to shape, as is illustrated in figure
+\ref{fig:unlabeled-versus-iterations}. We also noticed that, for $m=r$, all the pixels were labeled, {which may
+  indicate that $E_r$ is an an easy instance of the general non-submodular energy $E_m$, but this remains to be
+  proved. The number of pairwise terms in $E_r$ is roughly half of those in $E_1$ (see figure
+  \ref{fig:ratio-pairwise-terms}).
 
-We have used QPBOI to solve $E_m$. Naturally, in the case where all
-pixels are labeled by QPBOP, QPBOI returns the same labeling as QPBOP.
+  We have used QPBOI to solve $E_m$. Naturally, in the case where all pixels are labeled by QPBOP, QPBOI returns the
+  same labeling as QPBOP.
 
 
-\begin{figure}[!htp]
+\begin{figure}[h!]
+\center
+\includegraphics[scale=0.5]{images/optimization/pairwise-ratio/plot-pairwiseratio-lowerHigher-concavities-probe.eps}
+\caption{We plot the ratio of pairwise terms among all $\binom{|X^{(i)}|}{2}$ combinations. The highest ring has rougly half the number of pairwise terms  than the lowest ring.}
+\label{fig:ratio-pairwise-terms}
+\end{figure}
+
+
+\begin{figure}[hp!]
 \center
 \begin{minipage}[b]{0.5\textwidth}
 \subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-3/plot-model-square-concavities-probe.eps}}\\%
@@ -892,21 +938,16 @@ pixels are labeled by QPBOP, QPBOI returns the same labeling as QPBOP.
 \subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-5/plot-model-flower-concavities-probe.eps}}\\%
 \subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-7/plot-model-flower-concavities-probe.eps}}%
 \end{minipage}
-\caption{For each plot, we first produce shapes $\left\{ S^{(i)} \right\}$ executing DCE with $m=r$. Then, for each shape in $\left\{ S^{(i)} \right\}$, we execute one iteration of DCE for different values of $m$ and we count the unlabeled pixels. The number of unlabeled pixels by QPBOP remains high for lower values of $m$, and goes to zero when $m=r$. We observe the same behaviour for different radius values.}
+\caption{For each plot, we first produce shapes $\left\{ S^{(i)} \right\}$ executing DCE with $m=r$. Then, for each shape in $\left\{ S^{(i)} \right\}$, we execute one iteration of DCE for different values of $m$ and we count the unlabeled pixels. The number of unlabeled pixels by QPBOP remains high for lower values of $m$, and goes to zero when $m=r$. We observe the same behaviour for varying radius values.}
 \label{fig:unlabeled-versus-iterations}
 \end{figure}
 
-\begin{figure}
-\center
-\includegraphics[scale=0.5]{images/optimization/pairwise-ratio/plot-pairwiseratio-lowerHigher-concavities-probe.eps}
-\caption{We plot the ratio of pairwise terms among all $\binom{|X^{(i)}|}{2}$ combinations. The highest ring has rougly half the number of pairwise terms  than the lowest ring.\label{fig:ratio-pairwise-terms}}
-\end{figure}
-
-\todo{You must comment figure~\ref{fig:ratio-pairwise-terms} in the text.}
-
 \section{Application to image segmentation}
 
-We present an application of our digital curve evolution algorithm to supervised image segmentation. The DCE will act as a contour correction method. Here we are going to use a data fidelity term in order to characterize the object of interest. Given foreground and background seeds selected by the user, we derive mixed gaussian distributions  of color intensities $G_f$ and $G_b$, and we define the data fidelity term as
+We present an application of our digital curve evolution algorithm to supervised image segmentation. The DCE acts as a
+contour correction method. Here we use a data fidelity term in order to characterize the object of
+interest. Given foreground and background seeds selected by the user, we derive mixed gaussian distributions  of color
+intensities $G_f$ and $G_b$, and we define the data fidelity term as the cross-entropy, i.e.
 	
 \begin{align}
   g(y) = -(1-y)\log{G_f(I(y))} - y\log{G_b(I(y))}.
@@ -924,7 +965,7 @@ is set to the data fidelity term \eqref{eq:data-fidelity}.
  \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
  \SetKwComment{comment}{//}{}
  
- \Input{An image $I$; seed mask $M$; the estimation ball radius $r$; data $(\gamma)$, length $(\alpha)$ and squared curvature $(\beta)$ weights; initial dilation $d$; stop condition value \Tol; the maximum number of iterations \MIt;}
+ \Input{An image $I$; seed mask $M$; the estimation ball radius $r$; length $(\alpha)$, squared curvature $(\beta)$ and data fidelity $(\gamma)$ coefficients; initial dilation $d$; stop condition value \Tol; the maximum number of iterations \MIt;}
  \BlankLine
 
  $S \longleftarrow$ GrabCut($I,M$)\;
@@ -932,19 +973,19 @@ is set to the data fidelity term \eqref{eq:data-fidelity}.
  \Delta $\longleftarrow +\infty$\;
  $i \longleftarrow 0$\;
  \While{ \It $<$ \MIt \bf{and} \Delta $>$ \Tol  }{ 	
- 	$S^{(i+1)} \longleftarrow $ DCE($S^{(i)},\gamma,\alpha,\beta$)\;
+ 	$S^{(i+1)} \longleftarrow $ DCE($S^{(i)},r,\alpha,\beta,\gamma,2$)\;
  	\Delta $\longleftarrow |S^{(i)} - S^{(i+1)}|$\;
 
 	\It $\longleftarrow$ \It $+1$\;
 	
  }
  \label{alg:contour-correction} 
- \caption{Contour correction algorithm. \todo{Critère d'arrêt basé sur un nombre de pixels changés !?}}
+ \caption{Contour correction algorithm.}
 \end{algorithm}	
 
 The algorithm can be initialized by a collection of compact sets, or with the result of a third-party segmentation algorithm, as GrabCut \cite{rother04grabcut}. We include an additional parameter $d$ that dilates the initial sets using a square of side one before executing the flow.
 	
-\begin{figure}
+\begin{figure}[ht!]
 \center
 \begin{tabular}{ccc}
 Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
@@ -962,7 +1003,7 @@ Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
 \label{fig:parameters-influence}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[ht!]
 	\center
 	\begin{tabular}{ccc}
 		GrabCut & Contour Correction & Schoenemann \\
@@ -978,12 +1019,12 @@ Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
 		\includegraphics[scale=0.2]{images/segmentation/bc/vase/gc-seg.png} &
 		\includegraphics[scale=0.2]{images/segmentation/bc/vase/corrected-seg.png} &					\includegraphics[scale=0.2]{images/segmentation/schoenemann/vase/vase-seg.png}		
 	\end{tabular}
-	\caption{The proposed method regularizes grabcut contours and returns meaningful results. We can observe the completion feature of curvature in the second row, and we don't suffer from oversegmentation issues as Schoenemann's method. However, our flow may stop in a local optima as in the fourth row, while Schoenemann's is able to extrapolate such solutions.}
+	\caption{The proposed method regularizes GrabCut contours and returns meaningful results. We can observe the completion feature of curvature in the second row, and we don't suffer from oversegmentation issues as Schoenemann's method. However, our flow may stop in a local optima as in the fourth row, while Schoenemann's is able to extrapolate such solutions.}
 	\label{fig:segmentation-results}	
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[hp!]
 	\center
 	\begin{tabular}{ccc}
 		GrabCut & Contour Correction & Schoenemann \\
@@ -1014,30 +1055,27 @@ Seeds & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
 We evaluate our method using the BSD300 database \cite{martinFTM01berkeley}. All images contains the same number of pixels, the resolution being 321x481 in portrait mode. We compare the results of our method with segmentations given by GrabCut and Schoenemanns's method \cite{schoenemann09linear}. We report an average of $3s$ per flow iteration, and an average of $30$ iterations per image. While GrabCut executes in less than one second, Schoenemann's method may take several hours to complete.
 
 
-In figure \ref{fig:parameters-influence} we can observe the results of a curvature regularization in comparison with a pure length regularization, and figures \ref{fig:segmentation-results} and \ref{fig:more-segmentation-results} show some segmentation results.
-
-\todo{You must comment on the results.}
+{In figure \ref{fig:parameters-influence} we can observe the results of a curvature regularization in comparison with a
+  pure length regularization. The curvature can fill gaps and is smoother than the one produced by length only,
+  resulting in more pleasant segmentations. In figures \ref{fig:segmentation-results} and
+  \ref{fig:more-segmentation-results} we list several results of our method and we compare them with segmentation
+  produced by GrabCut and Schoenemann's method. Our method is successful in producing curvature regularized
+  segmentations and demonstrates the completion property of curvature. Moreover, it does not suffer from over
+  segmentation, it is much faster than Schoenemann's, and in several opportunities produces better segmentations than
+  GrabCut.
 
 \section{Conclusion}\label{sec:conclusion}
 
 
-We have studied in depth several digital curve evolution models based
-on the elastica energy and we have presented an application of one of
-them to image segmentation. The processes we have described are
-completely digital, and do not suffer from issues that typically
-arises in models that passes through a discretization stage, as
-rounding. Moreover, the model can handle changes in topology and its
-results are competitive with similar approaches while achieving
-reasonable running times.
+We have studied in depth several digital curve evolution models based on a digital version of the Elastica energy and we
+have presented an application to image segmentation. The processes we have described are completely digital, and do not
+suffer from issues that typically arise in models that passes through a discretization stage, such as
+rounding. Moreover, the model can handle changes in topology and its results are competitive with similar approaches
+while achieving reasonable running times.
 
-Future developments of this work may include automatization, no more
-dependence on seeds selected by the user and automatic choice of ball
-estimation radius based on the reach of the shape. One can also think
-to extend the DCE algorithm to $3$d, as the integral invariant
-estimator preserves its properties in that space. In future works, a
-denoising application may be derived by running the flow on the $3$d
-shape with data fidelity defined by image intensities or by distance
-to initial position.
+Future developments of this work will include extending the DCE algorithm to $3$d, as the integral invariant estimator
+is available in higher dimensions. As a result, a denoising application may be derived by lifting the flow to $3$d
+with a data fidelity defined by image intensities or by distance to initial position.
 
 
 
@@ -1051,3 +1089,66 @@ to initial position.
 \bibliography{jmiv}
 
 \end{document}
+
+
+
+%% for reference
+
+%% In this work, we investigate the use of a more suitable curvature
+%% estimator with multigrid convergent property and its application as a
+%% boundary regularizer in a digital flow minimizing its squared
+%% curvature. Our method decreases the elastica energy of the contour and
+%% its evolution is evaluated on several digital flows.
+
+%% Finally, we
+%% present an application of the model as a post-processing step in a
+%% segmentation framework. The code is freely available on
+%% github\footnote{https://www.github.com/danoan/BTools}.
+
+%\begin{itemize}
+%% \item{Geometric properties and regularization}
+%% \item{The role of curvature} 
+  
+%  Quote \cite{schoenemann2011elastic} for the interest of using curvature energy when segmenting regions in gradient-based data fitting term. It can look for global optimum within a graph representation of the image. Main problem of their approach is the computational complexity as well as rather coarse approximations of curvature. (Be more precise here).
+  
+  
+%%\item{\textbf{Classical work on elastica and Wilmore flow in imaging}}
+  %%\begin{itemize}
+  %% \item{Level lines based disocclusion \cite{masnou98inpainting} }	%% DONE
+ %%  \item{Filling-In by Joint Interpolation of Vector Fields and Gray Levels \cite{ballester01filljoint} } %% DONE
+ %%  \item{Eulers Elastica and Curvature Based Inpaintings \cite{chan02elasticainpainting} } %% DONE
+ %% \item{Discrete willmore flow \cite{bobenko2005discrete}}
+ %%  \item{Introducing Willmore flow into level set segmentation of spinal vertebrae \cite{lim2012introducing}}	 %%% DONE
+ %% \end{itemize}
+  
+%%\item{\textbf{Level-sets}}
+ %% \begin{itemize}
+  %% \item{Image processing via level set curvature flow \cite{malladi1995image} } %% DONE
+  %% \item{Shape Modeling with Front Propagation: A Level Set Approach \cite{malladi1995shape} }	%% DONE
+%%	\end{itemize}	
+  
+%%\item{\textbf{Convex relaxation}}
+%%  \begin{itemize}
+%%  \item{A convex lower semicontinuous approximation of Eulers elastica energy \cite{bredies15convex}}
+ %% \item{Introducing Total Curvature for Image Processing \cite{goldluecke11totalcurvature}}
+ %% \end{itemize}	
+  
+%\item{\textbf{Constraint optimization}}
+ % \begin{itemize}
+  %% \item{Curvature regularity for region-based image segmentation and inpainting: A linear programming relaxation \cite{schoenemann09linear} }	
+  %% \item{A Fast Algorithm for Euler's Elastica Model Using Augmented Lagrangian Method \cite{tai11elastica} }		
+  %%\item{The elastic ratio: Introducing curvature into ratio-based image segmentation \cite{schoenemann2011elastic}
+  %%}		%% DONE
+ % \end{itemize}
+  
+%%\item{\textbf{Discrete approaches}}
+%%  \begin{itemize}
+  %% \item{Fast global optimization of curvature \cite{zehiry10fast}	} %% DONE
+  %%\item{Efficient Squared Curvature \cite{nieuwenhuis14efficient} 	}
+  %%\item{Contrast driven {E}lastica for image segmentation \cite{el2016contrast} }
+  %%\item{Curvature Regularization for Curves and Surfaces in a Global Optimization Framework \cite{strandmark11globalframework} }
+
+ % \end{itemize}
+  
+	
+%%\end{itemize}
