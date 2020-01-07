@@ -176,22 +176,24 @@ For the understanding of the differences and similarity between definitions for 
 step-by-step graphical descriptions of definitions and equations in section 2 are preferable.}
 
 ~\\
-$\rightarrow$ We have significantly changed, and hopefully simplified our description also taking into account the
-other reviewers' comments.
+$\rightarrow$ We are not quite sure what the reviewer is asking here. Optimisation of the Elastica (equation (3)) in the
+continuous domain is itself a complex problem that has been studied by Mumford and others. In section 3 we conduct a
+minimization of equation (4) only, which is the discrete equivalent of equation (3). We hope that the new explanations
+and figures in section 3 answer the reviewer's concerns.
 ~\\
 
 
 \textbf{Second paragraph insection3 describes the main mathematical idea for curve evolution in digital space. In the process selection of the local neighbourhood is essential in your proposal. The graphical explanation is preferable. These descriptions provide the necessity of the distance transform in the local operations.}
 
 ~\\
-$\rightarrow$ New figures were included in section 3. We they will help clarify this point.
+$\rightarrow$ New figures were included in section 3. We hope they will help clarify this point.
 ~\\
 
 
 \textbf{In algorithm 1 (11) $X^\ast$ s.t .$\hat{E}(X)< E(X^ast)$ is searched, how can you mathematically guarantee $\hat{E}(X)< E(X^\ast)$? Please describe why such $X^{\ast}$ exists.}
 
 ~\\
-$\rightarrow$ It may not exist! If the neighborhood is exhausted and such X* is not found, the algorithm stops. In particular, the shapes S(i) and S(i-1) will be the same, hence delta will be zero and there will be no next iteration.
+$\rightarrow$ It may not exist! If the neighborhood is exhausted and such X* is not found, the algorithm simply stops. Specifically, the shapes S(i) and S(i-1) will be the same, hence delta will be zero and there will be no next iteration.
 ~\\
 
 
