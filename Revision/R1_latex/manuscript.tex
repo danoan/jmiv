@@ -440,10 +440,10 @@ shown that either estimator induce similar results.
 \begin{figure}[h!]
 	\center
 	\subfloat[\label{}]{%
-	\includegraphics[scale=2.0]{flower.png}
+	\includegraphics[scale=2.0]{local_search_definitions_flower.png}
 	}\hspace{40pt}%
 	\subfloat[\label{}]{%	
-	\includegraphics[scale=0.3]{cellular-grid-illustration.eps}
+	\includegraphics[scale=0.3]{local_search_definitions_cellular-grid-illustration.eps}
 	}
 	\caption{\revision{The flower shape in figure (a) and the cellular-grid model representation in (b) of the rectangle-bounded region. In figure (b), pixels are colored in gray, linels in green and pointels in blue.}}
 	\label{fig:cellular-grid-model}
@@ -486,10 +486,10 @@ Such set can be extremely large and its complete exhaustion is prohibitively exp
 \begin{figure}[!h]
 \center
 	\subfloat[\label{}]{%
-	\includegraphics[scale=0.03]{R3.pdf}
+	\includegraphics[scale=0.03]{local_search_definitions_R3.eps}
 	}\hspace{40pt}%
 	\subfloat[\label{}]{%
-	\includegraphics[scale=0.22]{glued-curve.eps}
+	\includegraphics[scale=0.22]{local_search_definitions_glued-curve.eps}
 	}%	
 	\caption{\revision{The blue pixels in figure (a) illustrates a $3$-ring set. In figure (b) we highlight the contour of an element of set $\mathcal{N}_{11}$.}}
 \end{figure}
@@ -530,8 +530,8 @@ Algorithm~\ref{alg:local-search} describes the local combinatorial process and F
 	\center
 	\begin{tabular}{ccc}
 		$h=1.0$ & $h=0.5$ & $h=0.25$\\
-		\includegraphics[scale=0.2]{images/local_search/square/h1/summary.eps} & \includegraphics[scale=0.2]{images/local_search/square/h05/summary.eps} & \includegraphics[scale=0.2]{images/local_search/square/h025/summary.eps} \\
-		\includegraphics[scale=0.2]{images/local_search/flower/h1/summary.eps} & \includegraphics[scale=0.2]{images/local_search/flower/h05/summary.eps} & \includegraphics[scale=0.2]{images/local_search/flower/h025/summary.eps}
+		\includegraphics[scale=0.2]{local_search_square_h1_summary.eps} & \includegraphics[scale=0.2]{local_search_square_h05_summary.eps} & \includegraphics[scale=0.2]{local_search_square_h025_summary.eps} \\
+		\includegraphics[scale=0.2]{local_search_flower_h1_summary.eps} & \includegraphics[scale=0.2]{local_search_flower_h05_summary.eps} & \includegraphics[scale=0.2]{local_search_flower_h025_summary.eps}
 	\end{tabular}	
 		\caption{\revision{Local combinatorial optimization process results using II estimator with radius $5$ for the square and flower shapes. Shapes are displayed at every $5$ iterations.}}	
 		\label{fig:local-comb-square-results}		
@@ -571,8 +571,8 @@ we explore a more efficient approach.
 
 \begin{figure}[!h]
 \center
-\subfloat[\label{}]{\includegraphics[scale=0.32]{images/local_search/square.eps}}
-\subfloat[\label{}]{\includegraphics[scale=0.32]{images/local_search/flower.eps}}
+\subfloat[\label{}]{\includegraphics[scale=0.32]{local_search_square.eps}}
+\subfloat[\label{}]{\includegraphics[scale=0.32]{local_search_flower.eps}}
 \caption{Digital elastica computation along iterations of algorithm \ref{alg:local-search}. \revision{The final shape has energy value close to the optimal value $2\pi/5$ (thin horizontal dashed line)}.}
 \label{fig:plot-elastica-local-search}
 \end{figure}
@@ -653,12 +653,12 @@ where $g(S,x)$ denotes a \revision{data term (e.g., distance to initial shape $S
 \begin{figure}
 \begin{minipage}{0.5\textwidth}
 \center
-\includegraphics[scale=0.1]{images/flow/contour-information/before-opt.pdf}
+\includegraphics[scale=0.1]{flow_contour-information_before-opt.eps}
 \label{fig:contour-info-1}
 \end{minipage}%
 \begin{minipage}{0.5\textwidth}
 \center
-\includegraphics[scale=0.1]{images/flow/contour-information/after-opt.pdf}
+\includegraphics[scale=0.1]{flow_contour-information_after-opt.eps}
 \label{fig:contour-info-2}
 \end{minipage}%
 \caption{ \revision{Directly using the optimization result of \eqref{eq:energy-family} doesn't decrease squared curvature because contour information is not present in the energy.}}
@@ -755,17 +755,17 @@ regions of low squared curvature, and it is precisely in those regions that spur
 \center
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=3, \alpha=0$\label{}]{%
-	\includegraphics[scale=0.2]{images/flow/length-radius-effect/triangle-r3-nolength/summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_length-radius-effect_triangle-r3-nolength_summary_flow.eps}
 	}%
 \end{minipage}%
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=3, \alpha=0.15$\label{}]{%
-	\includegraphics[scale=0.2]{images/flow/length-radius-effect/triangle-r3-length0.15/summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_length-radius-effect_triangle-r3-length015_summary_flow.eps}
 	}%
 \end{minipage}%
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=5, \alpha=0.15$\label{}]{%
-	\includegraphics[scale=0.2]{images/flow/length-radius-effect/triangle-r5/summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_length-radius-effect_triangle-r5_summary_flow.eps}
 	}%
 \end{minipage}%
 \caption{The algorithm is very sensitive to the little variations of the estimator, which are particularly important in regions of low squared curvature. Artifacts are somewhat reduced with a length penalization but increases if we use a higher ball radius. }
@@ -785,17 +785,17 @@ curvature value.
 \center
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=5, m=1$\label{}]{%
-	\includegraphics[scale=0.2]{images/flow/farther-rings/square-r5-l1/summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_farther-rings_square-r5-l1_summary_flow.eps}
 	}%
 \end{minipage}%
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=5, m=3$\label{}]{%
-	\includegraphics[scale=0.2]{images/flow/farther-rings/square-r5-l3/summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_farther-rings_square-r5-l3_summary_flow.eps}
 	}%
 \end{minipage}%
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[\revision{$r=5, m=5$}\label{}]{%
-	\includegraphics[scale=0.2]{images/flow/farther-rings/square-r5-l5/summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_farther-rings_square-r5-l5_summary_flow.eps}
 	}%
 \end{minipage}%
 \caption{By positioning the estimation ball on farther rings, we minimize artifacts creation. \label{fig:mx-square-flow}}
@@ -814,30 +814,30 @@ curvature value.
 		\setcounter{subfigure}{-3}
 		\subfloat[$r=3,h=0.5$]{%
 		\subfloat{%
-		\includegraphics[scale=0.2]{images/flow/grid-radius-effect/triangle/r3-h0.5/summary_flow.eps}
+		\includegraphics[scale=0.2]{flow_grid-radius-effect_triangle_r3-h05_summary_flow.eps}
 		}%
 		\hspace{15pt}
 		\subfloat{%
-		\includegraphics[scale=0.15]{images/flow/grid-radius-effect/square/r3-h0.5/summary_flow.eps}}%
+		\includegraphics[scale=0.15]{flow_grid-radius-effect_square_r3-h05_summary_flow.eps}}%
 		\hspace{15pt}
 		\subfloat{%
-\includegraphics[scale=0.2]{images/flow/grid-radius-effect/flower/r3-h0.5/summary_flow.eps}}%
+\includegraphics[scale=0.2]{flow_grid-radius-effect_flower_r3-h05_summary_flow.eps}}%
 		}		
 	
 		\setcounter{subfigure}{-2}
 		\subfloat[$r=5,h=0.5$]{%
 		\subfloat{%
-		\includegraphics[scale=0.2]{images/flow/grid-radius-effect/triangle/r5-h0.5/summary_flow.eps}
+		\includegraphics[scale=0.2]{flow_grid-radius-effect_triangle_r5-h05_summary_flow.eps}
 		}%1
 		\hspace{15pt}
 		\subfloat{%
-		\includegraphics[scale=0.15]{images/flow/grid-radius-effect/square/r5-h0.5/summary_flow.eps}}%
+		\includegraphics[scale=0.15]{flow_grid-radius-effect_square_r5-h05_summary_flow.eps}}%
 		\hspace{15pt}
 		\subfloat{%
-\includegraphics[scale=0.2]{images/flow/grid-radius-effect/flower/r5-h0.5/summary_flow.eps}}%
+\includegraphics[scale=0.2]{flow_grid-radius-effect_flower_r5-h05_summary_flow.eps}}%
 		}\\
 		\subfloat[\revision{Digital elastica evaluation ($r=5,h=0.5$)}]{%
-		\includegraphics[scale=0.5]{images/flow/elastica-energy-plot/square-flower-triangle.eps}						
+		\includegraphics[scale=0.5]{flow_elastica-energy-plot_square-flower-triangle.eps}						
 		}
 \caption{The choice of radius impacts the flow. In the figures, the flow ceases to evolve for all shapes  when $r=3$ (a). In figure (b), for $r=5$, the triangle evolves to a single point, while the others stop  in an intermediate shape, as in (a). In figure (c), we observe that for a given choice of radius, the digital elastica may increase after a certain number of iterations. }
 \label{fig:mx-flow-gs-radius-effect}
@@ -847,9 +847,9 @@ curvature value.
 \begin{figure}[!h]
 \center
 \subfloat[]{%
-	\includegraphics[scale=0.5]{images/flow/faster-high-curvature/summary_flow.eps}}\\%
+	\includegraphics[scale=0.5]{flow_faster-high-curvature_summary_flow.eps}}\\%
 \subfloat[]{%
-		\includegraphics[scale=0.25]{images/flow/fill-holes/summary_flow.eps}}%%1
+		\includegraphics[scale=0.25]{flow_fill-holes_summary_flow.eps}}%%1
 \caption{High curvature regions evolves faster than lower ones (a). The flow can handle topological changes (b). }
 \label{fig:mx-speed-variation-hole-filling}
 \end{figure}
@@ -893,7 +893,7 @@ varies across values of $m$ differs from shape to shape, as is illustrated in fi
 
 \begin{figure}
 \center
-\includegraphics[scale=0.5]{images/optimization/pairwise-ratio/plot-pairwiseratio-lowerHigher-concavities-probe.eps}
+\includegraphics[scale=0.5]{optimization_pairwise-ratio_plot-pairwiseratio-lowerHigher-concavities-probe.eps}
 \caption{We plot the ratio of pairwise terms among all $\binom{|X^{(i)}|}{2}$ combinations. The highest ring has roughly half the number of pairwise terms as the lowest ring.}
 \label{fig:ratio-pairwise-terms}
 \end{figure}
@@ -902,14 +902,14 @@ varies across values of $m$ differs from shape to shape, as is illustrated in fi
 \begin{figure}[]
 \center
 \begin{minipage}[b]{0.5\textwidth}
-\subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-3/plot-model-square-concavities-probe.eps}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-5/plot-model-square-concavities-probe.eps}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-7/plot-model-square-concavities-probe.eps}}%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-3_plot-model-square-concavities-probe.eps}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-5_plot-model-square-concavities-probe.eps}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-7_plot-model-square-concavities-probe.eps}}%
 \end{minipage}%
 \begin{minipage}[b]{0.5\textwidth}
-\subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-3/plot-model-flower-concavities-probe.eps}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-5/plot-model-flower-concavities-probe.eps}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{images/optimization/unlabeled-iterations/radius-7/plot-model-flower-concavities-probe.eps}}%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-3_plot-model-flower-concavities-probe.eps}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-5_plot-model-flower-concavities-probe.eps}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-7_plot-model-flower-concavities-probe.eps}}%
 \end{minipage}
 \caption{For each plot, we first produce shapes $\left\{ S^{(i)} \right\}$ executing DCE with $m=r$. Then, for each shape in $\left\{ S^{(i)} \right\}$, we execute one iteration of DCE for different values of $m$ and we count the unlabeled pixels. The number of unlabeled pixels by QPBOP remains high for lower values of $m$, and goes to zero when $m=r$. We observe the same behaviour for varying radius values.}
 \label{fig:unlabeled-versus-iterations}
@@ -962,13 +962,13 @@ The algorithm can be initialized by a collection of compact sets, or with the re
 \center
 \begin{tabular}{ccc}
 \revision{Seeds} & $(\alpha=0, \beta=0.5)$ & $(\alpha=0,\beta=1)$ \\
- 	\includegraphics[scale=0.25]{images/segmentation/bc/coala/seeds.png} & 
-	\includegraphics[scale=0.25]{images/segmentation/bc/coala/r3/lg0_sq05_dt1_it50.png} & 
-	\includegraphics[scale=0.25]{images/segmentation/bc/coala/r3/lg0_sq1_dt1_it50.png} \\
+ 	\includegraphics[scale=0.25]{segmentation_bc_coala_seeds.png} & 
+	\includegraphics[scale=0.25]{segmentation_bc_coala_r3_lg0_sq05_dt1_it50.png} & 
+	\includegraphics[scale=0.25]{segmentation_bc_coala_r3_lg0_sq1_dt1_it50.png} \\
 	
- 	\includegraphics[scale=0.25]{images/segmentation/bc/coala/grabcut-seg.png} & 
-	\includegraphics[scale=0.25]{images/segmentation/bc/coala/r3/lg1_sq0_dt1_it50.png} &
-	\includegraphics[scale=0.25]{images/segmentation/bc/coala/r3/lg2_sq0_dt1_it50.png} \\
+ 	\includegraphics[scale=0.25]{segmentation_bc_coala_grabcut-seg.png} & 
+	\includegraphics[scale=0.25]{segmentation_bc_coala_r3_lg1_sq0_dt1_it50.png} &
+	\includegraphics[scale=0.25]{segmentation_bc_coala_r3_lg2_sq0_dt1_it50.png} \\
 
 	\revision{GrabCut} & $(\alpha=0.5, \beta=0)$ & $(\alpha=1, \beta=0)$
 \end{tabular}	
@@ -981,18 +981,18 @@ The algorithm can be initialized by a collection of compact sets, or with the re
 	\begin{tabular}{ccc}
 		GrabCut & Schoenemann & Contour Correction \\
 		& $(\alpha=0.1, \beta=1.0$) & $(r=5, \alpha=0.1, \beta=1.0, \gamma=3.0$)\\
-		\includegraphics[scale=0.2]{images/segmentation/bc/tiger1/gc-seg.png} &
-	\includegraphics[scale=0.2]{images/segmentation/schoenemann/tiger1/tiger1-seg.png}&
-		\includegraphics[scale=0.2]{images/segmentation/bc/tiger1/corrected-seg.png}\\									
-		\includegraphics[scale=0.2]{images/segmentation/bc/snake/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/snake/snake-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/snake/corrected-seg.png}\\
-		\includegraphics[scale=0.2]{images/segmentation/bc/man/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/man/man-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/man/corrected-seg.png}\\		
-		\includegraphics[scale=0.2]{images/segmentation/bc/vase/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/vase/vase-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/vase/corrected-seg.png}		
+		\includegraphics[scale=0.2]{segmentation_bc_tiger1_gc-seg.png} &
+	\includegraphics[scale=0.2]{segmentation_schoenemann_tiger1_tiger1-seg.png}&
+		\includegraphics[scale=0.2]{segmentation_bc_tiger1_corrected-seg.png}\\									
+		\includegraphics[scale=0.2]{segmentation_bc_snake_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_snake_snake-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_snake_corrected-seg.png}\\
+		\includegraphics[scale=0.2]{segmentation_bc_man_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_man_man-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_man_corrected-seg.png}\\		
+		\includegraphics[scale=0.2]{segmentation_bc_vase_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_vase_vase-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_vase_corrected-seg.png}		
 	\end{tabular}
 	\caption{The proposed method regularizes GrabCut \cite{rother04grabcut} contours and returns meaningful results. We can observe the completion feature of curvature in the second row, and we don't suffer from over-segmentation issues as Schoenemann's method \cite{schoenemann09linear}. However, our flow may stop in a local optimum as in the fourth row, while Schoenemann's is able to extrapolate such solutions.}
 	\label{fig:segmentation-results}	
@@ -1004,27 +1004,27 @@ The algorithm can be initialized by a collection of compact sets, or with the re
 	\begin{tabular}{ccc}
 		GrabCut & Schoenemann & Contour Correction \\
 		& $(\alpha=0.1, \beta=1.0$) & $(r=5, \alpha=0.1, \beta=1.0, \gamma=3.0$)\\
-		\includegraphics[scale=0.2]{images/segmentation/bc/airplane2/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/airplane2/airplane2-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/airplane2/corrected-seg.png}\\						
-		\includegraphics[scale=0.2]{images/segmentation/bc/bird/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/bird/bird-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/bird/corrected-seg.png}\\				
-		\includegraphics[scale=0.2]{images/segmentation/bc/camel/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/camel/camel-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/camel/corrected-seg.png}\\	
-		\includegraphics[scale=0.2]{images/segmentation/bc/rock/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/rock/rock-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/rock/corrected-seg.png} \\		
-		\includegraphics[scale=0.2]{images/segmentation/bc/giraffes/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/giraffes/giraffes-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/giraffes/corrected-seg.png} \\		
-		\includegraphics[scale=0.2]{images/segmentation/bc/canguru/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/canguru/canguru-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/canguru/corrected-seg.png} \\		
-		\includegraphics[scale=0.2]{images/segmentation/bc/coral/gc-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/schoenemann/coral/coral-seg.png} &
-		\includegraphics[scale=0.2]{images/segmentation/bc/coral/corrected-seg.png}								
+		\includegraphics[scale=0.2]{segmentation_bc_airplane2_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_airplane2_airplane2-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_airplane2_corrected-seg.png}\\						
+		\includegraphics[scale=0.2]{segmentation_bc_bird_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_bird_bird-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_bird_corrected-seg.png}\\				
+		\includegraphics[scale=0.2]{segmentation_bc_camel_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_camel_camel-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_camel_corrected-seg.png}\\	
+		\includegraphics[scale=0.2]{segmentation_bc_rock_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_rock_rock-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_rock_corrected-seg.png} \\		
+		\includegraphics[scale=0.2]{segmentation_bc_giraffes_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_giraffes_giraffes-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_giraffes_corrected-seg.png} \\		
+		\includegraphics[scale=0.2]{segmentation_bc_canguru_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_canguru_canguru-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_canguru_corrected-seg.png} \\		
+		\includegraphics[scale=0.2]{segmentation_bc_coral_gc-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_schoenemann_coral_coral-seg.png} &
+		\includegraphics[scale=0.2]{segmentation_bc_coral_corrected-seg.png}								
 	\end{tabular}
 	\caption{\revision{Additional comparison results between GrabCut \cite{rother04grabcut}, Schoenemman  \cite{schoenemann09linear} and Contour correction segmentation methods.}}
 	\label{fig:more-segmentation-results}	
@@ -1064,7 +1064,7 @@ with a data fidelity defined by image intensities or by distance to initial posi
 % References will then be sorted and formatted in the correct style.
 %
 \bibliographystyle{splncs04}
-\bibliography{jmiv}
+\bibliography{manuscript}
 
 \end{document}
 
