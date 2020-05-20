@@ -443,7 +443,7 @@ shown that either estimator induce similar results.
 	\includegraphics[scale=2.0]{local_search_definitions_flower.png}
 	}\hspace{40pt}%
 	\subfloat[\label{}]{%	
-	\includegraphics[scale=0.3]{local_search_definitions_cellular-grid-illustration.eps}
+	\includegraphics[scale=0.3]{local_search_definitions_cellular-grid-illustration.pdf}
 	}
 	\caption{\revision{The flower shape in figure (a) and the cellular-grid model representation in (b) of the rectangle-bounded region. In figure (b), pixels are colored in gray, linels in green and pointels in blue.}}
 	\label{fig:cellular-grid-model}
@@ -486,10 +486,10 @@ Such set can be extremely large and its complete exhaustion is prohibitively exp
 \begin{figure}[!h]
 \center
 	\subfloat[\label{}]{%
-	\includegraphics[scale=0.03]{local_search_definitions_R3.eps}
+	\includegraphics[scale=0.03]{local_search_definitions_R3.pdf}
 	}\hspace{40pt}%
 	\subfloat[\label{}]{%
-	\includegraphics[scale=0.22]{local_search_definitions_glued-curve.eps}
+	\includegraphics[scale=0.22]{local_search_definitions_glued-curve.pdf}
 	}%	
 	\caption{\revision{The blue pixels in figure (a) illustrates a $3$-ring set. In figure (b) we highlight the contour of an element of set $\mathcal{N}_{11}$.}}
 \end{figure}
@@ -530,8 +530,8 @@ Algorithm~\ref{alg:local-search} describes the local combinatorial process and F
 	\center
 	\begin{tabular}{ccc}
 		$h=1.0$ & $h=0.5$ & $h=0.25$\\
-		\includegraphics[scale=0.2]{local_search_square_h1_summary.eps} & \includegraphics[scale=0.2]{local_search_square_h05_summary.eps} & \includegraphics[scale=0.2]{local_search_square_h025_summary.eps} \\
-		\includegraphics[scale=0.2]{local_search_flower_h1_summary.eps} & \includegraphics[scale=0.2]{local_search_flower_h05_summary.eps} & \includegraphics[scale=0.2]{local_search_flower_h025_summary.eps}
+		\includegraphics[scale=0.2]{local_search_square_h1_summary.pdf} & \includegraphics[scale=0.2]{local_search_square_h05_summary.pdf} & \includegraphics[scale=0.2]{local_search_square_h025_summary.pdf} \\
+		\includegraphics[scale=0.2]{local_search_flower_h1_summary.pdf} & \includegraphics[scale=0.2]{local_search_flower_h05_summary.pdf} & \includegraphics[scale=0.2]{local_search_flower_h025_summary.pdf}
 	\end{tabular}	
 		\caption{\revision{Local combinatorial optimization process results using II estimator with radius $5$ for the square and flower shapes. Shapes are displayed at every $5$ iterations.}}	
 		\label{fig:local-comb-square-results}		
@@ -571,8 +571,8 @@ we explore a more efficient approach.
 
 \begin{figure}[!h]
 \center
-\subfloat[\label{}]{\includegraphics[scale=0.32]{local_search_square.eps}}
-\subfloat[\label{}]{\includegraphics[scale=0.32]{local_search_flower.eps}}
+\subfloat[\label{}]{\includegraphics[scale=0.32]{local_search_square.pdf}}
+\subfloat[\label{}]{\includegraphics[scale=0.32]{local_search_flower.pdf}}
 \caption{Digital elastica computation along iterations of algorithm \ref{alg:local-search}. \revision{The final shape has energy value close to the optimal value $2\pi/5$ (thin horizontal dashed line)}.}
 \label{fig:plot-elastica-local-search}
 \end{figure}
@@ -653,12 +653,12 @@ where $g(S,x)$ denotes a \revision{data term (e.g., distance to initial shape $S
 \begin{figure}
 \begin{minipage}{0.5\textwidth}
 \center
-\includegraphics[scale=0.1]{flow_contour-information_before-opt.eps}
+\includegraphics[scale=0.1]{flow_contour-information_before-opt.pdf}
 \label{fig:contour-info-1}
 \end{minipage}%
 \begin{minipage}{0.5\textwidth}
 \center
-\includegraphics[scale=0.1]{flow_contour-information_after-opt.eps}
+\includegraphics[scale=0.1]{flow_contour-information_after-opt.pdf}
 \label{fig:contour-info-2}
 \end{minipage}%
 \caption{ \revision{Directly using the optimization result of \eqref{eq:energy-family} doesn't decrease squared curvature because contour information is not present in the energy.}}
@@ -755,17 +755,17 @@ regions of low squared curvature, and it is precisely in those regions that spur
 \center
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=3, \alpha=0$\label{}]{%
-	\includegraphics[scale=0.2]{flow_length-radius-effect_triangle-r3-nolength_summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_length-radius-effect_triangle-r3-nolength_summary_flow.pdf}
 	}%
 \end{minipage}%
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=3, \alpha=0.15$\label{}]{%
-	\includegraphics[scale=0.2]{flow_length-radius-effect_triangle-r3-length015_summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_length-radius-effect_triangle-r3-length015_summary_flow.pdf}
 	}%
 \end{minipage}%
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=5, \alpha=0.15$\label{}]{%
-	\includegraphics[scale=0.2]{flow_length-radius-effect_triangle-r5_summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_length-radius-effect_triangle-r5_summary_flow.pdf}
 	}%
 \end{minipage}%
 \caption{The algorithm is very sensitive to the little variations of the estimator, which are particularly important in regions of low squared curvature. Artifacts are somewhat reduced with a length penalization but increases if we use a higher ball radius. }
@@ -785,17 +785,17 @@ curvature value.
 \center
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=5, m=1$\label{}]{%
-	\includegraphics[scale=0.2]{flow_farther-rings_square-r5-l1_summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_farther-rings_square-r5-l1_summary_flow.pdf}
 	}%
 \end{minipage}%
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[$r=5, m=3$\label{}]{%
-	\includegraphics[scale=0.2]{flow_farther-rings_square-r5-l3_summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_farther-rings_square-r5-l3_summary_flow.pdf}
 	}%
 \end{minipage}%
 \begin{minipage}[b]{0.33\textwidth}
 	\subfloat[\revision{$r=5, m=5$}\label{}]{%
-	\includegraphics[scale=0.2]{flow_farther-rings_square-r5-l5_summary_flow.eps}
+	\includegraphics[scale=0.2]{flow_farther-rings_square-r5-l5_summary_flow.pdf}
 	}%
 \end{minipage}%
 \caption{By positioning the estimation ball on farther rings, we minimize artifacts creation. \label{fig:mx-square-flow}}
@@ -814,30 +814,30 @@ curvature value.
 		\setcounter{subfigure}{-3}
 		\subfloat[$r=3,h=0.5$]{%
 		\subfloat{%
-		\includegraphics[scale=0.2]{flow_grid-radius-effect_triangle_r3-h05_summary_flow.eps}
+		\includegraphics[scale=0.2]{flow_grid-radius-effect_triangle_r3-h05_summary_flow.pdf}
 		}%
 		\hspace{15pt}
 		\subfloat{%
-		\includegraphics[scale=0.15]{flow_grid-radius-effect_square_r3-h05_summary_flow.eps}}%
+		\includegraphics[scale=0.15]{flow_grid-radius-effect_square_r3-h05_summary_flow.pdf}}%
 		\hspace{15pt}
 		\subfloat{%
-\includegraphics[scale=0.2]{flow_grid-radius-effect_flower_r3-h05_summary_flow.eps}}%
+\includegraphics[scale=0.2]{flow_grid-radius-effect_flower_r3-h05_summary_flow.pdf}}%
 		}		
 	
 		\setcounter{subfigure}{-2}
 		\subfloat[$r=5,h=0.5$]{%
 		\subfloat{%
-		\includegraphics[scale=0.2]{flow_grid-radius-effect_triangle_r5-h05_summary_flow.eps}
+		\includegraphics[scale=0.2]{flow_grid-radius-effect_triangle_r5-h05_summary_flow.pdf}
 		}%1
 		\hspace{15pt}
 		\subfloat{%
-		\includegraphics[scale=0.15]{flow_grid-radius-effect_square_r5-h05_summary_flow.eps}}%
+		\includegraphics[scale=0.15]{flow_grid-radius-effect_square_r5-h05_summary_flow.pdf}}%
 		\hspace{15pt}
 		\subfloat{%
-\includegraphics[scale=0.2]{flow_grid-radius-effect_flower_r5-h05_summary_flow.eps}}%
+\includegraphics[scale=0.2]{flow_grid-radius-effect_flower_r5-h05_summary_flow.pdf}}%
 		}\\
 		\subfloat[\revision{Digital elastica evaluation ($r=5,h=0.5$)}]{%
-		\includegraphics[scale=0.5]{flow_elastica-energy-plot_square-flower-triangle.eps}						
+		\includegraphics[scale=0.5]{flow_elastica-energy-plot_square-flower-triangle.pdf}						
 		}
 \caption{The choice of radius impacts the flow. In the figures, the flow ceases to evolve for all shapes  when $r=3$ (a). In figure (b), for $r=5$, the triangle evolves to a single point, while the others stop  in an intermediate shape, as in (a). In figure (c), we observe that for a given choice of radius, the digital elastica may increase after a certain number of iterations. }
 \label{fig:mx-flow-gs-radius-effect}
@@ -847,9 +847,9 @@ curvature value.
 \begin{figure}[!h]
 \center
 \subfloat[]{%
-	\includegraphics[scale=0.5]{flow_faster-high-curvature_summary_flow.eps}}\\%
+	\includegraphics[scale=0.5]{flow_faster-high-curvature_summary_flow.pdf}}\\%
 \subfloat[]{%
-		\includegraphics[scale=0.25]{flow_fill-holes_summary_flow.eps}}%%1
+		\includegraphics[scale=0.25]{flow_fill-holes_summary_flow.pdf}}%%1
 \caption{High curvature regions evolves faster than lower ones (a). The flow can handle topological changes (b). }
 \label{fig:mx-speed-variation-hole-filling}
 \end{figure}
@@ -893,7 +893,7 @@ varies across values of $m$ differs from shape to shape, as is illustrated in fi
 
 \begin{figure}
 \center
-\includegraphics[scale=0.5]{optimization_pairwise-ratio_plot-pairwiseratio-lowerHigher-concavities-probe.eps}
+\includegraphics[scale=0.5]{optimization_pairwise-ratio_plot-pairwiseratio-lowerHigher-concavities-probe.pdf}
 \caption{We plot the ratio of pairwise terms among all $\binom{|X^{(i)}|}{2}$ combinations. The highest ring has roughly half the number of pairwise terms as the lowest ring.}
 \label{fig:ratio-pairwise-terms}
 \end{figure}
@@ -902,14 +902,14 @@ varies across values of $m$ differs from shape to shape, as is illustrated in fi
 \begin{figure}[]
 \center
 \begin{minipage}[b]{0.5\textwidth}
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-3_plot-model-square-concavities-probe.eps}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-5_plot-model-square-concavities-probe.eps}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-7_plot-model-square-concavities-probe.eps}}%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-3_plot-model-square-concavities-probe.pdf}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-5_plot-model-square-concavities-probe.pdf}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-7_plot-model-square-concavities-probe.pdf}}%
 \end{minipage}%
 \begin{minipage}[b]{0.5\textwidth}
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-3_plot-model-flower-concavities-probe.eps}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-5_plot-model-flower-concavities-probe.eps}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-7_plot-model-flower-concavities-probe.eps}}%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-3_plot-model-flower-concavities-probe.pdf}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-5_plot-model-flower-concavities-probe.pdf}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-7_plot-model-flower-concavities-probe.pdf}}%
 \end{minipage}
 \caption{For each plot, we first produce shapes $\left\{ S^{(i)} \right\}$ executing DCE with $m=r$. Then, for each shape in $\left\{ S^{(i)} \right\}$, we execute one iteration of DCE for different values of $m$ and we count the unlabeled pixels. The number of unlabeled pixels by QPBOP remains high for lower values of $m$, and goes to zero when $m=r$. We observe the same behaviour for varying radius values.}
 \label{fig:unlabeled-versus-iterations}
