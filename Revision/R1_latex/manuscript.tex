@@ -893,7 +893,7 @@ varies across values of $m$ differs from shape to shape, as is illustrated in fi
 
 \begin{figure}
 \center
-\includegraphics[scale=0.5]{optimization_pairwise-ratio_plot-pairwiseratio-lowerHigher-concavities-probe.pdf}
+\includegraphics[scale=0.5]{opt_pairwise_ratio_concavities_probe.pdf}
 \caption{We plot the ratio of pairwise terms among all $\binom{|X^{(i)}|}{2}$ combinations. The highest ring has roughly half the number of pairwise terms as the lowest ring.}
 \label{fig:ratio-pairwise-terms}
 \end{figure}
@@ -902,14 +902,14 @@ varies across values of $m$ differs from shape to shape, as is illustrated in fi
 \begin{figure}[]
 \center
 \begin{minipage}[b]{0.5\textwidth}
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-3_plot-model-square-concavities-probe.pdf}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-5_plot-model-square-concavities-probe.pdf}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-7_plot-model-square-concavities-probe.pdf}}%
+\subfloat[]{ \includegraphics[scale=0.35]{opt_unlabeled_it_r3_square_concavities_probe.pdf}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{opt_unlabeled_it_r5_square_concavities_probe.pdf}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{opt_unlabeled_it_r7_square_concavities_probe.pdf}}%
 \end{minipage}%
 \begin{minipage}[b]{0.5\textwidth}
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-3_plot-model-flower-concavities-probe.pdf}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-5_plot-model-flower-concavities-probe.pdf}}\\%
-\subfloat[]{ \includegraphics[scale=0.35]{optimization_unlabeled-iterations_radius-7_plot-model-flower-concavities-probe.pdf}}%
+\subfloat[]{ \includegraphics[scale=0.35]{opt_unlabeled_it_r3_flower_concavities_probe.pdf}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{opt_unlabeled_it_r5_flower_concavities_probe.pdf}}\\%
+\subfloat[]{ \includegraphics[scale=0.35]{opt_unlabeled_it_r7_flower_concavities_probe.pdf}}%
 \end{minipage}
 \caption{For each plot, we first produce shapes $\left\{ S^{(i)} \right\}$ executing DCE with $m=r$. Then, for each shape in $\left\{ S^{(i)} \right\}$, we execute one iteration of DCE for different values of $m$ and we count the unlabeled pixels. The number of unlabeled pixels by QPBOP remains high for lower values of $m$, and goes to zero when $m=r$. We observe the same behaviour for varying radius values.}
 \label{fig:unlabeled-versus-iterations}
